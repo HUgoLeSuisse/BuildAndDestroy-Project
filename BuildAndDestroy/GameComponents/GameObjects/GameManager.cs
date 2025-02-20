@@ -1,4 +1,5 @@
 ﻿using BuildAndDestroy.GameComponents.GameObjects.Entity;
+using BuildAndDestroy.GameComponents.GameObjects.Utils;
 using BuildAndDestroy.GameComponents.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -25,8 +26,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects
 
             monster = new E_Monster(
                 this,
-                position : new Point(800,500),
-                size : new Point(150,150)
+                position: new Point(800, 500),
+                size: new Point(150, 150),
+                lootBox: new LootBox(100)
                 );
         }
 

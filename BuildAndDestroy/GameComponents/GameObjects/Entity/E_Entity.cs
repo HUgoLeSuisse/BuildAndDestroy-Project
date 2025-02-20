@@ -42,7 +42,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             this.armor = armor;
             this.range = range;
 
-            this.lootBox = lootBox == null ? lootBox : new LootBox(100);
+            this.lootBox = lootBox;
 
             path = new Path(this.rect.Center, this.rect.Center);
             UpdateEvents e = UpdateEvents.GetInstance();
@@ -58,7 +58,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Pour le visiteur
         /// </summary>
         /// <param name="v"></param>
-        public void Accept(I_VisibleVisitor v)
+        public virtual void Accept(I_VisibleVisitor v)
         {
             v.Visit(this);
         }
@@ -172,7 +172,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <summary>
         /// le temp à attendre entre chaque attaque
         /// </summary>
-        private float AttackTime { get { return 1 / attackSpeed; } }
+        private float AttackTime { get { return 1 / AttackSpeed; } }
 
 
         protected E_Entity target;
@@ -191,10 +191,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <param name="player">qui à envoyer les dégats</param>
         public virtual void TakeDamage(float amount, E_Entity enemy)
         {
-            currentHealth -= amount - armor;
+            currentHealth -= amount - Armor;
             if (currentHealth < 0)
             {
-                onDie?.Invoke(enemy);
+                onDie?.Invoke(enemy,lootBox);
             }
 
         }
@@ -207,7 +207,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             if (CanAttack)
             {
-                target.TakeDamage(damage, this);
+                target.TakeDamage(Damage, this);
                 attackCooldown = new Cooldown(AttackTime);
                 attackCooldown.endCooldown += resetAttack;
                 attackCooldown.Start();

@@ -6,25 +6,76 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Text;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
     public class E_Player : E_Entity
     {
 
-        
+        public E_Player(GameManager gameMananger) : base(gameMananger, rect: new Rectangle(300, 500, 50, 50), range: 50, speed: 10)
+        {
+
+            inputManager = new InputManager();
+            mouseInput = new MouseInput();
+            mouseInput.onRightUp += GoToPosition;
+
+        }
+        #region Display
+
+        /// <summary>
+        /// Pour visiter la classe
+        /// </summary>
+        /// <param name="v"></param>
+        public override void Accept(I_VisibleVisitor v)
+        {
+            v.Visit(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>La texture acctuel</returns>
+        public override Texture2D GetAcctualTexture()
+        {
+            return texture;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Le rectangle absolu</returns>
+        public override Rectangle GetAbsoluteRectangle()
+        {
+            return rect;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>La couleur acctuel</returns>
+        public override Color GetAcctualColor()
+        {
+            return Color.Green;
+        }
+
+
+        #endregion
+
         private InputManager inputManager;
         private MouseInput mouseInput;
 
-        private float xp;
+        private float xp = 1;
 
         /// <summary>
         /// Niveau du personnage
         /// </summary>
-        public int Level { get {
+        public int Level
+        {
+            get
+            {
                 return (int)(MathF.Pow(xp, 0.6f) / 15);
-            } }
+            }
+        }
 
         /// <summary>
         /// Vitesse d'attaque
@@ -62,44 +113,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         public LevelUp levelUp;
 
 
-        public E_Player(GameManager gameMananger) : base(gameMananger, rect: new Rectangle(300, 500, 50, 50), range: 50, speed: 10)
-        {
-
-            inputManager = new InputManager();
-            mouseInput = new MouseInput();
-            mouseInput.onRightUp += GoToPosition;
-
-        }
-        #region Display
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>La texture acctuel</returns>
-        public override Texture2D GetAcctualTexture()
-        {
-            return texture;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>Le rectangle absolu</returns>
-        public override Rectangle GetAbsoluteRectangle()
-        {
-            return rect;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>La couleur acctuel</returns>
-        public override Color GetAcctualColor()
-        {
-            return Color.Green;
-        }
-
-
-        #endregion
 
         protected override void Update(GameTime gameTime)
         {
@@ -107,22 +120,41 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         }
 
+        /// <summary>
+        /// Permet d'attaquer une cible
+        /// </summary>
+        /// <param name="target">la cible</param>
         protected override void Attack(E_Entity target)
         {
-            target.onDie += (me, loot) =>
-            {
-            };
+            target.onDie += OnKill;
             base.Attack(target);
+            target.onDie -= OnKill;
         }
+
+        /// <summary>
+        /// La fonction s'active quand on tue un enemey
+        /// </summary>
+        /// <param name="killer">le tueur de la cible (nous)</param>
+        /// <param name="loot">la lootbox de la cible</param>
+        private void OnKill(E_Entity killer, LootBox loot)
+        {
+            ReciveLootBox(loot);
+        }
+
+        /// <summary>
+        /// Permet de recevoir une loot box
+        /// </summary>
+        /// <param name="loot">la loot box</param>
         public void ReciveLootBox(LootBox loot)
         {
-
+            EarnXP(loot.Xp);
         }
+
         /// <summary>
         /// Fait gagner de l'xp au personnage
         /// </summary>
         /// <param name="amount"></param>
-        public void EarnXP(int amount)
+        public void EarnXP(float amount)
         {
             int level = Level;
             xp += amount;

@@ -155,6 +155,7 @@ namespace BuildAndDestroy
                 v.GetAcctualColor());
 
             DrawEntityHealthBar(v, Color.Red);
+
             _sb.DrawString(d.defaultFont,v.Level.ToString(),new Vector2(50,50),Color.White);
 
         }
