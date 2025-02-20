@@ -146,6 +146,18 @@ namespace BuildAndDestroy
             DrawEntityHealthBar(v, Color.Red);
 
         }
+        public void Visit(E_Player v)
+        {
+
+            _sb.Draw(
+                v.GetAcctualTexture(),
+                v.GetAbsoluteRectangle(),
+                v.GetAcctualColor());
+
+            DrawEntityHealthBar(v, Color.Red);
+            _sb.DrawString(d.defaultFont,v.Level.ToString(),new Vector2(50,50),Color.White);
+
+        }
 
         /// <summary>
         /// Affiche la bar de vie d'une entité
@@ -173,6 +185,7 @@ namespace BuildAndDestroy
                 10),
                 color
                 );
+            
         }
 
         #endregion

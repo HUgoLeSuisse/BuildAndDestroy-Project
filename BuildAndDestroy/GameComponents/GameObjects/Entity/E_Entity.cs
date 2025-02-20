@@ -4,6 +4,7 @@ using BuildAndDestroy.GameComponents.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using BuildAndDestroy.GameComponents.GameObjects.Utils;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
@@ -12,6 +13,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
     /// </summary>
     public class E_Entity : I_Visible
     {
+
         protected GameManager gameMananger;
 
         public E_Entity(
@@ -23,10 +25,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             float damage = 3,
             float attackSpeed = 1,
             float armor = 1,
-            float range = 30
+            float range = 30,
+            LootBox lootBox = null
             )
         {
-
             d = DisplayUtils.GetInstance();
             this.rect = rect == null ? new Rectangle(0, 0, 50, 50) : rect.Value;
             this.texture = texture == null ? d.blank : texture;
@@ -39,6 +41,8 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             this.attackSpeed = attackSpeed;
             this.armor = armor;
             this.range = range;
+
+            this.lootBox = lootBox == null ? lootBox : new LootBox(100);
 
             path = new Path(this.rect.Center, this.rect.Center);
             UpdateEvents e = UpdateEvents.GetInstance();
@@ -98,40 +102,45 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private float speed;
         private float range;
 
-        public float AttackSpeed
+        private LootBox lootBox;
+
+        /// <summary>
+        /// Vitesse d'attaque 
+        /// </summary>
+        public virtual float AttackSpeed
         {
             get { return attackSpeed; }
         }
         /// <summary>
         /// Vie acctuelle
         /// </summary>
-        public float Health { get { return currentHealth; } }
+        public virtual float Health { get { return currentHealth; } }
         /// <summary>
         /// Vie Maximum
         /// </summary>
-        public float MaxHealth { get { return maxHealth; } }
+        public virtual float MaxHealth { get { return maxHealth; } }
 
         /// <summary>
         /// Armure
         /// </summary>
-        public float Armor
+        public virtual float Armor
         {
             get { return armor; }
         }
         /// <summary>
         /// Proté d'attaque
         /// </summary>
-        public float Range
+        public virtual float Range
         { get { return range; } }
 
         /// <summary>
         /// Dégat
         /// </summary>
-        public float Damage { get { return damage; } }
+        public virtual float Damage { get { return damage; } }
         /// <summary>
         /// Vitesse
         /// </summary>
-        public float Speed
+        public virtual float Speed
         {
             get
             {
@@ -171,7 +180,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
 
 
-        public delegate void OnDie(E_Entity killer);
+        public delegate void OnDie(E_Entity killer, LootBox lootBox);
         public OnDie onDie;
 
 
@@ -194,7 +203,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Envoie une attaque sur une cible et lance le cooldown d'attaque 
         /// </summary>
         /// <param name="target">La cible a attaquer</param>
-        private void Attack(E_Entity target)
+        protected virtual void Attack(E_Entity target)
         {
             if (CanAttack)
             {
@@ -212,6 +221,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             attackCooldown.endCooldown -= resetAttack;
             attackCooldown = null;
         }
+
         protected virtual void Update(GameTime gameTime)
         {
             path.UpdateCurrentPos(rect.Center);
