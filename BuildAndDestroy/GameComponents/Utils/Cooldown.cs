@@ -25,7 +25,7 @@ namespace BuildAndDestroy.GameComponents.Utils
         /// <param name="time">Temps à écouler</param>
         public Cooldown(float time)
         {
-            this.maxTime = time;
+            maxTime = time;
             currentTime = time;
             UpdateEvents.GetInstance().Update += Update;
         }

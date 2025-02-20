@@ -1,4 +1,5 @@
-﻿using BuildAndDestroy.GameComponents.UI.Element;
+﻿using BuildAndDestroy.GameComponents.GameObjects.Entity;
+using BuildAndDestroy.GameComponents.UI.Element;
 
 namespace BuildAndDestroy.GameComponents
 {
@@ -11,6 +12,7 @@ namespace BuildAndDestroy.GameComponents
         public void Visit(UI_Pannel v);
         public void Visit(UI_Label v);
         public void Visit(UI_GamePannel v);
+        public void Visit(E_Entity v);
     }
 
 }

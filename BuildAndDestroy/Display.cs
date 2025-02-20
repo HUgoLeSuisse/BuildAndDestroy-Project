@@ -1,11 +1,12 @@
 ﻿using BuildAndDestroy.GameComponents;
+using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.UI;
 using BuildAndDestroy.GameComponents.UI.Element;
 using BuildAndDestroy.GameComponents.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
+using Color = Microsoft.Xna.Framework.Color;
 
 namespace BuildAndDestroy
 {
@@ -66,7 +67,6 @@ namespace BuildAndDestroy
 
             events.PreUpdate?.Invoke(gameTime);
             events.Update?.Invoke(gameTime);
-            events.LateUpdate?.Invoke(gameTime);
             base.Update(gameTime);
         }
 
@@ -134,6 +134,39 @@ namespace BuildAndDestroy
             {
                 element.Accept(this);
             }
+        }
+        public void Visit(E_Entity v)
+        {
+
+            _sb.Draw(
+                v.GetAcctualTexture(),
+                v.GetAbsoluteRectangle(),
+                v.GetAcctualColor());
+
+            DrawEntityHealthBar(v, Color.Red);
+
+        }
+        public void DrawEntityHealthBar(E_Entity v,Color color)
+        {
+            _sb.Draw(
+                d.blank,
+                new Rectangle(
+                v.GetAbsoluteRectangle().Center.X - 50,
+                v.GetAbsoluteRectangle().Top - 15,
+                100,
+                10),
+                Color.DarkGray
+                );
+
+            _sb.Draw(
+                d.blank,
+                new Rectangle(
+                v.GetAbsoluteRectangle().Center.X - 50,
+                v.GetAbsoluteRectangle().Top - 15,
+                (int)(v.Health / v.MaxHealth * 100),
+                10),
+                color
+                );
         }
 
         #endregion

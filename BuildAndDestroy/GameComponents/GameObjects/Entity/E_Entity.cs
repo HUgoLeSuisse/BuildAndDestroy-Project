@@ -26,7 +26,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
 
             d = DisplayUtils.GetInstance();
-            this.rect = rect == null ? new Rectangle(0,0,50,50) : rect.Value ;
+            this.rect = rect == null ? new Rectangle(0, 0, 50, 50) : rect.Value;
             this.texture = texture == null ? d.blank : texture;
             this.gameMananger = gameMananger;
 
@@ -37,7 +37,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             this.attackSpeed = attackSpeed;
             this.armor = armor;
 
-            path = new Path(this.rect.Center,this.rect.Center);
+            path = new Path(this.rect.Center, this.rect.Center);
             UpdateEvents e = UpdateEvents.GetInstance();
             e.Update += Update;
         }
@@ -93,6 +93,25 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private float currentHealth;
         private float maxHealth;
         private float speed;
+        private float range;
+
+        private Cooldown attackCooldown = null;
+        private Rectangle attackArea
+        {
+            get
+            {
+                Rectangle r = new Rectangle(
+                    (int)(rect.X - range),
+                    (int)(rect.Y - range),
+                    (int)(rect.Width + 2 * range),
+                    (int)(rect.Height + 2 * range)
+                    );
+                return r;
+            }
+        }
+        private bool CanAttack { get { return attackCooldown == null; } }
+        private float AttackCooldown { get { return 1 / attackSpeed; } }
+
 
         protected E_Entity target;
         protected Path path;
@@ -103,6 +122,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         public delegate void OnDie(E_Entity killer);
         public OnDie onDie;
 
+
         /// <summary>
         /// Permet d'infliger des dégat à l'entité
         /// </summary>
@@ -110,7 +130,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <param name="player">qui à envoyer les dégats</param>
         public void TakeDamage(float amount, E_Entity enemy)
         {
-            currentHealth -= amount-armor;
+            currentHealth -= amount - armor;
             if (currentHealth < 0)
             {
                 onDie?.Invoke(enemy);
@@ -118,25 +138,46 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         }
 
+        /// <summary>
+        /// Envoie une attaque sur une cible et lance le cooldown d'attaque 
+        /// </summary>
+        /// <param name="target">La cible a attaquer</param>
         private void Attack(E_Entity target)
         {
-            target.TakeDamage(damage,this);
+            if (CanAttack)
+            {
+                target.TakeDamage(damage, this);
+                attackCooldown = new Cooldown(AttackCooldown);
+                attackCooldown.endCooldown += resetAttack;
+                attackCooldown.Start();
+            }
         }
-
+        /// <summary>
+        /// permet d'attaquer à nouveau
+        /// </summary>
+        public void resetAttack()
+        {
+            attackCooldown.endCooldown -= resetAttack;
+            attackCooldown = null;
+        }
         protected virtual void Update(GameTime gameTime)
         {
             path.UpdateCurrentPos(rect.Center);
             if (target != null)
             {
-                if (!rect.Intersects(target.rect))
+                if (!attackArea.Intersects(target.rect))
                 {
                     Vector2 dir = path.GetDirection();
                     rect.Offset(dir.X * speed, dir.Y * speed);
                 }
+                else
+                {
+                    Attack(target);
+                }
             }
             else
             {
-                if (path.GetDitance() > 10)
+                if (!rect.Contains(path.Destination))
                 {
                     Vector2 dir = path.GetDirection();
                     rect.Offset(dir.X * speed, dir.Y * speed);
@@ -150,7 +191,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         protected void GoToPosition(Point pos)
         {
             E_Entity target;
-            if (gameMananger.IsSomethingHere(pos,out target))
+            if (gameMananger.IsSomeThingHere(pos, out target))
             {
                 this.target = target;
                 path = new Path(rect.Center, target.rect.Center);

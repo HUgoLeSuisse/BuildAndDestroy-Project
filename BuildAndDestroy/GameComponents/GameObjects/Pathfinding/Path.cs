@@ -10,6 +10,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Pathfinding
     {
         Point currentPos;
         Point end;
+
+        public Point Destination { get { return end; }  }
+
         public Path(Point currentPos, Point end) 
         {
             this.currentPos = currentPos;

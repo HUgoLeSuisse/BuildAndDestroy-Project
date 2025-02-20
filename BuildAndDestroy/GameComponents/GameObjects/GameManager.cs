@@ -37,7 +37,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         /// <param name="pos">la postion</param>
         /// <param name="who">l'entité (si il y en a une)</param>
         /// <returns></returns>
-        public bool IsSomethingHere(Point pos, out E_Entity who)
+        public bool IsSomeThingHere(Point pos, out E_Entity who)
         {
             if (monster.GetAbsoluteRectangle().Contains(pos))
             {
