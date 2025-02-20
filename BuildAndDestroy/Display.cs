@@ -146,6 +146,12 @@ namespace BuildAndDestroy
             DrawEntityHealthBar(v, Color.Red);
 
         }
+
+        /// <summary>
+        /// Affiche la bar de vie d'une entité
+        /// </summary>
+        /// <param name="v">l'entité</param>
+        /// <param name="color">la couleur de la bar de vie</param>
         public void DrawEntityHealthBar(E_Entity v,Color color)
         {
             _sb.Draw(

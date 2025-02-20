@@ -11,6 +11,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Pathfinding
         Point currentPos;
         Point end;
 
+        /// <summary>
+        /// Retourn la destination du trajet
+        /// </summary>
         public Point Destination { get { return end; }  }
 
         public Path(Point currentPos, Point end) 
@@ -18,11 +21,20 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Pathfinding
             this.currentPos = currentPos;
             this.end = end;
         }
+
+        /// <summary>
+        /// Permet d'acctualisé la position acctuelle
+        /// </summary>
+        /// <param name="pos"></param>
         public void UpdateCurrentPos(Point pos)
         {
             currentPos = pos;
         }
 
+        /// <summary>
+        /// Obtient la direction dans laquel il faut se rendre
+        /// </summary>
+        /// <returns></returns>
         public Vector2 GetDirection()
         {
             int dx = end.X - currentPos.X;
@@ -37,6 +49,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Pathfinding
             return dir;
         }
 
+        /// <summary>
+        /// Obtient la distance à parcourire
+        /// </summary>
+        /// <returns></returns>
         public float GetDitance()
         {
             float X = currentPos.X - end.X;

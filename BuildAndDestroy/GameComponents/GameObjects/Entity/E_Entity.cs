@@ -13,6 +13,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
     public class E_Entity : I_Visible
     {
         protected GameManager gameMananger;
+
         public E_Entity(
             GameManager gameMananger,
             Rectangle? rect = null,
@@ -21,7 +22,8 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             float speed = 5,
             float damage = 3,
             float attackSpeed = 1,
-            float armor = 1
+            float armor = 1,
+            float range = 30
             )
         {
 
@@ -36,6 +38,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             this.damage = damage;
             this.attackSpeed = attackSpeed;
             this.armor = armor;
+            this.range = range;
 
             path = new Path(this.rect.Center, this.rect.Center);
             UpdateEvents e = UpdateEvents.GetInstance();
@@ -95,29 +98,78 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private float speed;
         private float range;
 
-        private Cooldown attackCooldown = null;
-        private Rectangle attackArea
+        public float AttackSpeed
+        {
+            get { return attackSpeed; }
+        }
+        /// <summary>
+        /// Vie acctuelle
+        /// </summary>
+        public float Health { get { return currentHealth; } }
+        /// <summary>
+        /// Vie Maximum
+        /// </summary>
+        public float MaxHealth { get { return maxHealth; } }
+
+        /// <summary>
+        /// Armure
+        /// </summary>
+        public float Armor
+        {
+            get { return armor; }
+        }
+        /// <summary>
+        /// Proté d'attaque
+        /// </summary>
+        public float Range
+        { get { return range; } }
+
+        /// <summary>
+        /// Dégat
+        /// </summary>
+        public float Damage { get { return damage; } }
+        /// <summary>
+        /// Vitesse
+        /// </summary>
+        public float Speed
         {
             get
             {
-                Rectangle r = new Rectangle(
-                    (int)(rect.X - range),
-                    (int)(rect.Y - range),
-                    (int)(rect.Width + 2 * range),
-                    (int)(rect.Height + 2 * range)
+                return speed;
+            }
+        }
+
+        private Cooldown attackCooldown = null;
+
+        /// <summary>
+        /// Rectangle d'attaque
+        /// </summary>
+        private Circle attackArea
+        {
+            get
+            {
+
+                Circle r = new Circle(
+                    rect.Center,
+                    range + rect.Width/2
                     );
                 return r;
             }
         }
+        /// <summary>
+        /// Peut il attaquer
+        /// </summary>
         private bool CanAttack { get { return attackCooldown == null; } }
-        private float AttackCooldown { get { return 1 / attackSpeed; } }
+        /// <summary>
+        /// le temp à attendre entre chaque attaque
+        /// </summary>
+        private float AttackTime { get { return 1 / attackSpeed; } }
 
 
         protected E_Entity target;
         protected Path path;
 
-        public float Health { get { return currentHealth; } }
-        public float MaxHealth { get { return maxHealth; } }
+
 
         public delegate void OnDie(E_Entity killer);
         public OnDie onDie;
@@ -128,7 +180,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// </summary>
         /// <param name="amount">nombre de dégat</param>
         /// <param name="player">qui à envoyer les dégats</param>
-        public void TakeDamage(float amount, E_Entity enemy)
+        public virtual void TakeDamage(float amount, E_Entity enemy)
         {
             currentHealth -= amount - armor;
             if (currentHealth < 0)
@@ -147,7 +199,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             if (CanAttack)
             {
                 target.TakeDamage(damage, this);
-                attackCooldown = new Cooldown(AttackCooldown);
+                attackCooldown = new Cooldown(AttackTime);
                 attackCooldown.endCooldown += resetAttack;
                 attackCooldown.Start();
             }
@@ -165,6 +217,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             path.UpdateCurrentPos(rect.Center);
             if (target != null)
             {
+                path = new Path(rect.Center, target.rect.Center);
                 if (!attackArea.Intersects(target.rect))
                 {
                     Vector2 dir = path.GetDirection();
@@ -185,7 +238,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
         /// <summary>
-        /// Indique à l'entité ou elle doit aller
+        /// Indique à l'entité ou elle doit aller et vérifie si une autre entité s'y trouve et si oui la prend pour cible
         /// </summary>
         /// <param name="pos">la position</param>
         protected void GoToPosition(Point pos)
@@ -194,7 +247,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             if (gameMananger.IsSomeThingHere(pos, out target))
             {
                 this.target = target;
-                path = new Path(rect.Center, target.rect.Center);
             }
             else
             {

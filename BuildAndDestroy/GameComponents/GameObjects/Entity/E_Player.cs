@@ -14,7 +14,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private MouseInput mouseInput;
 
 
-        public E_Player(GameManager gameMananger) : base(gameMananger)
+        public E_Player(GameManager gameMananger) : base(gameMananger, rect:new Rectangle(300,500,50,50), range:50, speed: 10)
         {
 
             inputManager = new InputManager();

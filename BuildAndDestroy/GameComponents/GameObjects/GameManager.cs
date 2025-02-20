@@ -25,9 +25,8 @@ namespace BuildAndDestroy.GameComponents.GameObjects
 
             monster = new E_Monster(
                 this,
-                position : new Point(500,500),
-                size : new Point(150,150),
-                maxHealth: 100
+                position : new Point(800,500),
+                size : new Point(150,150)
                 );
         }
 
