@@ -26,7 +26,7 @@ namespace BuildAndDestroy.GameComponents.Utils
 
         private DisplayUtils() { }
         /// <summary>
-        /// Texture blanche de 1 par 1
+        /// TextureBG blanche de 1 par 1
         /// </summary>
         public Texture2D blank { get; set; }
 

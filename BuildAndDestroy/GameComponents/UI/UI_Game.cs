@@ -1,4 +1,5 @@
 ﻿using BuildAndDestroy.GameComponents.GameObjects;
+using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.UI.Element;
 using Microsoft.Xna.Framework;
 namespace BuildAndDestroy.GameComponents.UI
@@ -8,6 +9,9 @@ namespace BuildAndDestroy.GameComponents.UI
     /// </summary>
     public class UI_Game : UI_Manager
     {
+
+        private E_Player player;
+
         /// <summary>
         /// La partie en cours
         /// </summary>

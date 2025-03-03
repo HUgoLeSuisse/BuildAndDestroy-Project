@@ -134,6 +134,10 @@ namespace BuildAndDestroy
             {
                 element.Accept(this);
             }
+            foreach (var element in v.GetChilds())
+            {
+                element.Accept(this);
+            }
         }
         public void Visit(E_Entity v)
         {

@@ -66,12 +66,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         public override Rectangle GetAbsoluteRectangle()
         {
 
-            Rectangle abs = rectRelative;
-            if (parent != null)
-            {
-                abs.Location += parent.GetAbsoluteRectangle().Location;
-            }
-            return abs;
+            return Absoulute;
         }
 
         /// <summary>

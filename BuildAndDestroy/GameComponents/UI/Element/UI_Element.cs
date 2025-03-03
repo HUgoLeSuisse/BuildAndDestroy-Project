@@ -33,104 +33,165 @@ namespace BuildAndDestroy.GameComponents.UI.Element
     /// </summary>
     public class UI_Element : I_Visible
     {
+        protected DisplayUtils d;
+
+        private UI_Pannel parent;
+
+        private Rectangle rect;
+        private Color color;
+        public Texture2D texture;
+
         /// <summary>
         /// Pannaux dans lequel il est contenu
         /// </summary>
-        public UI_Pannel parent;
+        public UI_Pannel Parent { get { return parent; } set { parent = value; } }
+
+        /// <summary>
+        /// Rectangle absolue à la position du parent
+        /// </summary>
+        public Rectangle Absoulute
+        {
+            get
+            {
+                Rectangle abs = rect;
+                if (parent != null)
+                {
+                    abs.Location += parent.GetAbsoluteRectangle().Location;
+                }
+                return abs;
+            }
+
+            set
+            {
+                Rectangle abs = value;
+                if (parent != null)
+                {
+                    abs.Location -= parent.GetAbsoluteRectangle().Location;
+                }
+                rect = abs;
+            }
+        }
 
         /// <summary>
         /// Rectangle relatif à la position du parent
         /// </summary>
-        public Rectangle rectRelative { get; set; }
-        /// <summary>
-        /// Couleur de l'element
-        /// </summary>
-        public Color color { get; set; }
-        /// <summary>
-        /// Texture de l'element
-        /// </summary>
-        public Texture2D texture { get; set; }
-
-        protected DisplayUtils d;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="rect">Rectangle relatif à la position du parent</param>
-        /// <param name="color">Couleur de l'element</param>
-        /// <param name="texture">Texture de l'element (par defaut 1x1 blanc)</param>
-        public UI_Element(Rectangle rect, Color? color, Texture2D? texture)
+        public Rectangle Relative
         {
-            d = DisplayUtils.GetInstance();
-            this.rectRelative = rect;
-            this.color = color == null ? Color.White : color.Value; 
-            this.texture = texture == null ? DisplayUtils.GetInstance().blank : texture;
+            get
+            {
+                return rect;
+            }
+
+            set
+            {
+                rect = value;
+            }
         }
 
 
         #region SetRelativePos
 
         /// <summary>
-        /// Positionner sur l'axe horizontal
+        /// Alignement sur l'axe horizontal
         /// </summary>
-        /// <param name="h"></param>
-        public void SetRelativePos(Horizontal h)
+        public Horizontal xAlign
         {
-            if (parent != null)
+            set
             {
-                int x = 0;
-                switch (h)
+                if (parent != null)
                 {
-                    case Horizontal.L:
-                        x = 0;
-                        break;
-                    case Horizontal.M:
-                        x = parent.rectRelative.Width / 2 - rectRelative.Width / 2;
-                        break;
-                    case Horizontal.R:
-                        x = parent.rectRelative.Width - rectRelative.Width;
-                        break;
+                    int x = 0;
+                    switch (value)
+                    {
+                        case Horizontal.L:
+                            x = 0;
+                            break;
+                        case Horizontal.M:
+                            x = parent.rect.Width / 2 - this.rect.Width / 2;
+                            break;
+                        case Horizontal.R:
+                            x = parent.rect.Width - this.rect.Width;
+                            break;
+                    }
+                    Rectangle rect = new Rectangle(new Point(x, this.rect.Y), this.rect.Size);
+                    this.rect = rect;
                 }
-                Rectangle rect = new Rectangle(new Point(x, rectRelative.Y), rectRelative.Size);
-                rectRelative = rect;
             }
+
         }
         /// <summary>
-        /// Positionner sur l'axe verticale
+        /// Alignement sur l'axe vertical
         /// </summary>
-        /// <param name="h"></param>
-        public void SetRelativePos(Vertical v)
+        public Vertical yAlign
         {
-            if (parent != null)
+            set
             {
-                int y = 0;
-                switch (v)
+                if (parent != null)
                 {
-                    case Vertical.T:
-                        y = 0;
-                        break;
-                    case Vertical.M:
-                        y = parent.rectRelative.Height / 2 - rectRelative.Height / 2;
-                        break;
-                    case Vertical.B:
-                        y = parent.rectRelative.Height - rectRelative.Height;
-                        break;
+                    int y = 0;
+                    switch (value)
+                    {
+                        case Vertical.T:
+                            y = 0;
+                            break;
+                        case Vertical.M:
+                            y = parent.rect.Height / 2 - this.rect.Height / 2;
+                            break;
+                        case Vertical.B:
+                            y = parent.rect.Height - this.rect.Height;
+                            break;
+                    }
+                    Rectangle rect = new Rectangle(new Point(this.rect.X, y), this.rect.Size);
+                    this.rect = rect;
                 }
-                Rectangle rect = new Rectangle(new Point(rectRelative.X, y), rectRelative.Size);
-                rectRelative = rect;
             }
-        }
-        /// <summary>
-        /// Positionner sur l'axe horizontal et verticale
-        /// </summary>
-        /// <param name="h"></param>
-        public void SetRelativePos(Horizontal h, Vertical v)
-        {
-            SetRelativePos(h);
-            SetRelativePos(v);
         }
 
         #endregion
+        /// <summary>
+        /// Couleur de l'element
+        /// </summary>
+        public Color? ColorBG
+        {
+            get
+            {
+                return color;
+            }
+
+            set
+            {
+                color = value ?? Color.Transparent;
+            }
+        }
+
+        /// <summary>
+        /// Texture de fond de l'element
+        /// </summary>
+        public Texture2D TextureBG
+        {
+            get { return texture; }
+            set
+            {
+                texture = value ?? DisplayUtils.GetInstance().blank;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rect">Rectangle relatif à la position du parent</param>
+        /// <param name="color">Couleur de l'element</param>
+        /// <param name="texture">TextureBG de l'element (par defaut 1x1 blanc)</param>
+        public UI_Element(Rectangle rect, Color? color, Texture2D texture)
+        {
+            d = DisplayUtils.GetInstance();
+            Relative = rect;
+            ColorBG = color;
+            TextureBG = texture;
+        }
+
+
 
         /// <summary>
         /// Permet à VisibleVistor de fonctionner
@@ -144,7 +205,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// <summary>
         /// 
         /// </summary>
-        /// <returns>Texture acctuelle</returns>
+        /// <returns>TextureBG acctuelle</returns>
         public virtual Texture2D GetAcctualTexture()
         {
             return texture;
@@ -156,12 +217,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// <returns>Le Rectangle absolue</returns>
         public virtual Rectangle GetAbsoluteRectangle()
         {
-            Rectangle abs = rectRelative;
-            if (parent != null)
-            {
-                abs.Location += parent.GetAbsoluteRectangle().Location;
-            }
-            return abs;
+            return Relative;
         }
 
         /// <summary>

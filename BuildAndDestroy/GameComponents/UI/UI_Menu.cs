@@ -38,7 +38,7 @@ namespace BuildAndDestroy.GameComponents.UI
 
 
             content.Add(label);
-            label.SetRelativePos(Horizontal.M);
+            label.xAlign = Horizontal.M;
 
 
             UI_Button playButton = new UI_Button(
@@ -53,7 +53,7 @@ namespace BuildAndDestroy.GameComponents.UI
 
                 );
             content.Add(playButton);
-            playButton.SetRelativePos(Horizontal.M);
+            playButton.xAlign = Horizontal.M;
             playButton.onClick += Play;
         }
 

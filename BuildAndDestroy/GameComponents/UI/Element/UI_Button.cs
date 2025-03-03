@@ -129,7 +129,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
             {
                 return overColor;
             }
-            return color;
+            return ColorBG.Value;
         }
     }
 }
