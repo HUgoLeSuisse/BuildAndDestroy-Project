@@ -66,5 +66,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         {
             return new I_Visible[] { player, monster };
         }
+
+        public E_Player GetPlayer()
+        {
+            return player;
+        }
     }
 }

@@ -8,30 +8,35 @@ namespace BuildAndDestroy.GameComponents.UI.Element
     /// <summary>
     /// Element d'interface avec un event quand on clique dessus
     /// </summary>
-    public class UI_Button : UI_Label
+    public class UI_Button : UI_Element
     {
         private Timer timePressed;
         private bool isOver;
         private bool isPressed;
         private Color overColor;
         private Color pressedColor;
+        public UI_Label label;
 
         public UI_Button(
             Point position = new Point(),
+            Point size = new Point(),
             string text = "",
             float fontSize = 1,
             Color color = new Color(),
-            Texture2D? image = null,
+            Texture2D? texture = null,
             Color? fontColor = null,
             SpriteFont? font = null,
             Color overColor = new Color(),
             Color pressedColor = new Color()
-            ) : base(position, text, fontSize, color, image, fontColor, font)
+            ) : base(new Rectangle(position,size),color, texture)
         {
+            label = new UI_Label(position, text, fontSize, color, texture, fontColor, font);
+            
             this.overColor = overColor;
             this.pressedColor = pressedColor;
             UpdateEvents.GetInstance().Update += Update;
         }
+
         public delegate void MouseAction();
         /// <summary>
         /// quand la souris entre
@@ -130,6 +135,14 @@ namespace BuildAndDestroy.GameComponents.UI.Element
                 return overColor;
             }
             return ColorBG.Value;
+        }
+        /// <summary>
+        /// Pour le visiteur
+        /// </summary>
+        /// <param name="v"></param>
+        public override void Accept(I_VisibleVisitor v)
+        {
+            v.Visit(this);
         }
     }
 }

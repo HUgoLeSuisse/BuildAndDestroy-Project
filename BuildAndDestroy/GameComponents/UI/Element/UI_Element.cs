@@ -94,7 +94,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// <summary>
         /// Alignement sur l'axe horizontal
         /// </summary>
-        public Horizontal xAlign
+        public virtual Horizontal xAlign
         {
             set
             {
@@ -122,7 +122,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// <summary>
         /// Alignement sur l'axe vertical
         /// </summary>
-        public Vertical yAlign
+        public virtual Vertical yAlign
         {
             set
             {
@@ -217,7 +217,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// <returns>Le Rectangle absolue</returns>
         public virtual Rectangle GetAbsoluteRectangle()
         {
-            return Relative;
+            return Absoulute;
         }
 
         /// <summary>

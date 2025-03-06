@@ -12,6 +12,7 @@ namespace BuildAndDestroy.GameComponents
         public void Visit(UI_Pannel v);
         public void Visit(UI_Label v);
         public void Visit(UI_GamePannel v);
+        public void Visit(UI_Button v);
         public void Visit(E_Entity v);
         public void Visit(E_Player v);
     }

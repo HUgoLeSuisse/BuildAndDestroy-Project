@@ -118,6 +118,34 @@ namespace BuildAndDestroy
                 );
 
         }
+        public void Visit(UI_Button v)
+        {
+            _sb.Draw(v.GetAcctualTexture(),
+                    v.GetAbsoluteRectangle(),
+                    v.GetAcctualColor());
+
+            UI_Label label = v.label;
+            
+            Point Size = label.Absoulute.Size;
+            Point c = v.Absoulute.Size;
+            int x = Size.X - c.X;
+            int y = Size.Y - c.Y;
+            Vector2 labelPos = new Vector2 ( x/2, y/2 );
+            Vector2 labelTruePos =  v.Absoulute.Location.ToVector2() - labelPos;
+            _sb.DrawString(
+                label.font,
+                label.text,
+                labelTruePos,
+                label.fontColor,
+                0,
+                Vector2.Zero,
+                label.GetFontSize(),
+                SpriteEffects.None,
+                1
+                );
+
+        }
+
         public void Visit(UI_Pannel v)
         {
             Visit((I_Visible)v);
@@ -152,11 +180,7 @@ namespace BuildAndDestroy
         }
         public void Visit(E_Player v)
         {
-
-            _sb.Draw(
-                v.GetAcctualTexture(),
-                v.GetAbsoluteRectangle(),
-                v.GetAcctualColor());
+            Visit((I_Visible)v);
 
             DrawEntityHealthBar(v, Color.Red);
 

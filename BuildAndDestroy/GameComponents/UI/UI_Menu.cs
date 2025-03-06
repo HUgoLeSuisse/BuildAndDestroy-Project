@@ -42,18 +42,19 @@ namespace BuildAndDestroy.GameComponents.UI
 
 
             UI_Button playButton = new UI_Button(
-                position: new Point(0, (int)(d.height*0.7f)),
+                size: new Point(500,200),
                 text: "Play",
                 fontSize: 2,
                 fontColor: Color.Black,
                 color: Color.DarkCyan,
                 overColor: Color.Cyan,
                 pressedColor: Color.LightCyan,
-                image: d.GetByPath<Texture2D>("Cadre")
+                texture: d.GetByPath<Texture2D>("Cadre")
 
                 );
             content.Add(playButton);
             playButton.xAlign = Horizontal.M;
+            playButton.yAlign = Vertical.M;
             playButton.onClick += Play;
         }
 
