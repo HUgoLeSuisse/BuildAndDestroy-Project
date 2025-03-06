@@ -14,7 +14,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects
     public class GameManager
     {
         E_Player player;
-        E_Monster monster;
+        List<E_Monster> monsters = new List<E_Monster>();
         Timer Timer = new Timer ();
         UpdateEvents e = UpdateEvents.GetInstance();
 
@@ -24,12 +24,18 @@ namespace BuildAndDestroy.GameComponents.GameObjects
 
             player = new E_Player(this);
 
-            monster = new E_Monster(
+            monsters.Add( new E_Monster(
                 this,
                 position: new Point(800, 500),
                 size: new Point(150, 150),
                 lootBox: new LootBox(100)
-                );
+                ));
+            monsters.Add(new E_RangeMonster(
+                this,
+                position: new Point(1600, 500),
+                size: new Point(75, 75),
+                lootBox: new LootBox(100)
+                ));
         }
 
         /// <summary>
@@ -40,15 +46,18 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         /// <returns></returns>
         public bool IsSomeThingHere(Point pos, out E_Entity who)
         {
-            if (monster.GetAbsoluteRectangle().Contains(pos))
-            {
-                who = monster;
-                return true;
-            }
-            if (player.GetAbsoluteRectangle().Contains(pos)) 
+            if (player.GetAbsoluteRectangle().Contains(pos))
             {
                 who = player;
                 return true;
+            }
+            foreach (var monster in monsters)
+            {
+                if (monster.GetAbsoluteRectangle().Contains(pos))
+                {
+                    who = monster;
+                    return true;
+                }
             }
             who = null;
             return false;
@@ -64,7 +73,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects
 
         public I_Visible[] GetVisibleElement()
         {
-            return new I_Visible[] { player, monster };
+            List<I_Visible> visibles = monsters.Cast<I_Visible>().ToList();
+            visibles.Add(player);
+            return visibles.ToArray();
         }
 
         public E_Player GetPlayer()

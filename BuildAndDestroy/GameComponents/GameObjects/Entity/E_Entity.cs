@@ -11,7 +11,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
     /// <summary>
     /// Gére une entité
     /// </summary>
-    public class E_Entity : I_Visible
+    public class E_Entity : I_Visible, I_Moveable
     {
 
         protected GameManager gameMananger;
@@ -26,8 +26,8 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             float attackSpeed = 1,
             float armor = 1,
             float range = 30,
-            LootBox lootBox = null
-            )
+            bool isRange = false,
+            LootBox lootBox = null)
         {
             d = DisplayUtils.GetInstance();
             this.rect = rect == null ? new Rectangle(0, 0, 50, 50) : rect.Value;
@@ -47,6 +47,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             path = new Path(this.rect.Center, this.rect.Center);
             UpdateEvents e = UpdateEvents.GetInstance();
             e.Update += Update;
+
+
+            attack += isRange? RangeAttack : MeleeAttack;
         }
 
         #region Display
@@ -93,6 +96,8 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         #region Gameplay
 
+        #region Champs
+           
         // Statistique
         private float attackSpeed;
         private float armor;
@@ -103,6 +108,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private float range;
 
         private LootBox lootBox;
+        #endregion
+
+        #region Propriété
 
         /// <summary>
         /// Vitesse d'attaque 
@@ -147,20 +155,16 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 return speed;
             }
         }
-
-        private Cooldown attackCooldown = null;
-
         /// <summary>
         /// Rectangle d'attaque
         /// </summary>
-        private Circle attackArea
+        private Circle AttackArea
         {
             get
             {
-
                 Circle r = new Circle(
                     rect.Center,
-                    range + rect.Width/2
+                    Range + rect.Width / 2
                     );
                 return r;
             }
@@ -174,15 +178,41 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// </summary>
         private float AttackTime { get { return 1 / AttackSpeed; } }
 
+        #endregion
 
+        #region ValeurLogique
+        private Cooldown attackCooldown = null;
         protected E_Entity target;
         protected Path path;
+        #endregion
 
-
-
+        #region Event
+        /// <summary>
+        /// Event de mort
+        /// </summary>
+        /// <param name="killer">le tueur</param>
+        /// <param name="lootBox">la butin qu'a récupèrer le tueur</param>
         public delegate void OnDie(E_Entity killer, LootBox lootBox);
+
+        /// <summary>
+        /// Quand le personnage meurt
+        /// </summary>
         public OnDie onDie;
 
+
+        /// <summary>
+        /// Event d'attaque 
+        /// </summary>
+        /// <param name="target">la cible</param>
+        public delegate void Attack(E_Entity target);
+        /// <summary>
+        /// Fait attaquer l'entity
+        /// </summary>
+        public Attack attack;
+
+        #endregion
+
+        #region Methode
 
         /// <summary>
         /// Permet d'infliger des dégat à l'entité
@@ -194,7 +224,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             currentHealth -= amount - Armor;
             if (currentHealth < 0)
             {
-                onDie?.Invoke(enemy,lootBox);
+                onDie?.Invoke(enemy, lootBox);
             }
 
         }
@@ -203,7 +233,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Envoie une attaque sur une cible et lance le cooldown d'attaque 
         /// </summary>
         /// <param name="target">La cible a attaquer</param>
-        protected virtual void Attack(E_Entity target)
+        protected virtual void MeleeAttack(E_Entity target)
         {
             if (CanAttack)
             {
@@ -213,6 +243,22 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 attackCooldown.Start();
             }
         }
+
+        /// <summary>
+        /// Envoie une attaque à distance sur une cible et lance le cooldown d'attaque 
+        /// </summary>
+        /// <param name="target">La cible a attaquer</param>
+        protected virtual void RangeAttack(E_Entity target)
+        {
+            if (CanAttack)
+            {
+                target.TakeDamage(Damage, this);
+                attackCooldown = new Cooldown(AttackTime);
+                attackCooldown.endCooldown += resetAttack;
+                attackCooldown.Start();
+            }
+        }
+
         /// <summary>
         /// permet d'attaquer à nouveau
         /// </summary>
@@ -225,28 +271,44 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         protected virtual void Update(GameTime gameTime)
         {
             path.UpdateCurrentPos(rect.Center);
+            FollowTarget(gameTime);
+        }
+
+        /// <summary>
+        /// Suit la cilbe et l'attque si elle est a porté
+        /// </summary>
+        /// <param name="gameTime"></param>
+        protected virtual void FollowTarget(GameTime gameTime)
+        {
             if (target != null)
             {
                 path = new Path(rect.Center, target.rect.Center);
-                if (!attackArea.Intersects(target.rect))
+                if (!AttackArea.Intersects(target.rect))
                 {
-                    Vector2 dir = path.GetDirection();
-                    rect.Offset(dir.X * speed, dir.Y * speed);
+                    I_Moveable moveable = this;
+                    moveable.Move(gameTime, ref rect, path.GetDirection(), Speed);
                 }
                 else
                 {
-                    Attack(target);
+                    attack?.Invoke(target);
                 }
             }
             else
             {
                 if (!rect.Contains(path.Destination))
                 {
-                    Vector2 dir = path.GetDirection();
-                    rect.Offset(dir.X * speed, dir.Y * speed);
+                    I_Moveable moveable = this;
+                    moveable.Move(gameTime, ref rect, path.GetDirection(), Speed);
                 }
             }
         }
+        /*
+        public override void Move(GameTime gameTime, ref Rectangle rect,Vector2 destination, float speed)
+        {
+
+        }
+        */
+
         /// <summary>
         /// Indique à l'entité ou elle doit aller et vérifie si une autre entité s'y trouve et si oui la prend pour cible
         /// </summary>
@@ -265,6 +327,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
 
+        #endregion
 
         #endregion
     }

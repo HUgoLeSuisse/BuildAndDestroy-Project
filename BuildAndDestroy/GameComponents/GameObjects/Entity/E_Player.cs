@@ -113,21 +113,14 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         public LevelUp levelUp;
 
 
-
-        protected override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-        }
-
         /// <summary>
         /// Permet d'attaquer une cible
         /// </summary>
         /// <param name="target">la cible</param>
-        protected override void Attack(E_Entity target)
+        protected override void MeleeAttack(E_Entity target)
         {
             target.onDie += OnKill;
-            base.Attack(target);
+            base.MeleeAttack(target);
             target.onDie -= OnKill;
         }
 

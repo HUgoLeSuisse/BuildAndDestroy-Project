@@ -19,9 +19,21 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             float attackSpeed = 0.8f,
             float armor = 1,
             float range = 30,
+            bool isRange = false,
             LootBox lootBox = null
-            ) : base(gameMananger,new Rectangle(position == null ? new Point(0,0): position.Value, size == null ? new Point(0, 0) : size.Value), texture,
-                maxHealth: maxHealth, speed: speed, attackSpeed: attackSpeed, armor: armor, range: range, lootBox: lootBox)
+            ) : base(gameMananger,
+                new Rectangle
+                (position == null ? new Point(0,0): position.Value,
+                    size == null ? new Point(0, 0) : size.Value),
+                texture,
+                maxHealth: maxHealth,
+                speed: speed,
+                attackSpeed: attackSpeed,
+                armor: armor,
+                range: range,
+                isRange: isRange,
+                lootBox: lootBox
+                )
         {
         }
         protected override void Update(GameTime gameTime)
