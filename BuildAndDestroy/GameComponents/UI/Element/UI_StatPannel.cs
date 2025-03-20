@@ -118,18 +118,18 @@ namespace BuildAndDestroy.GameComponents.UI.Element
 
             // Increasing Event
             force.onClick += (x) => {
-                player.Force += 1;
-                force.label.text = player.Force + "";
+                player.Knowledges.Force += 1;
+                force.label.text = player.Knowledges.Force + "";
                 LevelAvailable -= 1;
             };
             magic.onClick += (x) => {
-                player.Magic += 1;
-                magic.label.text = player.Magic + "";
+                player.Knowledges.Magic += 1;
+                magic.label.text = player.Knowledges.Magic + "";
                 LevelAvailable -= 1;
             };
             sicence.onClick += (x) => {
-                player.Science += 1;
-                sicence.label.text = player.Science + "";
+                player.Knowledges.Science += 1;
+                sicence.label.text = player.Knowledges.Science + "";
                 LevelAvailable -= 1;
             };
 
