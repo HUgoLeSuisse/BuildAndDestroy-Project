@@ -170,19 +170,14 @@ namespace BuildAndDestroy
         public void Visit(E_Entity v)
         {
 
-            _sb.Draw(
-                v.GetAcctualTexture(),
-                v.GetAbsoluteRectangle(),
-                v.GetAcctualColor());
-
+            Visit((I_Visible)v);
             DrawEntityHealthBar(v, Color.Red);
 
         }
         public void Visit(E_Player v)
         {
-            Visit((I_Visible)v);
+            Visit((E_Entity)v);
 
-            DrawEntityHealthBar(v, Color.Red);
 
             _sb.DrawString(d.defaultFont,v.Level.ToString(),new Vector2(50,50),Color.White);
 

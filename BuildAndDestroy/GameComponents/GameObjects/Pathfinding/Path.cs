@@ -12,7 +12,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Pathfinding
         Point end;
 
         /// <summary>
-        /// Retourn la destination du trajet
+        /// Retourn la direction du trajet
         /// </summary>
         public Point Destination { get { return end; }  }
 

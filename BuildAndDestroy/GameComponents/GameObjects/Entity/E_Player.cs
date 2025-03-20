@@ -140,7 +140,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <param name="loot">la loot box</param>
         public void ReciveLootBox(LootBox loot)
         {
-            EarnXP(loot.Xp);
+            if (loot is not null)
+            {
+                EarnXP(loot.Xp);
+            }
         }
 
         /// <summary>

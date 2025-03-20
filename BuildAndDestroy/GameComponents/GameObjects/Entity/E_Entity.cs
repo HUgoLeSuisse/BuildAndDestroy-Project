@@ -41,7 +41,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             this.attackSpeed = attackSpeed;
             this.armor = armor;
             this.range = range;
-
+            this.isRange = isRange;
             this.lootBox = lootBox;
 
             path = new Path(this.rect.Center, this.rect.Center);
@@ -106,12 +106,23 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private float maxHealth;
         private float speed;
         private float range;
+        private bool isRange;
 
         private LootBox lootBox;
         #endregion
 
         #region Propriété
 
+        /// <summary>
+        /// Position de l'entité
+        /// </summary>
+        public virtual Point Position
+        {
+            get
+            {
+                return rect.Center;
+            }
+        }
         /// <summary>
         /// Vitesse d'attaque 
         /// </summary>
@@ -136,7 +147,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             get { return armor; }
         }
         /// <summary>
-        /// Proté d'attaque
+        /// Portée d'attaque
         /// </summary>
         public virtual float Range
         { get { return range; } }
@@ -155,8 +166,14 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 return speed;
             }
         }
+
         /// <summary>
-        /// Rectangle d'attaque
+        /// Rectangel de l'entité
+        /// </summary>
+        public Rectangle Rect { get { return rect; } }
+
+        /// <summary>
+        /// Zone d'attaque
         /// </summary>
         private Circle AttackArea
         {
@@ -164,7 +181,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 Circle r = new Circle(
                     rect.Center,
-                    Range + rect.Width / 2
+                    Range-10 + rect.Width / 2
                     );
                 return r;
             }
@@ -177,6 +194,18 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// le temp à attendre entre chaque attaque
         /// </summary>
         private float AttackTime { get { return 1 / AttackSpeed; } }
+
+        /// <summary>
+        /// Si l'entité lance des projectile
+        /// </summary>
+        public bool IsRange
+        {
+            get
+            {
+                return isRange;
+            }
+        }
+
 
         #endregion
 
@@ -237,7 +266,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             if (CanAttack)
             {
-                target.TakeDamage(Damage, this);
+                Hit(target);
                 attackCooldown = new Cooldown(AttackTime);
                 attackCooldown.endCooldown += resetAttack;
                 attackCooldown.Start();
@@ -252,10 +281,24 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             if (CanAttack)
             {
-                target.TakeDamage(Damage, this);
+                Bullet b = new Bullet(gameMananger,this,position: Position, distance: Range+50, direction: (target.Position -Position).ToVector2());
+                
+                b.onTouch += Hit;
+
                 attackCooldown = new Cooldown(AttackTime);
                 attackCooldown.endCooldown += resetAttack;
                 attackCooldown.Start();
+            }
+        }
+        /// <summary>
+        /// Quand on tape
+        /// </summary>
+        /// <param name="hited"></param>
+        protected virtual void Hit(E_Entity hit)
+        {
+            if (hit is not null)
+            {
+                hit.TakeDamage(Damage, this);
             }
         }
 
@@ -303,7 +346,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
         /*
-        public override void Move(GameTime gameTime, ref Rectangle rect,Vector2 destination, float speed)
+        public override void Move(GameTime gameTime, ref Rectangle rect,Vector2 direction, float speed)
         {
 
         }

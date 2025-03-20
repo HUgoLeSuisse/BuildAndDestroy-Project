@@ -13,10 +13,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects
 {
     public class GameManager
     {
+        UpdateEvents e = UpdateEvents.GetInstance();
         E_Player player;
         List<E_Monster> monsters = new List<E_Monster>();
         Timer Timer = new Timer ();
-        UpdateEvents e = UpdateEvents.GetInstance();
+
 
         public GameManager() {
             e.PreUpdate += PerUpdate;
@@ -62,6 +63,30 @@ namespace BuildAndDestroy.GameComponents.GameObjects
             who = null;
             return false;
         }
+        /// <summary>
+        /// Vérifie s'il y a une entité qui collision avec le rectangle donné
+        /// </summary>
+        /// <param name="rect">le rectangle</param>
+        /// <param name="who">l'entité (si il y en a une)</param>
+        /// <returns></returns>
+        public bool IsSomeThingHere(Rectangle rect, out E_Entity who)
+        {
+            if (player.GetAbsoluteRectangle().Intersects(rect))
+            {
+                who = player;
+                return true;
+            }
+            foreach (var monster in monsters)
+            {
+                if (monster.GetAbsoluteRectangle().Intersects(rect))
+                {
+                    who = monster;
+                    return true;
+                }
+            }
+            who = null;
+            return false;
+        }
 
         private void PerUpdate(GameTime gameTime)
         {
@@ -75,6 +100,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         {
             List<I_Visible> visibles = monsters.Cast<I_Visible>().ToList();
             visibles.Add(player);
+            foreach (var bullet in Bullet.Bullets)
+            {
+                visibles.Add(bullet);
+            }
             return visibles.ToArray();
         }
 
