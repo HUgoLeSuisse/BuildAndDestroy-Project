@@ -40,13 +40,13 @@ namespace BuildAndDestroy
             base.Initialize();
 
             #region DisplayUtils
-                d.SetContent(Content);
-                _sb = new SpriteBatch(GraphicsDevice);
-                d.blank = new Texture2D(GraphicsDevice, 1, 1);
-                Color[] colorData = { Color.White };
-                d.blank.SetData(colorData);
+            d.SetContent(Content);
+            _sb = new SpriteBatch(GraphicsDevice);
+            d.blank = new Texture2D(GraphicsDevice, 1, 1);
+            Color[] colorData = { Color.White };
+            d.blank.SetData(colorData);
 
-                d.defaultFont = Content.LoadLocalized<SpriteFont>("DefaultFont");
+            d.defaultFont = Content.LoadLocalized<SpriteFont>("DefaultFont");
 
             #endregion
             _graphics.PreferredBackBufferWidth = d.width;
@@ -54,7 +54,7 @@ namespace BuildAndDestroy
             _graphics.IsFullScreen = false;
 
             _graphics.ApplyChanges();
-            _cam = new Camera();
+            _cam = Camera.Instance;
         }
 
         #endregion
@@ -125,13 +125,13 @@ namespace BuildAndDestroy
                     v.GetAcctualColor());
 
             UI_Label label = v.label;
-            
+
             Point Size = label.Absoulute.Size;
             Point c = v.Absoulute.Size;
             int x = Size.X - c.X;
             int y = Size.Y - c.Y;
-            Vector2 labelPos = new Vector2 ( x/2, y/2 );
-            Vector2 labelTruePos =  v.Absoulute.Location.ToVector2() - labelPos;
+            Vector2 labelPos = new Vector2(x / 2, y / 2);
+            Vector2 labelTruePos = v.Absoulute.Location.ToVector2() - labelPos;
             _sb.DrawString(
                 label.font,
                 label.text,
@@ -158,7 +158,7 @@ namespace BuildAndDestroy
         }
         public void Visit(UI_GamePannel v)
         {
-            foreach (var element in v.GetGameElement(new Rectangle(_cam.position, new Point(d.width, d.height))))
+            foreach (var element in v.GetGameElement(new Rectangle(_cam.Position, new Point(d.width, d.height))))
             {
                 element.Accept(this);
             }
@@ -167,19 +167,24 @@ namespace BuildAndDestroy
                 element.Accept(this);
             }
         }
+
         public void Visit(E_Entity v)
         {
+            _sb.Draw(
+                v.GetAcctualTexture(),
+                v.GetAbsoluteRectangle(),
+                v.GetAcctualColor());
 
-            Visit((I_Visible)v);
             DrawEntityHealthBar(v, Color.Red);
 
         }
         public void Visit(E_Player v)
         {
+            Rectangle r = v.GetAbsoluteRectangle();
             Visit((E_Entity)v);
 
 
-            _sb.DrawString(d.defaultFont,v.Level.ToString(),new Vector2(50,50),Color.White);
+            _sb.DrawString(d.defaultFont, v.Level.ToString() + " : " + v.Xp + "/" + v.NextLevel, new Vector2(50, 50), Color.White);
 
         }
 
@@ -188,7 +193,7 @@ namespace BuildAndDestroy
         /// </summary>
         /// <param name="v">l'entité</param>
         /// <param name="color">la couleur de la bar de vie</param>
-        public void DrawEntityHealthBar(E_Entity v,Color color)
+        public void DrawEntityHealthBar(E_Entity v, Color color)
         {
             _sb.Draw(
                 d.blank,
@@ -203,13 +208,13 @@ namespace BuildAndDestroy
             _sb.Draw(
                 d.blank,
                 new Rectangle(
-                v.GetAbsoluteRectangle().Center.X - 50,
-                v.GetAbsoluteRectangle().Top - 15,
+                v.GetAbsoluteRectangle().Center.X - 50 ,
+                v.GetAbsoluteRectangle().Top - 15 ,
                 (int)(v.Health / v.MaxHealth * 100),
                 10),
                 color
                 );
-            
+
         }
 
         #endregion

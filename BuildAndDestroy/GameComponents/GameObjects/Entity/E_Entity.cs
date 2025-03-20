@@ -81,7 +81,14 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <returns>Le rectangle absolu</returns>
         public virtual Rectangle GetAbsoluteRectangle()
         {
-            return rect;
+            Rectangle r = new Rectangle(
+                rect.X - Camera.Instance.Position.X,
+
+                rect.Y - Camera.Instance.Position.Y,
+                rect.Width,
+                rect.Height
+                );
+            return r;
         }
 
         /// <summary>
@@ -355,7 +362,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <summary>
         /// Indique à l'entité ou elle doit aller et vérifie si une autre entité s'y trouve et si oui la prend pour cible
         /// </summary>
-        /// <param name="pos">la position</param>
+        /// <param name="pos">la Position</param>
         protected void GoToPosition(Point pos)
         {
             E_Entity target;

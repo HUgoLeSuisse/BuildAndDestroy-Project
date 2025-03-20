@@ -1,4 +1,5 @@
 ﻿using BuildAndDestroy.GameComponents.GameObjects;
+using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +18,6 @@ namespace BuildAndDestroy.GameComponents.UI.Element
     public class UI_GamePannel : UI_Pannel
     {
         public GameManager game { get; private set; }
-
 
         UI_StatPannel playerStats;
         public UI_GamePannel() : base(new Rectangle(0,0,DisplayUtils.GetInstance().width, DisplayUtils.GetInstance().height), Color.Transparent, null)
@@ -38,6 +38,11 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         public override void Accept(I_VisibleVisitor v)
         {
             v.Visit(this);
+        }
+
+        public E_Player GetPlayer()
+        {
+            return game.GetPlayer();
         }
     }
 }

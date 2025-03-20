@@ -94,9 +94,20 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             v.Visit(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Le rectangle absolu</returns>
         public Rectangle GetAbsoluteRectangle()
         {
-            return rect;
+            Rectangle r = new Rectangle(
+                rect.X - Camera.Instance.Position.X,
+
+                rect.Y - Camera.Instance.Position.Y,
+                rect.Width,
+                rect.Height
+                );
+            return r;
         }
 
         public Color GetAcctualColor()

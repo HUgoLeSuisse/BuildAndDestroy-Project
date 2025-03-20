@@ -14,7 +14,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="rect">Rectangle relatif à la position du parent</param>
+        /// <param name="rect">Rectangle relatif à la Position du parent</param>
         /// <param name="color">Couleur de l'element(par defaut blanc)</param>
         /// <param name="texture">TextureBG de l'element (par defaut 1x1 blanc)</param>
         public UI_Pannel(Rectangle rect, Color? color, Texture2D? image) : base(rect, color, image)

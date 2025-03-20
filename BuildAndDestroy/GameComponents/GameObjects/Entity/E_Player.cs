@@ -16,8 +16,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
 
             inputManager = new InputManager();
-            mouseInput = new MouseInput();
-            mouseInput.onRightUp += GoToPosition;
+            mouseInput = MouseInput.Instance;
+            mouseInput.onRightUp += (onScreenPos, inGamePos) =>
+            {
+                GoToPosition(inGamePos);
+            };
 
         }
         #region Display
@@ -40,14 +43,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             return texture;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>Le rectangle absolu</returns>
-        public override Rectangle GetAbsoluteRectangle()
-        {
-            return rect;
-        }
 
         /// <summary>
         /// 
@@ -64,12 +59,44 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private InputManager inputManager;
         private MouseInput mouseInput;
 
-        private float xp = 1;
+        private int level = 0;
+        private float xp = 0;
 
         /// <summary>
         /// Niveau du personnage
         /// </summary>
         public int Level
+        {
+            get
+            {
+                return level;
+            }
+        }
+        /// <summary>
+        /// La quantité d'xp du personnage
+        /// </summary>
+        public float Xp
+        {
+            get
+            {
+                return xp;
+            }
+            set
+            {
+                xp += value;
+                if (xp >= NextLevel)
+                {
+                    xp -= NextLevel;
+                    level += 1;
+                    levelUp?.Invoke();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Xp jusqu'au prochain niveau
+        /// </summary>
+        public float NextLevel
         {
             get
             {
@@ -105,6 +132,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// </summary>
         public override float Range
         { get { return base.Range; } }
+
 
         public delegate void LevelUp();
         /// <summary>
@@ -142,23 +170,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             if (loot is not null)
             {
-                EarnXP(loot.Xp);
+                Xp = loot.Xp;
             }
         }
 
-        /// <summary>
-        /// Fait gagner de l'xp au personnage
-        /// </summary>
-        /// <param name="amount"></param>
-        public void EarnXP(float amount)
-        {
-            int level = Level;
-            xp += amount;
-            if (level < Level)
-            {
-                levelUp?.Invoke();
-            }
-        }
 
     }
 }

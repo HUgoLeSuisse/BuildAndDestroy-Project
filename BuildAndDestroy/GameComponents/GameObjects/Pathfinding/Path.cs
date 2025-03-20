@@ -23,7 +23,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Pathfinding
         }
 
         /// <summary>
-        /// Permet d'acctualisé la position acctuelle
+        /// Permet d'acctualisé la Position acctuelle
         /// </summary>
         /// <param name="pos"></param>
         public void UpdateCurrentPos(Point pos)

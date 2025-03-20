@@ -47,7 +47,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         public UI_Pannel Parent { get { return parent; } set { parent = value; } }
 
         /// <summary>
-        /// Rectangle absolue à la position du parent
+        /// Rectangle absolue à la Position du parent
         /// </summary>
         public Rectangle Absoulute
         {
@@ -73,7 +73,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         }
 
         /// <summary>
-        /// Rectangle relatif à la position du parent
+        /// Rectangle relatif à la Position du parent
         /// </summary>
         public Rectangle Relative
         {
@@ -180,7 +180,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="rect">Rectangle relatif à la position du parent</param>
+        /// <param name="rect">Rectangle relatif à la Position du parent</param>
         /// <param name="color">Couleur de l'element</param>
         /// <param name="texture">TextureBG de l'element (par defaut 1x1 blanc)</param>
         public UI_Element(Rectangle rect, Color? color, Texture2D texture)

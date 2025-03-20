@@ -1,5 +1,6 @@
 ﻿using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.GameObjects.Utils;
+using BuildAndDestroy.GameComponents.UI;
 using BuildAndDestroy.GameComponents.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -40,21 +41,21 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         }
 
         /// <summary>
-        /// Vérifie s'il y a une entité à une position donnée
+        /// Vérifie s'il y a une entité à une Position donnée
         /// </summary>
         /// <param name="pos">la postion</param>
         /// <param name="who">l'entité (si il y en a une)</param>
         /// <returns></returns>
         public bool IsSomeThingHere(Point pos, out E_Entity who)
         {
-            if (player.GetAbsoluteRectangle().Contains(pos))
+            if (player.Rect.Contains(pos))
             {
                 who = player;
                 return true;
             }
             foreach (var monster in monsters)
             {
-                if (monster.GetAbsoluteRectangle().Contains(pos))
+                if (monster.Rect.Contains(pos))
                 {
                     who = monster;
                     return true;
@@ -71,14 +72,14 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         /// <returns></returns>
         public bool IsSomeThingHere(Rectangle rect, out E_Entity who)
         {
-            if (player.GetAbsoluteRectangle().Intersects(rect))
+            if (player.Rect.Intersects(rect))
             {
                 who = player;
                 return true;
             }
             foreach (var monster in monsters)
             {
-                if (monster.GetAbsoluteRectangle().Intersects(rect))
+                if (monster.Rect.Intersects(rect))
                 {
                     who = monster;
                     return true;

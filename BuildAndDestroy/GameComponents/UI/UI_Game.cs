@@ -2,6 +2,7 @@
 using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.UI.Element;
 using Microsoft.Xna.Framework;
+using System;
 namespace BuildAndDestroy.GameComponents.UI
 {
     /// <summary>
@@ -17,9 +18,18 @@ namespace BuildAndDestroy.GameComponents.UI
         /// </summary>
         public UI_Game(Camera cam) : base(cam) 
         { 
-            content = new UI_GamePannel();
+            UI_GamePannel gamePannel = new UI_GamePannel();
+            content = gamePannel;
+            player = gamePannel.GetPlayer();
         }
 
-
+        public E_Player GetPlayer()
+        {
+            return player;
+        }
+        public override UI_Pannel GetContent()
+        {
+            return content;
+        }
     }
 }
