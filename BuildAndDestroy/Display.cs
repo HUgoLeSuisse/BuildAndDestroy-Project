@@ -120,6 +120,10 @@ namespace BuildAndDestroy
         }
         public void Visit(UI_Button v)
         {
+            if (v.label.text == "0")
+            {
+                int rx = 0;
+            }
             _sb.Draw(v.GetAcctualTexture(),
                     v.GetAbsoluteRectangle(),
                     v.GetAcctualColor());
@@ -147,6 +151,16 @@ namespace BuildAndDestroy
         }
 
         public void Visit(UI_Pannel v)
+        {
+            Visit((I_Visible)v);
+
+            UI_Element[] uI_Elements = v.GetChilds();
+            foreach (var item in uI_Elements)
+            {
+                item.Accept(this);
+            }
+        }
+        public void Visit(UI_StatPannel v)
         {
             Visit((I_Visible)v);
 

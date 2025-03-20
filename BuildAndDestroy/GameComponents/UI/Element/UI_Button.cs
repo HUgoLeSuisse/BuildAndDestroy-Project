@@ -11,11 +11,30 @@ namespace BuildAndDestroy.GameComponents.UI.Element
     public class UI_Button : UI_Element
     {
         private Timer timePressed;
+        private bool isEnabled = true;
         private bool isOver;
         private bool isPressed;
         private Color overColor;
         private Color pressedColor;
+        private Color disabledColor;
         public UI_Label label;
+
+        public bool IsEnabled
+        {
+            get
+            {
+                return isEnabled;
+            }
+            set
+            {
+                isEnabled = value;
+                if (!isEnabled) {
+
+                    isOver = false;
+                    isPressed = false;
+                }
+            }
+        }
 
         public UI_Button(
             Point position = new Point(),
@@ -28,12 +47,14 @@ namespace BuildAndDestroy.GameComponents.UI.Element
             SpriteFont? font = null,
             Color overColor = new Color(),
             Color pressedColor = new Color()
-            ) : base(new Rectangle(position,size),color, texture)
+,
+            Color disabledColor = default) : base(new Rectangle(position,size),color, texture)
         {
             label = new UI_Label(position, text, fontSize, color, texture, fontColor, font);
             
             this.overColor = overColor;
             this.pressedColor = pressedColor;
+            this.disabledColor = disabledColor;
             UpdateEvents.GetInstance().Update += Update;
         }
 
@@ -71,50 +92,53 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// <param name="gameTime"></param>
         protected virtual void Update(GameTime gameTime)
         {
-            MouseState mouse = Mouse.GetState();
-            if (GetAbsoluteRectangle().Contains(mouse.Position))
+            MouseState mouse = Mouse.GetState(); 
+            if (IsEnabled)
             {
-                if (!isOver)
+                if (GetAbsoluteRectangle().Contains(mouse.Position))
                 {
-                    onMouseOver?.Invoke();
-                    isOver = true;
-                }
-
-                if (mouse.LeftButton == ButtonState.Pressed)
-                {
-                    if (!isPressed)
+                    if (!isOver)
                     {
-                        onMouseDown?.Invoke();
-                        timePressed = new Timer();
+                        onMouseOver?.Invoke();
+                        isOver = true;
+                    }
 
-                        isPressed = true;
+                    if (mouse.LeftButton == ButtonState.Pressed)
+                    {
+                        if (!isPressed)
+                        {
+                            onMouseDown?.Invoke();
+                            timePressed = new Timer();
+
+                            isPressed = true;
+                        }
+                    }
+                    else
+                    {
+                        if (isPressed)
+                        {
+                            onMouseUp?.Invoke();
+                            onClick?.Invoke(timePressed.GetTime());
+                            timePressed = null;
+                            isPressed = false;
+                        }
                     }
                 }
                 else
                 {
-                    if (isPressed)
+                    if (isOver)
                     {
-                        onMouseUp?.Invoke();
-                        onClick?.Invoke(timePressed.GetTime());
-                        timePressed = null;
-                        isPressed = false;
+                        onMouseOver?.Invoke();
                     }
-                }
-            }
-            else
-            {
-                if (isOver)
-                {
-                    onMouseOver?.Invoke();
-                }
-                isOver = false;
+                    isOver = false;
 
-                if (mouse.LeftButton == ButtonState.Released)
-                {
-                    if (isPressed)
+                    if (mouse.LeftButton == ButtonState.Released)
                     {
-                        onMouseDown?.Invoke();
-                        isPressed = false;
+                        if (isPressed)
+                        {
+                            onMouseDown?.Invoke();
+                            isPressed = false;
+                        }
                     }
                 }
             }
@@ -134,7 +158,11 @@ namespace BuildAndDestroy.GameComponents.UI.Element
             {
                 return overColor;
             }
-            return ColorBG.Value;
+            if (!isEnabled)
+            {
+                return disabledColor;
+            }
+            return ColorBG;
         }
         /// <summary>
         /// Pour le visiteur

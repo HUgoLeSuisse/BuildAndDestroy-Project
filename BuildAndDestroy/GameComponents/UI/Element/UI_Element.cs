@@ -151,7 +151,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// <summary>
         /// Couleur de l'element
         /// </summary>
-        public Color? ColorBG
+        public Color ColorBG
         {
             get
             {
@@ -160,7 +160,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
 
             set
             {
-                color = value ?? Color.Transparent;
+                color = value;
             }
         }
 
@@ -187,7 +187,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         {
             d = DisplayUtils.GetInstance();
             Relative = rect;
-            ColorBG = color;
+            ColorBG = color ?? Color.Transparent;
             TextureBG = texture;
         }
 

@@ -62,6 +62,45 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private int level = 0;
         private float xp = 0;
 
+        private int force = 0;
+        private int magic = 0;
+        private int science = 0;
+
+        public int Force
+        {
+            get 
+            { 
+                return force; 
+            }
+            set 
+            { 
+                force = value; 
+            }
+        }
+        public int Magic
+        {
+            get
+            {
+                return magic;
+            }
+            set
+            {
+                magic = value;
+            }
+        }
+        public int Science
+        {
+            get
+            {
+                return science;
+            }
+            set
+            {
+                science = value;
+            }
+        }
+
+
         /// <summary>
         /// Niveau du personnage
         /// </summary>
