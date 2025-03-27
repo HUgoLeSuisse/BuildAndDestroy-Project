@@ -5,7 +5,9 @@ using BuildAndDestroy.GameComponents.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using BuildAndDestroy.GameComponents.GameObjects.Spell;
 using System;
+using BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
@@ -14,13 +16,20 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         public E_Player(GameManager gameMananger) : base(gameMananger, rect: new Rectangle(300, 500, 50, 50), range: 50, speed: 10)
         {
-
             inputManager = new InputManager();
             mouseInput = MouseInput.Instance;
             mouseInput.onRightUp += (onScreenPos, inGamePos) =>
             {
                 GoToPosition(inGamePos);
             };
+
+            skills[0] = new S_Fireball(this);
+            inputManager.PutInput("FirstSpell", Keys.Q);
+            inputManager.GetInputs()["FirstSpell"].onKeyUp += () =>
+            {
+                skills[0].Use();
+            };
+            
 
         }
         #region Display
@@ -59,10 +68,22 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private InputManager inputManager;
         private MouseInput mouseInput;
 
+        private Skill[] skills = new Skill[3];
+        public Skill[] Skills
+        {
+            get { return skills; } 
+        
+        }
+
+
+
         private int level = 0;
         private float xp = 0;
 
-        private Knowledges knowledges;
+
+        private Knowledges knowledges = new Knowledges(0,0,0);
+
+
         public Knowledges Knowledges
         {
             get
@@ -157,19 +178,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <param name="target">la cible</param>
         protected override void MeleeAttack(E_Entity target)
         {
-            target.onDie += OnKill;
             base.MeleeAttack(target);
-            target.onDie -= OnKill;
-        }
-
-        /// <summary>
-        /// La fonction s'active quand on tue un enemey
-        /// </summary>
-        /// <param name="killer">le tueur de la cible (nous)</param>
-        /// <param name="loot">la lootbox de la cible</param>
-        private void OnKill(E_Entity killer, LootBox loot)
-        {
-            ReciveLootBox(loot);
         }
 
         /// <summary>
@@ -184,6 +193,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
 
-
+        public Vector2 GetMouseDirection()
+        {
+            return mouseInput.GetMousePosition().ToVector2()-Rect.Center.ToVector2();
+        }
     }
 }

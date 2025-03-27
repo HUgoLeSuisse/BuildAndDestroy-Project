@@ -9,6 +9,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
     public class Bullet : I_Visible, I_Moveable
     {
         public static List<Bullet> Bullets = new List<Bullet>();
+
         private GameManager gm;
         private E_Entity shooter;
         private Point origine;
@@ -17,7 +18,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private Rectangle rect;
         private float distance;
 
-        public delegate void OnTouch(E_Entity hited);
+        public delegate void OnTouch(E_Entity hitted);
         public OnTouch onTouch;
 
         /// <summary>
@@ -58,6 +59,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         public void Destroy()
         {
+            onTouch = null;
             Bullets.Remove(this);
         }
 
@@ -80,7 +82,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 }
                     I_Moveable moveable = this;
                     moveable.Move(gameTime, ref rect, direction, speed);
-                
             }
             else
             {

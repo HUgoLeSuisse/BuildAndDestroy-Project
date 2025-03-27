@@ -34,17 +34,17 @@ namespace BuildAndDestroy.GameComponents.Input
             {
                 isDown = false;
                 onKeyUp?.Invoke();
-                onKeyPressed(timer.GetTime());
+                onKeyPressed?.Invoke(timer.GetTime());
                 timer = null;
             }
         }
         public delegate void UpDown();
         /// <summary>
-        /// quand la souris est enfoncé
+        /// quand le boutton est enfoncé
         /// </summary>
         public UpDown onKeyDown;
         /// <summary>
-        /// quand la souris est relâché
+        /// quand le boutton est relâché
         /// </summary>
         public UpDown onKeyUp;
 

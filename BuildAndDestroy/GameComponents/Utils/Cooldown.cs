@@ -36,8 +36,11 @@ namespace BuildAndDestroy.GameComponents.Utils
                 currentTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             if (currentTime < 0) {
-                endCooldown?.Invoke();
-                Stop();
+                if (isEnable)
+                {
+                    endCooldown?.Invoke();
+                    Stop();
+                }
             }
 
         }

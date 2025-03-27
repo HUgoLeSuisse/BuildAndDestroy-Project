@@ -14,7 +14,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
     public class E_Entity : I_Visible, I_Moveable
     {
 
-        protected GameManager gameMananger;
+        private GameManager gameManager;
+        public GameManager GameManager
+        {
+            get { return gameManager; }
+        }
 
         public E_Entity(
             GameManager gameMananger,
@@ -32,7 +36,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             d = DisplayUtils.GetInstance();
             this.rect = rect == null ? new Rectangle(0, 0, 50, 50) : rect.Value;
             this.texture = texture == null ? d.blank : texture;
-            this.gameMananger = gameMananger;
+            this.gameManager = gameMananger;
 
             this.maxHealth = maxHealth;
             this.currentHealth = maxHealth;
@@ -50,6 +54,19 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
 
             attack += isRange? RangeAttack : MeleeAttack;
+
+            onDie += (killer, lootbox) =>
+            {
+                if (lootbox != null)
+                {
+                    if (killer is E_Player)
+                    {
+                        E_Player p = (E_Player)killer;
+                        p.ReciveLootBox (lootbox);
+                    }
+                }
+            };
+
         }
 
         #region Display
@@ -197,6 +214,16 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Peut il attaquer
         /// </summary>
         private bool CanAttack { get { return attackCooldown == null; } }
+
+        private float DamageReduction
+        {
+            get
+            {
+                const float C = 2;
+                return C / (C + Armor);
+            }
+        }
+
         /// <summary>
         /// le temp à attendre entre chaque attaque
         /// </summary>
@@ -258,7 +285,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         public virtual void TakeDamage(float amount, E_Entity enemy)
         {
             currentHealth -= amount - Armor;
-            if (currentHealth < 0)
+            if (currentHealth <= 0)
             {
                 onDie?.Invoke(enemy, lootBox);
             }
@@ -288,7 +315,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             if (CanAttack)
             {
-                Bullet b = new Bullet(gameMananger,this,position: Position, distance: Range+50, direction: (target.Position -Position).ToVector2());
+                Bullet b = new Bullet(gameManager,this,position: Position, distance: Range+50, direction: (target.Position -Position).ToVector2());
                 
                 b.onTouch += Hit;
 
@@ -352,12 +379,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 }
             }
         }
-        /*
-        public override void Move(GameTime gameTime, ref Rectangle rect,Vector2 direction, float speed)
-        {
-
-        }
-        */
 
         /// <summary>
         /// Indique à l'entité ou elle doit aller et vérifie si une autre entité s'y trouve et si oui la prend pour cible
@@ -366,7 +387,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         protected void GoToPosition(Point pos)
         {
             E_Entity target;
-            if (gameMananger.IsSomeThingHere(pos, out target))
+            if (gameManager.IsSomeThingHere(pos, out target))
             {
                 this.target = target;
             }

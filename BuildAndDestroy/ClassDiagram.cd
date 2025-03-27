@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.Bullet" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAgAAAAQAAIUAAAAAAIAgAAEDAAQAAAAAAAAIAAEA=</HashCode>
+      <FileName>GameComponents\GameObjects\Entity\Bullet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.E_Entity" Collapsed="true">
+    <Position X="19.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EMQCCCCKAYgAiAAgIQICIAEBACCEIwKEEAAAgBpAAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Entity\E_Entity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.E_Monster" Collapsed="true">
+    <Position X="18.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAI=</HashCode>
+      <FileName>GameComponents\GameObjects\Entity\E_Monster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.E_Player" Collapsed="true">
+    <Position X="20.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UIAACBAEARAACAAAAAAAAABAAAGAQQItEAAAAEAAAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Entity\E_Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.E_RangeMonster" Collapsed="true">
+    <Position X="18.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Entity\E_RangeMonster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Pathfinding.Path" Collapsed="true">
+    <Position X="28.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAIABAAABAAAAAAAAAAAAAEAAAACAAAAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Pathfinding\Path.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Skill.Active" Collapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAIAAAEAAAAAAAAAAACEAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Skill\Active.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Skill.Passive" Collapsed="true">
+    <Position X="26.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Skill\Passive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Skill.Skill" Collapsed="true">
+    <Position X="30.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAEACAgAAAgAAAAAAAAAAEAAAgAQAAIAAAAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Skill\Skill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Utils.Knowledges" Collapsed="true">
+    <Position X="28.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAEAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAIABA=</HashCode>
+      <FileName>GameComponents\GameObjects\Utils\Knowledges.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Utils.LootBox" Collapsed="true">
+    <Position X="30.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Utils\LootBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.GameManager" Collapsed="true">
+    <Position X="23.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAQAAAAAAAAAEAAAAAAABAAAADAAAAAAAEIAA=</HashCode>
+      <FileName>GameComponents\GameObjects\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.GameObjects.Map" Collapsed="true">
+    <Position X="23.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.Input.InputAction" Collapsed="true">
+    <Position X="25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAAAAAAAAAgAAEAgAAAAAAAAAAAAAAAAEBAAA=</HashCode>
+      <FileName>GameComponents\Input\InputAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.Input.InputManager" Collapsed="true">
+    <Position X="26.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAACAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\Input\InputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.Input.MouseInput" Collapsed="true">
+    <Position X="25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAACgAAgAAAhAAAQAAAAABAAAAAQAAAAAEAIAA=</HashCode>
+      <FileName>GameComponents\Input\MouseInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_Button" Collapsed="true">
+    <Position X="16" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIYAAAAAAAAAARAAAAkAAAAAAACgAgIAAFRACIAAAAA=</HashCode>
+      <FileName>GameComponents\UI\Element\UI_Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_Element" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIgAAAAAAQAAAABQAAAAYAAgABCAAgCkAAAAAAIAAAQ=</HashCode>
+      <FileName>GameComponents\UI\Element\UI_Element.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_GamePannel" Collapsed="true">
+    <Position X="20.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAQAAAAAAAAAEAEAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\UI\Element\UI_GamePannel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_Label" Collapsed="true">
+    <Position X="13.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAACAAAACgAAAAAAAAAAAAAAIAAAAAAIAAAA=</HashCode>
+      <FileName>GameComponents\UI\Element\UI_Label.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_Pannel" Collapsed="true">
+    <Position X="19.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAAAAAAQAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\UI\Element\UI_Pannel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_StatPannel" Collapsed="true">
+    <Position X="18.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIwAAAAAAAAAAAAAAAAAAgAAAAMBAAABAAAAAAAAABg=</HashCode>
+      <FileName>GameComponents\UI\Element\UI_StatPannel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.UI.UI_Game" Collapsed="true">
+    <Position X="13.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABACAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\UI\UI_Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.UI.UI_Manager" Collapsed="true">
+    <Position X="14.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAAAAAAAAAAAAAAAAAAAAAAAAAEACAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\UI\UI_Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.UI.UI_Menu" Collapsed="true">
+    <Position X="15.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAACA=</HashCode>
+      <FileName>GameComponents\UI\UI_Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.Utils.Cooldown" Collapsed="true">
+    <Position X="28.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAAACAAAQAAAAAAAAAAAAAEAACAYAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\Utils\Cooldown.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.Utils.DisplayUtils" Collapsed="true">
+    <Position X="30.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAgAAAIEAAQAQAAAAAAABABAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>GameComponents\Utils\DisplayUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.Utils.Timer" Collapsed="true">
+    <Position X="23.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\Utils\Timer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.Utils.UpdateEvents" Collapsed="true">
+    <Position X="25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>GameComponents\Utils\UpdateEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildAndDestroy.GameComponents.Camera" Collapsed="true">
+    <Position X="26.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAUAAAAAAgAAAAAAAAAABAAAAEQAAAAAAAEAA=</HashCode>
+      <FileName>GameComponents\Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Circle" Collapsed="true">
+    <Position X="23.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAYAIA=</HashCode>
+      <FileName>GameComponents\Utils\Circle.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="BuildAndDestroy.GameComponents.GameObjects.Entity.I_Moveable" Collapsed="true">
+    <Position X="23.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\GameObjects\Entity\I_Moveable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BuildAndDestroy.GameComponents.I_Visible" Collapsed="true">
+    <Position X="25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAQAAAAAAAAAAAAAAAACAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>GameComponents\I_Visible.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BuildAndDestroy.GameComponents.I_VisibleVisitor" Collapsed="true">
+    <Position X="26.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameComponents\I_VisibleVisitor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="BuildAndDestroy.GameComponents.UI.Element.Horizontal" Collapsed="true">
+    <Position X="23.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAQA=</HashCode>
+      <FileName>GameComponents\UI\Element\UI_Element.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BuildAndDestroy.GameComponents.UI.Element.Vertical" Collapsed="true">
+    <Position X="25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMEAAA=</HashCode>
+      <FileName>GameComponents\UI\Element\UI_Element.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
