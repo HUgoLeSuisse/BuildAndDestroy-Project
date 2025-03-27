@@ -200,5 +200,13 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
 
+        /// <summary>
+        /// Obtien la direction entre l'entité et la souris
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 GetMouseDirection()
+        {
+            return mouseInput.GetMousePosition().ToVector2() - Rect.Center.ToVector2();
+        }
     }
 }
