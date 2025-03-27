@@ -10,7 +10,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
         const float DISTANCE = 500;
         const float SPEED = 15;
         const int SIZE = 30;
-        public Fireball(GameManager gm, Skill skill) : base(gm,skill,5)
+        const int COOLDOWN = 3;
+
+
+        public Fireball(GameManager gm, Skill skill) : base(gm,skill,COOLDOWN)
         {
             onUse += Launch;
         }

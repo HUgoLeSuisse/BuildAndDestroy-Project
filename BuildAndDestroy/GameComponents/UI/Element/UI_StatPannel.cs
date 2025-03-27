@@ -65,7 +65,8 @@ namespace BuildAndDestroy.GameComponents.UI.Element
 
             health = new UI_Label(
                 position : new Point(0,0),
-                text:"xxxx",color:Color.Transparent,
+                text:"xxxx",
+                color:Color.Transparent,
                 fontColor : Color.White);
             stats.Add(health);
             health.xAlign = Horizontal.R;
@@ -99,7 +100,6 @@ namespace BuildAndDestroy.GameComponents.UI.Element
                 fontColor: Color.White
                 );
             stats.Add(magic);
-
             magic.yAlign = Vertical.M;
 
             // SCIENCE
@@ -132,7 +132,13 @@ namespace BuildAndDestroy.GameComponents.UI.Element
                 sicence.label.text = player.Knowledges.Science + "";
                 LevelAvailable -= 1;
             };
-
+            // Skills
+            for (int i = 0; i < player.Skills.Length; i++)
+            {
+                UI_Skill skill = new UI_Skill(player.Skills[i],new Rectangle(150+70*i,10,60,60));
+                weapon.Add(skill);
+                
+            }
             UpdateEvents.GetInstance().PreUpdate += Update;
 
         }

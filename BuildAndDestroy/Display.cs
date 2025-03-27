@@ -6,6 +6,7 @@ using BuildAndDestroy.GameComponents.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using Color = Microsoft.Xna.Framework.Color;
 
 namespace BuildAndDestroy
@@ -118,6 +119,32 @@ namespace BuildAndDestroy
                 );
 
         }
+        public void Visit(UI_Skill v)
+        {
+            _sb.Draw(
+                v.GetAcctualTexture(),
+                v.GetAbsoluteRectangle(),
+                v.GetAcctualColor());
+
+            Vector2 pos = v.GetAbsoluteRectangle().Center.ToVector2();
+            if (v.Skill != null && v.Skill.Active != null && v.Skill.Active.Cooldown != null && !v.Skill.Active.IsAvailable)
+            {
+                Vector2 size = d.defaultFont.MeasureString(Convert.ToInt32(v.Skill.Active.Cooldown.GetTime()).ToString()) * 0.7f /2;
+                pos -= size;
+                _sb.DrawString(
+                    d.defaultFont,
+                    Convert.ToInt32(v.Skill.Active.Cooldown.GetTime()).ToString(),
+                    pos,
+                    Color.White,
+                    0,
+                    Vector2.Zero,
+                    0.7f,
+                    SpriteEffects.None,
+                    1
+                    );
+            }
+
+        }
         public void Visit(UI_Button v)
         {
             if (v.label.text == "0")
@@ -170,6 +197,7 @@ namespace BuildAndDestroy
                 item.Accept(this);
             }
         }
+
         public void Visit(UI_GamePannel v)
         {
             foreach (var element in v.GetGameElement(new Rectangle(_cam.Position, new Point(d.width, d.height))))

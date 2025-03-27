@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Spell
 {
-    public class Skill : I_Visible
+    public class Skill 
     {
         private E_Player owner;
 
@@ -24,7 +24,19 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
 
         private string name;
         private Texture2D icon;
-        
+        public Texture2D Icon { get { return icon; } }
+        public Color Color
+        {
+            get
+            {
+
+                if (active != null && !active.IsAvailable)
+                {
+                    return Color.Gray;
+                }
+                return Color.White;
+            }
+        }
 
 
         protected Active active;
@@ -69,28 +81,5 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
             return false;
         }
 
-        public void Accept(I_VisibleVisitor v)
-        {
-            v.Visit(this);
-        }
-
-        public Texture2D GetAcctualTexture()
-        {
-            return icon;
-        }
-
-        public Rectangle GetAbsoluteRectangle()
-        {
-            return new Rectangle();
-        }
-
-        public Color GetAcctualColor()
-        {
-            if (active != null && active.IsAvailable)
-            {
-                return Color.Gray;
-            }
-            return Color.White;
-        }
     }
 }

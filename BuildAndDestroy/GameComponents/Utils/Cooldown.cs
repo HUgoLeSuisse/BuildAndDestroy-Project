@@ -12,6 +12,10 @@ namespace BuildAndDestroy.GameComponents.Utils
         private float maxTime;
         private float currentTime;
         private bool isEnable = false;
+        public bool IsEnable
+        {
+            get { return isEnable; }
+        }
 
         public delegate void EndTimer();
         /// <summary>
