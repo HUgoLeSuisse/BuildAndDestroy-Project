@@ -18,8 +18,13 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
             onUse += Launch;
         }
 
+        /// <summary>
+        /// Lance la boule de feu
+        /// </summary>
+        /// <param name="skillData"></param>
         private void Launch(SkillData skillData)
         {
+            // envoyer un projectile
             Bullet fireBall = new Bullet(gm,skill.Owner,
                 position: skill.Owner.Position,
                 size: new Point(SIZE, SIZE),
@@ -28,12 +33,18 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
                 speed: SPEED
                 );
 
+            //quand le projectile touche
             fireBall.onTouch += (hitted) =>
             {
                 OnTouch(skillData, hitted);
             };
         }
 
+        /// <summary>
+        /// Quand le projetcile touche
+        /// </summary>
+        /// <param name="skillData"></param>
+        /// <param name="hitted"></param>
         private void OnTouch(SkillData skillData, E_Entity hitted)
         {
             if (hitted != null)

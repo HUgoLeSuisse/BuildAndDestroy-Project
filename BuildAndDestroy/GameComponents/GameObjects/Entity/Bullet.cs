@@ -57,6 +57,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             Bullets.Add( this );
         }
 
+        /// <summary>
+        /// Supprime le projectile
+        /// </summary>
         public void Destroy()
         {
             onTouch = null;

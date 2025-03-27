@@ -11,11 +11,20 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.UI.Element
 {
+    /// <summary>
+    /// Affiche une compétance et gére notemment les cooldown
+    /// </summary>
     public class UI_Skill : UI_Element
     {
         private Skill skill;
         public Skill Skill { get { return skill; } }
         UpdateEvents updateEvents;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="skill"></param>
+        /// <param name="rect"></param>
         public UI_Skill(Skill skill,Rectangle rect) : base(rect, null, null)
         {
             this.skill = skill;
@@ -25,6 +34,10 @@ namespace BuildAndDestroy.GameComponents.UI.Element
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameTime"></param>
         private void Update(GameTime gameTime)
         {
             if (skill != null)

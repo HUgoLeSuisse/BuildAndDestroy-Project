@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using BuildAndDestroy.GameComponents.GameObjects.Utils;
+using BuildAndDestroy.GameComponents.Input;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
@@ -398,6 +399,14 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
 
+        /// <summary>
+        /// Obtien la direction entre l'entité et la souris
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 GetMouseDirection()
+        {
+            return mouseInput.GetMousePosition().ToVector2() - Rect.Center.ToVector2();
+        }
         #endregion
 
         #endregion

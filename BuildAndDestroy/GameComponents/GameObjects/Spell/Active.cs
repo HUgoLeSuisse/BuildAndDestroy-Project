@@ -14,10 +14,15 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
 
         public bool IsAvailable { get { return isAvailable; } }
 
+        /// <summary>
+        /// Cooldown de la comptéance
+        /// </summary>
         public float Timer
         {
             get { return baseTimer; }
         }
+
+
         public Active(GameManager gm, Skill skill, int baseTimer)
         {
             this.gm = gm;

@@ -23,6 +23,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 GoToPosition(inGamePos);
             };
 
+            // Asigne la boule de feu sur le premier sort (test a supprimer par la suite)
             skills[0] = new S_Fireball(this);
             inputManager.PutInput("FirstSpell", Keys.Q);
             inputManager.GetInputs()["FirstSpell"].onKeyUp += () =>
@@ -69,6 +70,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private MouseInput mouseInput;
 
         private Skill[] skills = new Skill[3];
+
+        /// <summary>
+        /// Compétance du personnage
+        /// </summary>
         public Skill[] Skills
         {
             get { return skills; } 
@@ -83,7 +88,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         private Knowledges knowledges = new Knowledges(0,0,0);
 
-
+        /// <summary>
+        /// Connaissances du personnage
+        /// </summary>
         public Knowledges Knowledges
         {
             get
@@ -193,9 +200,5 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
 
-        public Vector2 GetMouseDirection()
-        {
-            return mouseInput.GetMousePosition().ToVector2()-Rect.Center.ToVector2();
-        }
     }
 }
