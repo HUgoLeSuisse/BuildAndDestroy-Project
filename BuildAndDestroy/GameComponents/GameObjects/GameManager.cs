@@ -7,13 +7,13 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects
 {
     public class GameManager
     {
+        public static List<DrawableCircle> drawableCircles = new List<DrawableCircle>();
+
         UpdateEvents e = UpdateEvents.GetInstance();
         E_Player player;
         List<E_Monster> monsters = new List<E_Monster>();
@@ -70,22 +70,44 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         /// <param name="rect">le rectangle</param>
         /// <param name="who">l'entité (si il y en a une)</param>
         /// <returns></returns>
-        public bool IsSomeThingHere(Rectangle rect, out E_Entity who)
+        public bool IsSomeThingHere(Rectangle rect, out List<E_Entity> who)
         {
+            who = new List<E_Entity>();
             if (player.Rect.Intersects(rect))
             {
-                who = player;
-                return true;
+                who.Add(player);
             }
             foreach (var monster in monsters)
             {
                 if (monster.Rect.Intersects(rect))
                 {
-                    who = monster;
-                    return true;
+                    who.Add(monster);
                 }
             }
-            who = null;
+            if (who.Count >= 1) { return true; }
+            return false;
+        }
+        /// <summary>
+        /// Vérifie s'il y a une entité qui collision avec le rectangle donné
+        /// </summary>
+        /// <param name="rect">le rectangle</param>
+        /// <param name="who">l'entité (si il y en a une)</param>
+        /// <returns></returns>
+        public bool IsSomeThingHere(Circle circ, out List<E_Entity> who)
+        {
+            who = new List<E_Entity>();
+            if (circ.Intersects(player.Rect))
+            {
+                who.Add(player);
+            }
+            foreach (var monster in monsters)
+            {
+                if (circ.Intersects(monster.Rect))
+                {
+                    who.Add(monster);
+                }
+            }
+            if (who.Count >= 1) { return true; }
             return false;
         }
 
@@ -99,7 +121,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects
 
         public I_Visible[] GetVisibleElement()
         {
-            List<I_Visible> visibles = monsters.Cast<I_Visible>().ToList();
+            List<I_Visible> visibles = drawableCircles.Cast<I_Visible>().ToList();
+            foreach (var monster in monsters)
+            {
+                visibles.Add(monster);
+            }
             visibles.Add(player);
             foreach (var bullet in Bullet.Bullets)
             {

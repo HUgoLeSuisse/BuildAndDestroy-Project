@@ -32,6 +32,7 @@ namespace BuildAndDestroy
             d.width = 1920;
             d.height = 1080;
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             events = UpdateEvents.GetInstance();
@@ -44,6 +45,7 @@ namespace BuildAndDestroy
             d.SetContent(Content);
             _sb = new SpriteBatch(GraphicsDevice);
             d.blank = new Texture2D(GraphicsDevice, 1, 1);
+            d.graphics = GraphicsDevice;
             Color[] colorData = { Color.White };
             d.blank.SetData(colorData);
 
@@ -217,7 +219,9 @@ namespace BuildAndDestroy
                 v.GetAbsoluteRectangle(),
                 v.GetAcctualColor());
 
+
             DrawEntityHealthBar(v, Color.Red);
+
 
         }
         public void Visit(E_Player v)
@@ -258,9 +262,45 @@ namespace BuildAndDestroy
                 );
 
         }
+        public void Visit(DrawableCircle v)
+        {
+            Visit((I_Visible) v);
+        }
 
         #endregion
 
+        /// <summary>
+        /// créer une texture ciruclaire unicolor (pour débuging)
+        /// </summary>
+        /// <param name="graphicsDevice"></param>
+        /// <param name="diameter"></param>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        public static Texture2D CreateCircleTexture(GraphicsDevice graphicsDevice, int diameter, Color color)
+        {
+            Texture2D texture = new Texture2D(graphicsDevice, diameter, diameter);
+            Color[] data = new Color[diameter * diameter];
+
+            int radius = diameter / 2;
+            Vector2 center = new Vector2(radius, radius);
+
+            for (int y = 0; y < diameter; y++)
+            {
+                for (int x = 0; x < diameter; x++)
+                {
+                    Vector2 pos = new Vector2(x, y);
+                    float distance = Vector2.Distance(pos, center);
+
+                    if (distance <= radius)
+                        data[y * diameter + x] = color; // Pixel dans le cercle
+                    else
+                        data[y * diameter + x] = Color.Transparent; // Pixel en dehors
+                }
+            }
+
+            texture.SetData(data);
+            return texture;
+        }
 
     }
 }

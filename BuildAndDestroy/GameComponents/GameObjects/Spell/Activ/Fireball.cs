@@ -6,7 +6,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
     public class Fireball : Active
     {
         const float BASE_DAMAGE = 3;
-        const float SCALING_RATIO = 0.5f;
+        const float MAGIC_RATIO = 0.5f;
         const float DISTANCE = 500;
         const float SPEED = 15;
         const int SIZE = 30;
@@ -49,7 +49,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
         {
             if (hitted != null)
             {
-                hitted.TakeDamage(BASE_DAMAGE + SCALING_RATIO * skill.Owner.Knowledges.Magic, skill.Owner);
+                hitted.TakeDamage(BASE_DAMAGE + MAGIC_RATIO * skill.Owner.Knowledges.Magic, skill.Owner);
             }
         }
     }

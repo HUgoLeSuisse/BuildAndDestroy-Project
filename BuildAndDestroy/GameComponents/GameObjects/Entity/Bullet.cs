@@ -73,13 +73,16 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
             if (MathF.Sqrt(X * X + Y * Y)<= distance)
             {
-                E_Entity hit;
-                if (gm.IsSomeThingHere(rect,out hit))
+                List<E_Entity> hitteds;
+                if (gm.IsSomeThingHere(rect,out hitteds))
                 {
-                    if (hit != shooter)
+                    foreach (var item in hitteds)
                     {
-                        onTouch?.Invoke(hit);
-                        return;
+                        if (item != shooter)
+                        {
+                            onTouch?.Invoke(item);
+                            return;
+                        }
                     }
                     
                 }

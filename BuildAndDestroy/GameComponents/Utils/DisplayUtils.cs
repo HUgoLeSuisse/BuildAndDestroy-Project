@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace BuildAndDestroy.GameComponents.Utils
         /// instance du singleton
         /// </summary>
         private static DisplayUtils instance;
+        public GraphicsDevice graphics;
 
         /// <summary>
         /// Permet d'accedé au ressource

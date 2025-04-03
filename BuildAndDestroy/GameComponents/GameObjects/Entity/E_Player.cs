@@ -30,7 +30,13 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 skills[0].Use();
             };
-            
+            skills[1] = new S_CircularSlash(this);
+            inputManager.PutInput("SecondSpell", Keys.W);
+            inputManager.GetInputs()["SecondSpell"].onKeyUp += () =>
+            {
+                skills[1].Use();
+            };
+
 
         }
         #region Display
@@ -86,7 +92,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private float xp = 0;
 
 
-        private Knowledges knowledges = new Knowledges(0,0,0);
+        private Knowledges knowledges = new Knowledges(0, 0, 0);
 
         /// <summary>
         /// Connaissances du personnage
@@ -98,7 +104,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 return knowledges;
             }
         }
-           
+
 
         /// <summary>
         /// Niveau du personnage
@@ -111,7 +117,8 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
         /// <summary>
-        /// La quantité d'xp du personnage
+        /// La quantité d'xp du personnage 
+        /// (Pour en ajouté il faut faire Xp = QTE_A_AJOUTEE)
         /// </summary>
         public float Xp
         {
@@ -119,10 +126,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 return xp;
             }
+            
             set
             {
                 xp += value;
-                if (xp >= NextLevel)
+                while (xp >= NextLevel)
                 {
                     xp -= NextLevel;
                     level += 1;
@@ -138,7 +146,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             get
             {
-                return (int)(MathF.Pow(xp, 0.6f) / 15);
+                return (int)(MathF.Pow(Level, 0.6f) * 100);
             }
         }
 
@@ -207,6 +215,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         public Vector2 GetMouseDirection()
         {
             return mouseInput.GetMousePosition().ToVector2() - Rect.Center.ToVector2();
-        }
+        }   
     }
 }

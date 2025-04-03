@@ -12,6 +12,24 @@ namespace BuildAndDestroy.GameComponents.Utils
         private float maxTime;
         private float currentTime;
         private bool isEnable = false;
+
+        /// <summary>
+        /// Temps de fin du cooldown
+        /// </summary>
+        public float MaxTime
+        {
+            get { return maxTime; }
+        }
+
+        /// <summary>
+        /// Temps écoulé depuis le depuis du cooldown
+        /// </summary>
+        public float CurrentTime
+        {
+            get { return currentTime; }
+        }
+
+
         /// <summary>
         /// Est ce que le cooldown est actif
         /// </summary>
