@@ -59,5 +59,27 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Utils
             Magic = m;
             Science = s;
         }
+
+        /// <summary>
+        /// Compare si la connaissance d'origne (this) et plus grand ou égale sur tous les points que celle en paramètre
+        /// </summary>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public bool IsEnough (Knowledges k)
+        {
+            if (k.Force > Force)
+            {
+                return false;
+            }
+            if (k.Magic > Magic)
+            {
+                return false;
+            }
+            if (k.Science > Science)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

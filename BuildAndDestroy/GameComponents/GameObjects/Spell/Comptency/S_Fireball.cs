@@ -9,7 +9,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency
 {
     public class S_Fireball : Skill
     {
-        public S_Fireball( E_Player owner) : base("Fireball", owner, null, null)
+        public S_Fireball( E_Player owner) : base("Fireball", owner, new Knowledges(0,1,0), null)
         {
             active = new Fireball(owner.GameManager,this);
             

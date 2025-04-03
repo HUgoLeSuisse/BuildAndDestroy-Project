@@ -19,6 +19,7 @@ namespace BuildAndDestroy.GameComponents
         public void Visit(E_Entity v);
         public void Visit(E_Player v);
         public void Visit(DrawableCircle v);
+
     }
 
 }

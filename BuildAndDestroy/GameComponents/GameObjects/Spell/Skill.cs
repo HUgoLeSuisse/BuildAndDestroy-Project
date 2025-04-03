@@ -73,10 +73,13 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
         }
         public bool Use()
         {
-            if(active.IsAvailable)
+            if (Owner.Knowledges.IsEnough(RequiredKnowledges))
             {
-                active.onUse?.Invoke(new SkillData());
-                return true;
+                if (active.IsAvailable)
+                {
+                    active.onUse?.Invoke(new SkillData());
+                    return true;
+                }
             }
             return false;
         }

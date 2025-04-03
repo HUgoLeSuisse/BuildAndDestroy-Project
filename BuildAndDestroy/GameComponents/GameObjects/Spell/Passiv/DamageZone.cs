@@ -1,4 +1,5 @@
-﻿using BuildAndDestroy.GameComponents.GameObjects.Entity;
+﻿using BuildAndDestroy.GameComponents.GameObjects.Effect;
+using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.Utils;
 using Microsoft.Xna.Framework;
 using System;
@@ -20,6 +21,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Passiv
         /// </summary>
         /// <param name="range">zone de dégat</param>
         /// <param name="damage">Dégat par second</param>
+        /// <param name="color">Couleur de la zone</param>
         /// <param name=""></param>
         public DamageZone(
             GameManager gameManager,

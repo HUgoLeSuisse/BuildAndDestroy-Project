@@ -91,19 +91,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private int level = 0;
         private float xp = 0;
 
-
         private Knowledges knowledges = new Knowledges(0, 0, 0);
-
-        /// <summary>
-        /// Connaissances du personnage
-        /// </summary>
-        public Knowledges Knowledges
-        {
-            get
-            {
-                return knowledges;
-            }
-        }
 
 
         /// <summary>
@@ -116,6 +104,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 return level;
             }
         }
+
         /// <summary>
         /// La quantité d'xp du personnage 
         /// (Pour en ajouté il faut faire Xp = QTE_A_AJOUTEE)
@@ -150,34 +139,18 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
 
-        /// <summary>
-        /// Vitesse d'attaque
-        /// </summary>
-        public override float AttackSpeed
-        {
-            get { return base.AttackSpeed; }
-        }
-        /// <summary>
-        /// Vie acctuelle
-        /// </summary>
-        public override float Health { get { return base.Health; } }
-        /// <summary>
-        /// Vie Maximum
-        /// </summary>
-        public override float MaxHealth { get { return base.MaxHealth; } }
+
 
         /// <summary>
-        /// Armure
+        /// Connaissances du personnage
         /// </summary>
-        public override float Armor
+        public Knowledges Knowledges
         {
-            get { return base.Armor; }
+            get
+            {
+                return knowledges;
+            }
         }
-        /// <summary>
-        /// Proté d'attaque
-        /// </summary>
-        public override float Range
-        { get { return base.Range; } }
 
 
         public delegate void LevelUp();

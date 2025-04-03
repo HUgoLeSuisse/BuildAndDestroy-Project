@@ -1,4 +1,5 @@
-﻿using BuildAndDestroy.GameComponents.GameObjects.Entity;
+﻿using BuildAndDestroy.GameComponents.GameObjects.Effect;
+using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using Microsoft.Xna.Framework;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
@@ -50,6 +51,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
             if (hitted != null)
             {
                 hitted.TakeDamage(BASE_DAMAGE + MAGIC_RATIO * skill.Owner.Knowledges.Magic, skill.Owner);
+                hitted.Effects.Add(new F_ArmorReduction(hitted, skill.Owner,4));
             }
         }
     }

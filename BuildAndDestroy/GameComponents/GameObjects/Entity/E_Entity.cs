@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using BuildAndDestroy.GameComponents.GameObjects.Utils;
 using BuildAndDestroy.GameComponents.Input;
+using System.Collections.Generic;
+using BuildAndDestroy.GameComponents.GameObjects.Effect;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
@@ -133,10 +135,20 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private float range;
         private bool isRange;
 
+        public float bonusDamage;
+        public float bonusArmor;
+
+        private List<F_Effect> effects = new List<F_Effect>();
+
         private LootBox lootBox;
         #endregion
 
         #region Propriété
+
+        /// <summary>
+        /// Ensemble d'effet du personnage
+        /// </summary>
+        public List<F_Effect> Effects { get { return effects; } }
 
         /// <summary>
         /// Position de l'entité
@@ -167,10 +179,39 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <summary>
         /// Armure
         /// </summary>
-        public virtual float Armor
+        public virtual float BaseArmor
         {
             get { return armor; }
         }
+        /// <summary>
+        /// Dégat Bonus
+        /// /!\ pour ajouté un bonus/malus il faut faire :  
+        /// Bonus : BonusDamage = valeur;   
+        /// Malus : BonusDamage = -valeur;
+        /// </summary>
+        public virtual float BonusArmor
+        {
+            get
+            {
+                bonusArmor = 0f;
+                foreach (var item in effects)
+                {
+                    item.ApplyStatBonus();
+                }
+                return bonusArmor;
+            }
+            set
+            {
+                bonusArmor += value;
+            }
+
+        }
+
+        /// <summary>
+        /// Dégat totaux
+        /// </summary>
+        public float TotalArmor { get { return BaseArmor + BonusArmor; } }
+    
         /// <summary>
         /// Portée d'attaque
         /// </summary>
@@ -178,9 +219,36 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         { get { return range; } }
 
         /// <summary>
-        /// Dégat
+        /// Dégat de base
         /// </summary>
-        public virtual float Damage { get { return damage; } }
+        public virtual float BaseDamage { get { return damage; } }
+
+        /// <summary>
+        /// Dégat Bonus
+        /// /!\ pour ajouté un bonus/malus il faut faire :  
+        /// Bonus : BonusDamage = valeur;   
+        /// Malus : BonusDamage = -valeur;
+        /// </summary>
+        public virtual float BonusDamage { 
+            get { 
+                bonusDamage = 0f;
+                foreach (var item in effects)
+                {
+                    item.ApplyStatBonus();
+                }
+                return bonusDamage;
+            }
+            set {
+                bonusDamage += value;
+            }
+        
+        }
+
+        /// <summary>
+        /// Dégat totaux
+        /// </summary>
+        public float TotalDamage { get { return BaseDamage + BonusDamage; } }
+
         /// <summary>
         /// Vitesse
         /// </summary>
@@ -221,7 +289,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             get
             {
                 const float C = 2;
-                return C / (C + Armor);
+                return C / (C + TotalArmor);
             }
         }
 
@@ -333,10 +401,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             if (hit is not null)
             {
-                hit.TakeDamage(Damage, this);
+                hit.TakeDamage(TotalDamage, this);
             }
         }
-
+        
         /// <summary>
         /// permet d'attaquer à nouveau
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using BuildAndDestroy.GameComponents.GameObjects.Entity;
+﻿using BuildAndDestroy.GameComponents.GameObjects.Effect;
+using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.Utils;
 using Microsoft.Xna.Framework;
 using System;
@@ -10,7 +11,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
     {
         const int RANGE = 250;
         const float BASE_DAMAGE = 3;
-        const float FORCE_RATIO = 80;
+        const float FORCE_RATIO = 0.8f;
         const float CHARGE_TIME = 0.8f;
 
         Circle range;
@@ -69,6 +70,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
                 if (item != skill.Owner)
                 {
                     item.TakeDamage(BASE_DAMAGE + FORCE_RATIO * skill.Owner.Knowledges.Force, skill.Owner);
+                    item.Effects.Add(new F_Bleeding(item, skill.Owner, duration: 3, damage:1));
                 }
             }
         }
