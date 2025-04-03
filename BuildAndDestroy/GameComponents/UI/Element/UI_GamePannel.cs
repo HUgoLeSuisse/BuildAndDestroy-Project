@@ -33,7 +33,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
 
         public I_Visible[] GetGameElement(Rectangle rect)
         {
-            return game.GetVisibleElement();
+            return game.GetVisibleElement(rect);
         }
         public override void Accept(I_VisibleVisitor v)
         {

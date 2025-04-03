@@ -285,7 +285,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <param name="player">qui à envoyer les dégats</param>
         public virtual void TakeDamage(float amount, E_Entity enemy)
         {
-            currentHealth -= amount - Armor;
+            currentHealth -= amount * DamageReduction;
             if (currentHealth <= 0)
             {
                 onDie?.Invoke(enemy, lootBox);

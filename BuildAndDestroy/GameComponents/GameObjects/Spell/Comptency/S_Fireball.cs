@@ -1,12 +1,9 @@
 ﻿using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.GameObjects.Spell.Activ;
+using BuildAndDestroy.GameComponents.GameObjects.Spell.Passiv;
 using BuildAndDestroy.GameComponents.GameObjects.Utils;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency
 {
@@ -15,6 +12,8 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency
         public S_Fireball( E_Player owner) : base("Fireball", owner, null, null)
         {
             active = new Fireball(owner.GameManager,this);
+            
+            passives.Add(new DamageZone(owner.GameManager, this, color: new Color(120, 170, 190, 127)));
         }
     }
 }

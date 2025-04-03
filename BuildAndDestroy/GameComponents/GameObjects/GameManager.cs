@@ -119,14 +119,15 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         {
         }
 
-        public I_Visible[] GetVisibleElement()
+        public I_Visible[] GetVisibleElement(Rectangle rect)
         {
             List<I_Visible> visibles = drawableCircles.Cast<I_Visible>().ToList();
-            foreach (var monster in monsters)
+            List<E_Entity> entities;
+            IsSomeThingHere(rect, out entities);
+            foreach (var entity in entities)
             {
-                visibles.Add(monster);
+                visibles.Add(entity);
             }
-            visibles.Add(player);
             foreach (var bullet in Bullet.Bullets)
             {
                 visibles.Add(bullet);
