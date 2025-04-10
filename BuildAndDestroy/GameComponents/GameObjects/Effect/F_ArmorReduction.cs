@@ -21,5 +21,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Effect
             base.ApplyStatBonus();
             Receiver.BonusArmor = -amount;
         }
+        public override void Destroy()
+        {
+            base.Destroy();
+        }
     }
 }

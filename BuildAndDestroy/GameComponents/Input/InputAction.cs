@@ -10,7 +10,7 @@ using static BuildAndDestroy.GameComponents.Input.InputAction;
 
 namespace BuildAndDestroy.GameComponents.Input
 {
-    public class InputAction
+    public class InputAction : I_SmartObject
     {
         public bool isDown { get; private set; }
         public Keys key { get; set; }
@@ -38,6 +38,8 @@ namespace BuildAndDestroy.GameComponents.Input
                 timer = null;
             }
         }
+
+
         public delegate void UpDown();
         /// <summary>
         /// quand le boutton est enfoncé
@@ -57,5 +59,15 @@ namespace BuildAndDestroy.GameComponents.Input
         /// S'appele quand on clique sur le bouton
         /// </summary>
         public OnAction onKeyPressed;
+
+        public virtual void Destroy()
+        {
+            onKeyDown = null;
+            onKeyPressed = null;
+            onKeyUp = null;
+            UpdateEvents.GetInstance().PreUpdate -= PreUpdate;
+            timer?.Destroy();
+
+        }
     }
 }

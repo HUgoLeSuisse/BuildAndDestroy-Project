@@ -30,7 +30,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
             this.skill = skill;
 
             updateEvents = UpdateEvents.GetInstance();
-            updateEvents.Update += Update;
+            updateEvents.PreUpdate += Update;
 
         }
 
@@ -54,6 +54,12 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         public override void Accept(I_VisibleVisitor v)
         {
             v.Visit(this);
+        }
+        public override void Destroy()
+        {
+            base.Destroy();
+            UpdateEvents.GetInstance().PreUpdate -= Update;
+
         }
     }
 }

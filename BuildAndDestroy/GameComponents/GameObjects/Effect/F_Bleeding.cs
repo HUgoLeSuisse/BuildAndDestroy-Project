@@ -22,14 +22,15 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Effect
             UpdateEvents.GetInstance().Update += Update;
         }
 
-        protected override void Delete()
-        {
-            UpdateEvents.GetInstance().Update -= Update;
-        }
-
         private void Update(GameTime gameTime)
         {
-            Receiver.TakeDamage((float)(damage*gameTime.ElapsedGameTime.TotalSeconds), Giver);
+            Receiver?.TakeDamage((float)(damage*gameTime.ElapsedGameTime.TotalSeconds), Giver);
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+            UpdateEvents.GetInstance().Update -= Update;
         }
     }
 }

@@ -59,5 +59,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Passiv
             }
 
         }
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            GameManager.drawableCircles.Remove(drawable);
+        }
     }
 }

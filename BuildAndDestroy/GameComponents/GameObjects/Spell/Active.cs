@@ -2,7 +2,7 @@
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Spell
 {
-    public class Active
+    public class Active : I_SmartObject
     {
         private bool isAvailable = true;
         private Cooldown cooldown;
@@ -46,5 +46,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
 
         public delegate void OnUse(SkillData skillData);
         public OnUse onUse;
+
+        public virtual void Destroy()
+        {
+            cooldown.Destroy();
+            onUse = null;
+        }
     }
 }

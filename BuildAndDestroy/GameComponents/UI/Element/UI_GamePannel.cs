@@ -44,5 +44,10 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         {
             return game.GetPlayer();
         }
+        public override void Destroy()
+        {
+            base.Destroy();
+            game.Destroy();
+        }
     }
 }

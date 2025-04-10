@@ -64,6 +64,7 @@ namespace BuildAndDestroy.GameComponents.UI
         /// <param name="time"></param>
         private void Play(float time)
         {
+            Destroy();
             cam.ChangeUI(new UI_Game(cam));
         }
 

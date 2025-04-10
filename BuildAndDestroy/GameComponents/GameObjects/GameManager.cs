@@ -10,34 +10,49 @@ using System.Linq;
 
 namespace BuildAndDestroy.GameComponents.GameObjects
 {
-    public class GameManager
+    public class GameManager : I_SmartObject
     {
         public static List<DrawableCircle> drawableCircles = new List<DrawableCircle>();
 
         UpdateEvents e = UpdateEvents.GetInstance();
+
         E_Player player;
         List<E_Monster> monsters = new List<E_Monster>();
+
         Timer Timer = new Timer ();
 
 
         public GameManager() {
-            e.PreUpdate += PerUpdate;
             e.Update += Update;
 
             player = new E_Player(this);
-
-            monsters.Add( new E_Monster(
+            var m1 = new E_Monster(
                 this,
                 position: new Point(800, 500),
                 size: new Point(150, 150),
                 lootBox: new LootBox(100)
-                ));
-            monsters.Add(new E_RangeMonster(
+                );
+            var m2 = new E_RangeMonster(
                 this,
                 position: new Point(1600, 500),
                 size: new Point(75, 75),
                 lootBox: new LootBox(100)
-                ));
+                );
+            monsters.Add(m1 );
+            monsters.Add(m2);
+        }
+
+        /// <summary>
+        /// Destroy An Entity
+        /// </summary>
+        /// <param name="killer"></param>
+        /// <param name="lootBox"></param>
+        public void DeleteEntity(E_Entity killed)
+        {
+            if (killed is E_Monster)
+            {
+                monsters.Remove((E_Monster)killed);
+            }
         }
 
         /// <summary>
@@ -111,9 +126,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects
             return false;
         }
 
-        private void PerUpdate(GameTime gameTime)
-        {
-        }
 
         private void Update(GameTime gameTime)
         {
@@ -138,6 +150,20 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         public E_Player GetPlayer()
         {
             return player;
+        }
+
+        public void Destroy()
+        {
+            drawableCircles.Clear();
+            player?.Destroy();
+            player = null;
+            foreach (var item in monsters)
+            {
+                item.Destroy();
+            }
+            e.Update -= Update;
+            Timer?.Destroy();
+            Timer = null;
         }
     }
 }

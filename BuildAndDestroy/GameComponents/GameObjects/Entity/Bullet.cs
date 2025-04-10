@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
-    public class Bullet : I_Visible, I_Moveable
+    public class Bullet : I_Visible, I_Moveable, I_SmartObject
     {
         public static List<Bullet> Bullets = new List<Bullet>();
 
@@ -62,8 +62,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// </summary>
         public void Destroy()
         {
-            onTouch = null;
             Bullets.Remove(this);
+            UpdateEvents.GetInstance().Update -= Update;
+            onTouch = null;
         }
 
         private void Update(GameTime gameTime)

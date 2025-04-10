@@ -14,7 +14,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
     /// <summary>
     /// Gére une entité
     /// </summary>
-    public class E_Entity : I_Visible, I_Moveable
+    public class E_Entity : I_Visible, I_Moveable, I_SmartObject
     {
 
         private GameManager gameManager;
@@ -56,18 +56,19 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             e.Update += Update;
 
 
-            attack += isRange? RangeAttack : MeleeAttack;
+            attack += isRange ? RangeAttack : MeleeAttack;
 
-            onDie += (killer, lootbox) =>
-            {
+            onDie += (killer, lootbox) => {
+                // donne la lootbox au tueur de l'entité
                 if (lootbox != null)
                 {
                     if (killer is E_Player)
                     {
                         E_Player p = (E_Player)killer;
-                        p.ReciveLootBox (lootbox);
+                        p.ReciveLootBox(lootbox);
                     }
                 }
+                Destroy();
             };
 
         }
@@ -124,7 +125,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         #region Gameplay
 
         #region Champs
-           
+
         // Statistique
         private float attackSpeed;
         private float armor;
@@ -211,7 +212,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Dégat totaux
         /// </summary>
         public float TotalArmor { get { return BaseArmor + BonusArmor; } }
-    
+
         /// <summary>
         /// Portée d'attaque
         /// </summary>
@@ -229,8 +230,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Bonus : BonusDamage = valeur;   
         /// Malus : BonusDamage = -valeur;
         /// </summary>
-        public virtual float BonusDamage { 
-            get { 
+        public virtual float BonusDamage
+        {
+            get
+            {
                 bonusDamage = 0f;
                 foreach (var item in effects)
                 {
@@ -238,10 +241,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 }
                 return bonusDamage;
             }
-            set {
+            set
+            {
                 bonusDamage += value;
             }
-        
+
         }
 
         /// <summary>
@@ -274,7 +278,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 Circle r = new Circle(
                     rect.Center,
-                    Range-10 + rect.Width / 2
+                    Range - 10 + rect.Width / 2
                     );
                 return r;
             }
@@ -384,8 +388,8 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             if (CanAttack)
             {
-                Bullet b = new Bullet(gameManager,this,position: Position, distance: Range+50, direction: (target.Position -Position).ToVector2());
-                
+                Bullet b = new Bullet(gameManager, this, position: Position, distance: Range + 50, direction: (target.Position - Position).ToVector2());
+
                 b.onTouch += Hit;
 
                 attackCooldown = new Cooldown(AttackTime);
@@ -404,7 +408,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 hit.TakeDamage(TotalDamage, this);
             }
         }
-        
+
         /// <summary>
         /// permet d'attaquer à nouveau
         /// </summary>
@@ -465,6 +469,19 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 this.target = null;
                 path = new Path(rect.Center, pos);
             }
+        }
+
+        public virtual void Destroy()
+        {
+            var effectsArray = effects.ToArray();
+            foreach (var item in effectsArray)
+            {
+                item.Destroy();   
+            }
+            GameManager.DeleteEntity(this);
+            UpdateEvents.GetInstance().Update -= Update;
+
+
         }
 
         #endregion

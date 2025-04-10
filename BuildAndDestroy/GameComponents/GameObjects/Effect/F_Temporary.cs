@@ -19,18 +19,15 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Effect
         {
             cooldown = new Cooldown(duration);
             cooldown.Start();
-            onEnd += Delete;
+            onEnd += base.Destroy;
             cooldown.endCooldown += () =>
             {
                 onEnd?.Invoke();
             };
         }
-
-        protected virtual void Delete()
+        public override void Destroy()
         {
-            Receiver.Effects.Remove(this);
-            Receiver = null;
-            Giver = null;
+            base.Destroy();
         }
     }
 }

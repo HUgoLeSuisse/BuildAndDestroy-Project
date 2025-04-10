@@ -1,4 +1,5 @@
 ﻿using BuildAndDestroy.GameComponents.GameObjects.Entity;
+using BuildAndDestroy.GameComponents.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Effect
 {
-    public class F_Effect
+    public class F_Effect : I_SmartObject
     {
         private E_Entity receiver;
         /// <summary>
@@ -27,9 +28,13 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Effect
             this.receiver = receiver; this.giver = giver;
         }
 
-        public virtual void ApplyStatBonus()
-        {
+        public virtual void ApplyStatBonus(){}
 
+        public virtual void Destroy()
+        {
+            Receiver?.Effects?.Remove(this);
+            Receiver = null;
+            Giver = null;
         }
     }
 }

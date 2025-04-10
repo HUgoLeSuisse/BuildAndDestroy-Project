@@ -55,7 +55,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
             this.overColor = overColor;
             this.pressedColor = pressedColor;
             this.disabledColor = disabledColor;
-            UpdateEvents.GetInstance().Update += Update;
+            UpdateEvents.GetInstance().PreUpdate += Update;
         }
 
         public delegate void MouseAction();
@@ -171,6 +171,12 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         public override void Accept(I_VisibleVisitor v)
         {
             v.Visit(this);
+        }
+        public override void Destroy()
+        {
+            base.Destroy();
+            UpdateEvents.GetInstance().PreUpdate -= Update;
+
         }
     }
 }

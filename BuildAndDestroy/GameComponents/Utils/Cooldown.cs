@@ -6,7 +6,7 @@ namespace BuildAndDestroy.GameComponents.Utils
     /// <summary>
     /// Permet lancer un minuteur qui active un event quand il a fini
     /// </summary>
-    public class Cooldown
+    public class Cooldown : I_SmartObject
     {
 
         private float maxTime;
@@ -90,6 +90,12 @@ namespace BuildAndDestroy.GameComponents.Utils
         public void Start()
         {
             isEnable = true;
+        }
+
+        public void Destroy()
+        {
+            UpdateEvents.GetInstance().Update -= Update;
+            endCooldown = null;
         }
     }
 }

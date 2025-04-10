@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Spell
 {
-    public class Passive
+    public class Passive : I_SmartObject
     {
         protected GameManager gm;
         protected Skill skill;
@@ -38,6 +38,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
         protected virtual void OnConditionValide(GameTime gameTime)
         {
 
+        }
+
+        public virtual void Destroy()
+        {
+            UpdateEvents.GetInstance().Update -= Update;
         }
     }
 }

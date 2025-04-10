@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildAndDestroy.GameComponents.GameObjects
+namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
 {
-    public class Map
+    public class W_Weapon
     {
-        public Map() { }
     }
 }

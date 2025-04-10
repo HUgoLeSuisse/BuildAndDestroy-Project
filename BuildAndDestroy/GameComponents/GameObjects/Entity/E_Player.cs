@@ -188,6 +188,26 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         public Vector2 GetMouseDirection()
         {
             return mouseInput.GetMousePosition().ToVector2() - Rect.Center.ToVector2();
-        }   
+        }
+
+
+        /// <summary>
+        /// Supprime le joueur de manière deffinitive
+        /// </summary>
+        public override void Destroy()
+        {
+            base.Destroy();
+            inputManager.Destroy();
+            foreach (var item in skills)
+            {
+                item.Destroy();   
+            }
+
+        }
+
+        internal void RemoveSkill(Skill skill)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

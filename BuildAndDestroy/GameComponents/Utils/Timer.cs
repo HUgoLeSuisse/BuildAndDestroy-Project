@@ -11,7 +11,7 @@ namespace BuildAndDestroy.GameComponents.Utils
     /// <summary>
     /// Permet de compter le temps passé depuis la création de l'instance
     /// </summary>
-    public class Timer
+    public class Timer : I_SmartObject
     {
         private float time;
         public Timer()
@@ -25,6 +25,11 @@ namespace BuildAndDestroy.GameComponents.Utils
         public float GetTime()
         {
             return time;
+        }
+
+        public void Destroy()
+        {
+            UpdateEvents.GetInstance().Update -= Update;
         }
     }
 }

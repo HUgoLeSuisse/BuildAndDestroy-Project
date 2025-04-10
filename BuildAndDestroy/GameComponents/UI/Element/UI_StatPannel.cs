@@ -47,6 +47,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
 
         public UI_StatPannel(Rectangle rect, Color? color, Texture2D image, E_Player player) : base(rect, color, image)
         {
+            UpdateEvents.GetInstance().PreUpdate += Update;
             this.player = player;
             player.levelUp += () =>
             {
@@ -139,7 +140,6 @@ namespace BuildAndDestroy.GameComponents.UI.Element
                 weapon.Add(skill);
                 
             }
-            UpdateEvents.GetInstance().PreUpdate += Update;
 
         }
 
@@ -156,6 +156,13 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         public override void Accept(I_VisibleVisitor v)
         {
             v.Visit(this);
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+            UpdateEvents.GetInstance().PreUpdate -= Update;
+
         }
     }
 }

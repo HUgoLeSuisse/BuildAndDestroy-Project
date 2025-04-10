@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using BuildAndDestroy.GameComponents.Utils;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.Input
 {
-    public class InputManager
+    public class InputManager : I_SmartObject
     {
         Dictionary<string, InputAction> inputs = new Dictionary<string, InputAction>();
         public InputManager() { }
@@ -32,6 +33,16 @@ namespace BuildAndDestroy.GameComponents.Input
         public Dictionary<string, InputAction> GetInputs()
         {
             return inputs;
+        }
+
+        public void Destroy()
+        {
+            foreach (var item in inputs)
+            {
+                item.Value.Destroy();
+                
+            }
+            inputs.Clear();
         }
     }
 }

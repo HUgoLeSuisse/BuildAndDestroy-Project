@@ -20,7 +20,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
         public CircularSlash(GameManager gm, Skill skill) : base(gm, skill, 5)
         {
             onUse += Charge;
-            UpdateEvents.GetInstance().PreUpdate += PreUpdate;
+            UpdateEvents.GetInstance().PreUpdate += Update;
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
             };
         }
 
-        private void PreUpdate(GameTime gameTime)
+        private void Update(GameTime gameTime)
         {
             if (charge != null)
             {
@@ -73,6 +73,12 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
                     item.Effects.Add(new F_Bleeding(item, skill.Owner, duration: 3, damage:1));
                 }
             }
+        }
+        public override void Destroy()
+        {
+            base.Destroy();
+            GameManager.drawableCircles.Remove(drawable);
+            charge?.Destroy();
         }
     }
 }

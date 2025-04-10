@@ -31,7 +31,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
     /// <summary>
     /// Element d'interface utilisateur
     /// </summary>
-    public class UI_Element : I_Visible
+    public class UI_Element : I_Visible, I_SmartObject
     {
         protected DisplayUtils d;
 
@@ -227,6 +227,14 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         public virtual Color GetAcctualColor()
         {
             return color;
+        }
+
+        public virtual void Destroy()
+        {
+            if(parent != null)
+            {
+                parent.Remove(this);
+            }
         }
     }
 }

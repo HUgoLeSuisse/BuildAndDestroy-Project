@@ -7,7 +7,7 @@ namespace BuildAndDestroy.GameComponents.UI
     /// <summary>
     /// Permet de géré une interface utilisateur
     /// </summary>
-    public abstract class UI_Manager
+    public abstract class UI_Manager : I_SmartObject
     {
         protected DisplayUtils d;
         protected Camera cam;
@@ -21,6 +21,11 @@ namespace BuildAndDestroy.GameComponents.UI
         {
             d = DisplayUtils.GetInstance();
             this.cam = cam;
+        }
+
+        public void Destroy()
+        {
+            content.Destroy();
         }
 
         /// <summary>

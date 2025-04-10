@@ -77,6 +77,11 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         {
             return fontSize;
         }
+        public override void Destroy()
+        {
+            base.Destroy();
+
+        }
 
     }
 }

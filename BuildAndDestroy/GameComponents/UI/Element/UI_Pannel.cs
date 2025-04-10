@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace BuildAndDestroy.GameComponents.UI.Element
@@ -47,6 +48,22 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         public override void Accept(I_VisibleVisitor v)
         {
             v.Visit(this);
+        }
+
+        public void Remove(UI_Element uI_Element)
+        {
+            childrens.Remove(uI_Element);
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+            var childrensArray = childrens.ToArray();
+            foreach (var item in childrensArray)
+            {
+                item.Destroy();
+            }
+            childrens.Clear();
         }
     }
 }

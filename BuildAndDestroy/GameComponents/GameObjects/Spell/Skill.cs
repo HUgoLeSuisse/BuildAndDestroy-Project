@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Spell
 {
-    public class Skill 
+    public class Skill : I_SmartObject
     {
         private E_Player owner;
 
@@ -84,5 +84,21 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
             return false;
         }
 
+        public void Destroy()
+        {
+            for (int i = 0; i < owner.Skills.Length; i++)
+            {
+
+                if (owner.Skills[i] == this)
+                {
+                    owner.RemoveSkill(this);
+                }
+            }
+            active.Destroy();
+            foreach (var item in passives)
+            {
+                item.Destroy();
+            }
+        }
     }
 }
