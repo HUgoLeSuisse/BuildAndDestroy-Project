@@ -31,7 +31,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 attackSpeed: attackSpeed,
                 armor: armor,
                 range: range,
-                isRange: isRange,
                 lootBox: lootBox
                 )
         {
@@ -52,10 +51,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// </summary>
         /// <param name="amount">Quantité de dégat</param>
         /// <param name="enemy">Enemy qui inflige les dégats</param>
-        public override void TakeDamage(float amount, E_Entity enemy)
+        public override bool TakeDamage(float amount, E_Entity enemy)
         {
-            base.TakeDamage(amount,enemy);
+            bool value = base.TakeDamage(amount,enemy);
             SetTarget(enemy);
+            return value;
         }
 
         /// <summary>

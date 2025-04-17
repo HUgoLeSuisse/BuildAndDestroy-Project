@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using BuildAndDestroy.GameComponents.GameObjects.Spell;
 using System;
 using BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency;
+using BuildAndDestroy.GameComponents.GameObjects.Weapon;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
@@ -36,7 +37,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 skills[1].Use();
             };
-
+            Weapon = new W_MagicStaff(this);
 
         }
         #region Display
@@ -76,22 +77,45 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private MouseInput mouseInput;
 
         private Skill[] skills = new Skill[3];
+        private W_Weapon weapon;
+
+
+        private int level = 1;
+        private float xp = 0;
+
+        private Knowledges knowledges = new Knowledges(0, 0, 0);
+
 
         /// <summary>
         /// Compétance du personnage
         /// </summary>
         public Skill[] Skills
         {
-            get { return skills; } 
-        
+            get { return skills; }
+
         }
 
 
+        /// <summary>
+        /// Arme équipé du personnage
+        /// </summary>
+        public W_Weapon Weapon
+        {
+            get { return weapon; }
+            set
+            {
+                weapon = value;
+                if (weapon != null)
+                {
+                    attack = weapon.Attack;
+                }
+                else
+                {
+                    attack = MeleeAttack;
+                }
+            }
 
-        private int level = 0;
-        private float xp = 0;
-
-        private Knowledges knowledges = new Knowledges(0, 0, 0);
+        }
 
 
         /// <summary>
@@ -115,7 +139,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 return xp;
             }
-            
+
             set
             {
                 xp += value;
@@ -140,7 +164,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         }
 
 
-
         /// <summary>
         /// Connaissances du personnage
         /// </summary>
@@ -159,15 +182,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// </summary>
         public LevelUp levelUp;
 
-
-        /// <summary>
-        /// Permet d'attaquer une cible
-        /// </summary>
-        /// <param name="target">la cible</param>
-        protected override void MeleeAttack(E_Entity target)
-        {
-            base.MeleeAttack(target);
-        }
 
         /// <summary>
         /// Permet de recevoir une loot box
@@ -200,14 +214,20 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             inputManager.Destroy();
             foreach (var item in skills)
             {
-                item.Destroy();   
+                item?.Destroy();
             }
 
         }
 
-        internal void RemoveSkill(Skill skill)
+        public void RemoveSkill(Skill skill)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Skills.Length; i++)
+            {
+                if (Skills[i] == skill)
+                {
+                    skills[i] = null;
+                }
+            }
         }
     }
 }

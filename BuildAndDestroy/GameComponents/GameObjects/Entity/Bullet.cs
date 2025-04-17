@@ -40,15 +40,15 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             this.gm = gameManager;
             this.shooter = shooter;
-            this.origine = position == null ? new Point(0, 0) : position.Value;
+            this.origine = position == null ? shooter.Position : position.Value;
             this.direction = direction == null ? new Vector2( 0, 0 ) : direction.Value;
             this.direction.Normalize();
 
             this.rect = new Rectangle(
-                position == null ? new Point(0, 0) : position.Value,
+                position == null ? shooter.Position- (size.Value.ToVector2()/2).ToPoint() : position.Value,
                 size == null ? new Point(15, 15) : size.Value
                 );
-            this.distance = distance;
+            this.distance = distance + MathF.Sqrt(rect.Width* rect.Width + rect.Height * rect.Height);
             this.speed = speed;
             UpdateEvents.GetInstance().Update += Update;
             onTouch = (hit) => { 
@@ -69,10 +69,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         private void Update(GameTime gameTime)
         {
-            float X = rect.Location.X - origine.X;
-            float Y = rect.Location.Y - origine.Y;
+            float X = rect.Center.X - origine.X;
+            float Y = rect.Center.Y - origine.Y;
 
-            if (MathF.Sqrt(X * X + Y * Y)<= distance)
+            if (MathF.Sqrt(X * X + Y * Y)< distance )
             {
                 List<E_Entity> hitteds;
                 if (gm.IsSomeThingHere(rect,out hitteds))

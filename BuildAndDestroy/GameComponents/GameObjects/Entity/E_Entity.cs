@@ -8,6 +8,7 @@ using BuildAndDestroy.GameComponents.GameObjects.Utils;
 using BuildAndDestroy.GameComponents.Input;
 using System.Collections.Generic;
 using BuildAndDestroy.GameComponents.GameObjects.Effect;
+using BuildAndDestroy.GameComponents.GameObjects.Weapon;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
@@ -33,7 +34,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             float attackSpeed = 1,
             float armor = 1,
             float range = 30,
-            bool isRange = false,
             LootBox lootBox = null)
         {
             d = DisplayUtils.GetInstance();
@@ -48,7 +48,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             this.attackSpeed = attackSpeed;
             this.armor = armor;
             this.range = range;
-            this.isRange = isRange;
             this.lootBox = lootBox;
 
             path = new Path(this.rect.Center, this.rect.Center);
@@ -56,9 +55,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             e.Update += Update;
 
 
-            attack += isRange ? RangeAttack : MeleeAttack;
+            attack = MeleeAttack;
 
-            onDie += (killer, lootbox) => {
+            onDie += (killer, lootbox) =>
+            {
                 // donne la lootbox au tueur de l'entité
                 if (lootbox != null)
                 {
@@ -134,10 +134,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         private float maxHealth;
         private float speed;
         private float range;
-        private bool isRange;
 
         public float bonusDamage;
         public float bonusArmor;
+        public float bonusRange;
+        public float bonusSpeed;
 
         private List<F_Effect> effects = new List<F_Effect>();
 
@@ -216,8 +217,31 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <summary>
         /// Portée d'attaque
         /// </summary>
-        public virtual float Range
+        public virtual float BaseRange
         { get { return range; } }
+
+        public virtual float BonusRange
+        {
+            get
+            {
+                bonusRange = 0f;
+                foreach (var item in effects)
+                {
+                    item.ApplyStatBonus();
+                }
+                return bonusRange;
+            }
+            set
+            {
+                bonusRange += value;
+            }
+
+        }
+
+        /// <summary>
+        /// Dégat totaux
+        /// </summary>
+        public float TotalRange { get { return BaseRange + BonusRange; } }
 
         /// <summary>
         /// Dégat de base
@@ -243,7 +267,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
             set
             {
-                bonusDamage += value;
+                bonusDamage = value;
             }
 
         }
@@ -256,13 +280,36 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <summary>
         /// Vitesse
         /// </summary>
-        public virtual float Speed
+        public virtual float BaseSpeed
         {
             get
             {
                 return speed;
             }
         }
+        public virtual float BonusSpeed
+        {
+            get
+            {
+                bonusSpeed = 0f;
+                foreach (var item in effects)
+                {
+                    item.ApplyStatBonus();
+                }
+
+                return bonusSpeed;
+            }
+            set
+            {
+                bonusSpeed = value;
+            }
+
+        }
+
+        /// <summary>
+        /// Dégat totaux
+        /// </summary>
+        public float TotalSpeed { get { return BaseSpeed + BonusSpeed; } }
 
         /// <summary>
         /// Rectangel de l'entité
@@ -278,7 +325,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 Circle r = new Circle(
                     rect.Center,
-                    Range - 10 + rect.Width / 2
+                    TotalRange - 10 + rect.Width / 2
                     );
                 return r;
             }
@@ -301,17 +348,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// le temp à attendre entre chaque attaque
         /// </summary>
         private float AttackTime { get { return 1 / AttackSpeed; } }
-
-        /// <summary>
-        /// Si l'entité lance des projectile
-        /// </summary>
-        public bool IsRange
-        {
-            get
-            {
-                return isRange;
-            }
-        }
 
 
         #endregion
@@ -340,11 +376,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Event d'attaque 
         /// </summary>
         /// <param name="target">la cible</param>
-        public delegate void Attack(E_Entity target);
+        public delegate void onAttack(E_Entity target);
         /// <summary>
         /// Fait attaquer l'entity
         /// </summary>
-        public Attack attack;
+        public onAttack attack;
 
         #endregion
 
@@ -354,14 +390,17 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Permet d'infliger des dégat à l'entité
         /// </summary>
         /// <param name="amount">nombre de dégat</param>
-        /// <param name="player">qui à envoyer les dégats</param>
-        public virtual void TakeDamage(float amount, E_Entity enemy)
+        /// <param name="enemy">qui à envoyer les dégats</param>
+        /// <returns>Retourne si l'entité a été tuer par les dégats</returns>
+        public virtual bool TakeDamage(float amount, E_Entity enemy)
         {
             currentHealth -= amount * DamageReduction;
             if (currentHealth <= 0)
             {
                 onDie?.Invoke(enemy, lootBox);
+                return true;
             }
+            return false;
 
         }
 
@@ -369,11 +408,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Envoie une attaque sur une cible et lance le cooldown d'attaque 
         /// </summary>
         /// <param name="target">La cible a attaquer</param>
-        protected virtual void MeleeAttack(E_Entity target)
+        protected virtual void Attack(E_Entity target)
         {
             if (CanAttack)
             {
-                Hit(target);
+                attack?.Invoke(target);
                 attackCooldown = new Cooldown(AttackTime);
                 attackCooldown.endCooldown += resetAttack;
                 attackCooldown.Start();
@@ -381,31 +420,26 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         }
 
         /// <summary>
-        /// Envoie une attaque à distance sur une cible et lance le cooldown d'attaque 
+        /// Envoie une attaque sur une cible et lance le cooldown d'attaque 
         /// </summary>
         /// <param name="target">La cible a attaquer</param>
-        protected virtual void RangeAttack(E_Entity target)
+        protected void MeleeAttack(E_Entity target)
         {
-            if (CanAttack)
-            {
-                Bullet b = new Bullet(gameManager, this, position: Position, distance: Range + 50, direction: (target.Position - Position).ToVector2());
+            Hit(target);
 
-                b.onTouch += Hit;
-
-                attackCooldown = new Cooldown(AttackTime);
-                attackCooldown.endCooldown += resetAttack;
-                attackCooldown.Start();
-            }
         }
         /// <summary>
         /// Quand on tape
         /// </summary>
         /// <param name="hited"></param>
-        protected virtual void Hit(E_Entity hit)
+        public virtual void Hit(E_Entity hit)
         {
             if (hit is not null)
             {
-                hit.TakeDamage(TotalDamage, this);
+                if (hit.TakeDamage(TotalDamage, this))
+                {
+                    target = null;
+                }
             }
         }
 
@@ -436,11 +470,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 if (!AttackArea.Intersects(target.rect))
                 {
                     I_Moveable moveable = this;
-                    moveable.Move(gameTime, ref rect, path.GetDirection(), Speed);
+                    moveable.Move(gameTime, ref rect, path.GetDirection(), BaseSpeed);
                 }
                 else
                 {
-                    attack?.Invoke(target);
+                    Attack(target);
                 }
             }
             else
@@ -448,7 +482,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 if (!rect.Contains(path.Destination))
                 {
                     I_Moveable moveable = this;
-                    moveable.Move(gameTime, ref rect, path.GetDirection(), Speed);
+                    moveable.Move(gameTime, ref rect, path.GetDirection(), BaseSpeed);
                 }
             }
         }
@@ -476,12 +510,15 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             var effectsArray = effects.ToArray();
             foreach (var item in effectsArray)
             {
-                item.Destroy();   
+                item.Destroy();
             }
             GameManager.DeleteEntity(this);
             UpdateEvents.GetInstance().Update -= Update;
+        }
 
-
+        public Vector2 GetDirectionWith(E_Entity entity)
+        {
+            return (entity.Position - Position).ToVector2();
         }
 
         #endregion

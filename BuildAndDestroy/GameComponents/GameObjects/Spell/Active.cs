@@ -49,7 +49,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
 
         public virtual void Destroy()
         {
-            cooldown.Destroy();
+            cooldown?.Destroy();
             onUse = null;
         }
     }

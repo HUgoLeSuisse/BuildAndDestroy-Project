@@ -35,11 +35,21 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 attackSpeed: attackSpeed,
                 armor: armor,
                 range: range,
-                isRange: true,
                 lootBox: lootBox)
         {
-
+            attack = RangeAttack;
         }
 
+        private void RangeAttack(E_Entity target)
+        {
+            Bullet b = new Bullet(GameManager, this,
+                size: new Point(20, 20),
+                direction: GetDirectionWith(target),
+                distance: TotalRange);
+            b.onTouch += (entity) =>
+            {
+                Hit(entity);
+            };
+        }
     }
 }
