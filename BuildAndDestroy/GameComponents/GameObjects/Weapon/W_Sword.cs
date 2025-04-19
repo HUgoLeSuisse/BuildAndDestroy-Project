@@ -15,7 +15,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
 
         public override void Attack(E_Entity target)
         {
-            target.TakeDamage(Owner.TotalDamage * (Owner.Knowledges.Force + 1), Owner);
+            target.TakeDamage(Owner.Stats[E_Entity.DAMAGE].Total * (Owner.Knowledges.Force + 1), Owner);
         }
     }
 }

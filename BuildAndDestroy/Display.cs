@@ -1,5 +1,6 @@
 ﻿using BuildAndDestroy.GameComponents;
 using BuildAndDestroy.GameComponents.GameObjects.Entity;
+using BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis;
 using BuildAndDestroy.GameComponents.UI;
 using BuildAndDestroy.GameComponents.UI.Element;
 using BuildAndDestroy.GameComponents.Utils;
@@ -256,7 +257,7 @@ namespace BuildAndDestroy
                 new Rectangle(
                 v.GetAbsoluteRectangle().Center.X - 50 ,
                 v.GetAbsoluteRectangle().Top - 15 ,
-                (int)(v.Health / v.MaxHealth * 100),
+                (int)(((DoubleStat)v.Stats[E_Entity.HEALTH]).Percent * 100),
                 10),
                 color
                 );

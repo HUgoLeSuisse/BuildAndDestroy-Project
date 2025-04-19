@@ -9,6 +9,8 @@ using BuildAndDestroy.GameComponents.Input;
 using System.Collections.Generic;
 using BuildAndDestroy.GameComponents.GameObjects.Effect;
 using BuildAndDestroy.GameComponents.GameObjects.Weapon;
+using BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis;
+using System.Buffers;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
@@ -41,14 +43,17 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             this.texture = texture == null ? d.blank : texture;
             this.gameManager = gameMananger;
 
-            this.maxHealth = maxHealth;
-            this.currentHealth = maxHealth;
-            this.speed = speed;
-            this.damage = damage;
-            this.attackSpeed = attackSpeed;
-            this.armor = armor;
-            this.range = range;
+
+            stats.Add(SPEED, new Stat(speed));
+            stats.Add(DAMAGE, new Stat(damage));
+            stats.Add(RANGE, new Stat(range));
+            stats.Add(ATTACK_SPEED, new Stat(attackSpeed));
+            stats.Add(ARMOR, new Stat(armor));
+            stats.Add(HEALTH, new DoubleStat(maxHealth));
+
+
             this.lootBox = lootBox;
+
 
             path = new Path(this.rect.Center, this.rect.Center);
             UpdateEvents e = UpdateEvents.GetInstance();
@@ -127,18 +132,17 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         #region Champs
 
         // Statistique
-        private float attackSpeed;
-        private float armor;
-        private float damage;
-        private float currentHealth;
-        private float maxHealth;
-        private float speed;
-        private float range;
+        public const string SPEED = "speed";
+        public const string ARMOR = "armor";
+        public const string DAMAGE = "damage";
+        public const string HEALTH = "health";
+        public const string ATTACK_SPEED = "attackSpeed";
+        public const string RANGE = "range";
 
-        public float bonusDamage;
-        public float bonusArmor;
-        public float bonusRange;
-        public float bonusSpeed;
+        private Dictionary<string, Stat> stats = new Dictionary<string, Stat> ();
+
+        public Dictionary<string, Stat> Stats { get { return stats; } }
+
 
         private List<F_Effect> effects = new List<F_Effect>();
 
@@ -163,155 +167,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             }
         }
         /// <summary>
-        /// Vitesse d'attaque 
-        /// </summary>
-        public virtual float AttackSpeed
-        {
-            get { return attackSpeed; }
-        }
-        /// <summary>
-        /// Vie acctuelle
-        /// </summary>
-        public virtual float Health { get { return currentHealth; } }
-        /// <summary>
-        /// Vie Maximum
-        /// </summary>
-        public virtual float MaxHealth { get { return maxHealth; } }
-
-        /// <summary>
-        /// Armure
-        /// </summary>
-        public virtual float BaseArmor
-        {
-            get { return armor; }
-        }
-        /// <summary>
-        /// Dégat Bonus
-        /// /!\ pour ajouté un bonus/malus il faut faire :  
-        /// Bonus : BonusDamage = valeur;   
-        /// Malus : BonusDamage = -valeur;
-        /// </summary>
-        public virtual float BonusArmor
-        {
-            get
-            {
-                bonusArmor = 0f;
-                foreach (var item in effects)
-                {
-                    item.ApplyStatBonus();
-                }
-                return bonusArmor;
-            }
-            set
-            {
-                bonusArmor += value;
-            }
-
-        }
-
-        /// <summary>
-        /// Dégat totaux
-        /// </summary>
-        public float TotalArmor { get { return BaseArmor + BonusArmor; } }
-
-        /// <summary>
-        /// Portée d'attaque
-        /// </summary>
-        public virtual float BaseRange
-        { get { return range; } }
-
-        public virtual float BonusRange
-        {
-            get
-            {
-                bonusRange = 0f;
-                foreach (var item in effects)
-                {
-                    item.ApplyStatBonus();
-                }
-                return bonusRange;
-            }
-            set
-            {
-                bonusRange += value;
-            }
-
-        }
-
-        /// <summary>
-        /// Dégat totaux
-        /// </summary>
-        public float TotalRange { get { return BaseRange + BonusRange; } }
-
-        /// <summary>
-        /// Dégat de base
-        /// </summary>
-        public virtual float BaseDamage { get { return damage; } }
-
-        /// <summary>
-        /// Dégat Bonus
-        /// /!\ pour ajouté un bonus/malus il faut faire :  
-        /// Bonus : BonusDamage = valeur;   
-        /// Malus : BonusDamage = -valeur;
-        /// </summary>
-        public virtual float BonusDamage
-        {
-            get
-            {
-                bonusDamage = 0f;
-                foreach (var item in effects)
-                {
-                    item.ApplyStatBonus();
-                }
-                return bonusDamage;
-            }
-            set
-            {
-                bonusDamage = value;
-            }
-
-        }
-
-        /// <summary>
-        /// Dégat totaux
-        /// </summary>
-        public float TotalDamage { get { return BaseDamage + BonusDamage; } }
-
-        /// <summary>
-        /// Vitesse
-        /// </summary>
-        public virtual float BaseSpeed
-        {
-            get
-            {
-                return speed;
-            }
-        }
-        public virtual float BonusSpeed
-        {
-            get
-            {
-                bonusSpeed = 0f;
-                foreach (var item in effects)
-                {
-                    item.ApplyStatBonus();
-                }
-
-                return bonusSpeed;
-            }
-            set
-            {
-                bonusSpeed = value;
-            }
-
-        }
-
-        /// <summary>
-        /// Dégat totaux
-        /// </summary>
-        public float TotalSpeed { get { return BaseSpeed + BonusSpeed; } }
-
-        /// <summary>
         /// Rectangel de l'entité
         /// </summary>
         public Rectangle Rect { get { return rect; } }
@@ -325,7 +180,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 Circle r = new Circle(
                     rect.Center,
-                    TotalRange - 10 + rect.Width / 2
+                    Stats[RANGE].Total - 10 + rect.Width / 2
                     );
                 return r;
             }
@@ -340,14 +195,14 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             get
             {
                 const float C = 2;
-                return C / (C + TotalArmor);
+                return C / (C + Stats[ARMOR].Total);
             }
         }
 
         /// <summary>
         /// le temp à attendre entre chaque attaque
         /// </summary>
-        private float AttackTime { get { return 1 / AttackSpeed; } }
+        private float AttackTime { get { return 1 / Stats[ATTACK_SPEED].Total; } }
 
 
         #endregion
@@ -394,8 +249,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <returns>Retourne si l'entité a été tuer par les dégats</returns>
         public virtual bool TakeDamage(float amount, E_Entity enemy)
         {
-            currentHealth -= amount * DamageReduction;
-            if (currentHealth <= 0)
+            ((DoubleStat)Stats[HEALTH]).CurrentAmount -= amount * DamageReduction;
+
+            if (((DoubleStat)Stats[HEALTH]).IsZero)
             {
                 onDie?.Invoke(enemy, lootBox);
                 return true;
@@ -436,7 +292,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             if (hit is not null)
             {
-                if (hit.TakeDamage(TotalDamage, this))
+                if (hit.TakeDamage(Stats[DAMAGE].Total, this))
                 {
                     target = null;
                 }
@@ -470,7 +326,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 if (!AttackArea.Intersects(target.rect))
                 {
                     I_Moveable moveable = this;
-                    moveable.Move(gameTime, ref rect, path.GetDirection(), BaseSpeed);
+                    moveable.Move(gameTime, ref rect, path.GetDirection(), Stats[SPEED].Total);
                 }
                 else
                 {
@@ -482,7 +338,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 if (!rect.Contains(path.Destination))
                 {
                     I_Moveable moveable = this;
-                    moveable.Move(gameTime, ref rect, path.GetDirection(), BaseSpeed);
+                    moveable.Move(gameTime, ref rect, path.GetDirection(), Stats[SPEED].Total);
                 }
             }
         }

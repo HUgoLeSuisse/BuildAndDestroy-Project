@@ -145,7 +145,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
 
         private void Update(GameTime gameTime)
         {
-            health.text = player.Health.ToString();
+            health.text = player.Stats[E_Entity.HEALTH].Total.ToString();
         }
 
 

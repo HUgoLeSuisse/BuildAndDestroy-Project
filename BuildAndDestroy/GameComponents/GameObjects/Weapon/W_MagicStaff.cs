@@ -1,5 +1,6 @@
 ﻿using BuildAndDestroy.GameComponents.GameObjects.Effect;
 using BuildAndDestroy.GameComponents.GameObjects.Entity;
+using BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis;
 using Microsoft.Xna.Framework;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
@@ -9,7 +10,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
 
         public W_MagicStaff(E_Player owner) : base(owner, "Magic Staff")
         {
-            Owner.Effects.Add(new F_BonusRange(owner, owner, 500));
+            Owner.Stats[E_Entity.RANGE].Modifiers.Add(new StatModifier(true,500));
         }
 
         public override void Attack(E_Entity target)
@@ -20,7 +21,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
                 Owner,
                 size: new Point(4, 4),
                 direction: Owner.GetDirectionWith(target),
-                distance: Owner.TotalRange);
+                distance: Owner.Stats[E_Entity.RANGE].Total);
             b.onTouch += (entity) =>
             {
                 Owner.Hit(entity);

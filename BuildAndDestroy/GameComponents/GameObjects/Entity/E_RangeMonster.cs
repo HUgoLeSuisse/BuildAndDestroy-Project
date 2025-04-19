@@ -45,7 +45,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             Bullet b = new Bullet(GameManager, this,
                 size: new Point(20, 20),
                 direction: GetDirectionWith(target),
-                distance: TotalRange);
+                distance: Stats[RANGE].Total);
             b.onTouch += (entity) =>
             {
                 Hit(entity);
