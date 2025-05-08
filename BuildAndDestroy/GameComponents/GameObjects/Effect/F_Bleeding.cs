@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Effect
 {
+    /// <summary>
+    /// Effet de saignement : inflige des dégats sur la durée
+    /// </summary>
     public class F_Bleeding : F_Temporary
     {
         private float damage;

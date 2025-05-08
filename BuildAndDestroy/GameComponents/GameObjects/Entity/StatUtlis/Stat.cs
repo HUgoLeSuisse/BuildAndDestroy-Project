@@ -12,6 +12,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis
     public class Stat
     {
         private List<StatModifier> mods = new List<StatModifier>();
+
+        /// <summary>
+        /// vous modifier la statistique (bonus / malus)
+        /// </summary>
         public List<StatModifier> Modifiers
         {
             get
@@ -21,6 +25,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis
         }
 
         private float baseValue;
+
+        /// <summary>
+        /// valeur de base
+        /// </summary>
         public float BaseValue
         {
             get
@@ -28,6 +36,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis
                 return baseValue;
             }
         }
+
+        /// <summary>
+        /// total des bonus simples
+        /// </summary>
         public float FlatBonus
         {
             get
@@ -43,6 +55,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis
                 return amount;
             }
         }
+
+        /// <summary>
+        /// total des bonus en pourcent
+        /// </summary>
         public float PercentBonus
         {
             get
@@ -59,6 +75,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis
             }
         }
 
+        /// <summary>
+        /// Valeur après application des bonus
+        /// </summary>
         public float Total
         {
             get

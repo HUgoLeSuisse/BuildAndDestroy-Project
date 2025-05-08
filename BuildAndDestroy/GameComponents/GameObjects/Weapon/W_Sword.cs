@@ -7,12 +7,20 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
 {
+    /// <summary>
+    /// Permet de gérer une épée
+    /// </summary>
     public class W_Sword : W_Weapon
     {
         public W_Sword(E_Player owner) : base(owner, "Sword")
         {
         }
 
+
+        /// <summary>
+        /// Permet d'attaquer avec l'arme
+        /// </summary>
+        /// <param name="target">cible à attaquer</param>
         public override void Attack(E_Entity target)
         {
             target.TakeDamage(Owner.Stats[E_Entity.DAMAGE].Total * (Owner.Knowledges.Force + 1), Owner);

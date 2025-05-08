@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Effect
 {
-    public class F_Temporary : F_Effect
+    /// <summary>
+    /// Effet temporaire
+    /// </summary>
+    public abstract class F_Temporary : F_Effect
     {
         private Cooldown cooldown;
 
@@ -29,5 +32,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Effect
         {
             base.Destroy();
         }
+
     }
 }

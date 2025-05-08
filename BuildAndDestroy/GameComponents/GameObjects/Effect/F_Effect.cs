@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Effect
 {
-    public class F_Effect : I_SmartObject
+    /// <summary>
+    /// Applique un effet
+    /// </summary>
+    public abstract class F_Effect : I_SmartObject
     {
         private E_Entity receiver;
         /// <summary>
@@ -28,7 +31,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Effect
             this.receiver = receiver; this.giver = giver;
         }
 
-        public virtual void ApplyStatBonus(){}
 
         public virtual void Destroy()
         {

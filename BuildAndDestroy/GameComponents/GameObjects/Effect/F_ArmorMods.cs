@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Effect
 {
+    /// <summary>
+    /// Effet qui modifie l'armure
+    /// </summary>
     public class F_ArmorMods : F_Temporary
     {
         private StatModifier mod;

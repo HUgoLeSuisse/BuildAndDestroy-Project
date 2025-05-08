@@ -77,7 +77,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
             {
                 if (active.IsAvailable)
                 {
-                    active.onUse?.Invoke(new SkillData());
+                    active.onUse?.Invoke();
                     return true;
                 }
             }

@@ -38,8 +38,17 @@ namespace BuildAndDestroy.GameComponents.GameObjects
                 size: new Point(75, 75),
                 lootBox: new LootBox(100)
                 );
+            var m3 = new E_Monster(
+                this,
+                maxHealth: 200,
+                damage: 6,
+                position: new Point(24000, 500),
+                size: new Point(200, 200),
+                lootBox: new LootBox(300)
+                );
             monsters.Add(m1 );
             monsters.Add(m2);
+            monsters.Add(m3);
         }
 
         /// <summary>
@@ -131,6 +140,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         {
         }
 
+        /// <summary>
+        /// Retourne les éléments à afficher
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <returns></returns>
         public I_Visible[] GetVisibleElement(Rectangle rect)
         {
             List<I_Visible> visibles = drawableCircles.Cast<I_Visible>().ToList();
@@ -147,6 +161,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects
             return visibles.ToArray();
         }
 
+        /// <summary>
+        /// Retourne le joueur
+        /// </summary>
+        /// <returns></returns>
         public E_Player GetPlayer()
         {
             return player;

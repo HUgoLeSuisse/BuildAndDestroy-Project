@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
 {
+    /// <summary>
+    /// Pour envoyer un coup circulaire qui applique un saignement
+    /// </summary>
     public class CircularSlash : Active
     {
         const int RANGE = 250;
@@ -27,7 +30,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
         /// Charge le coup
         /// </summary>
         /// <param name="skillData"></param>
-        private void Charge(SkillData skillData)
+        private void Charge()
         {
             charge = new Cooldown(CHARGE_TIME);
             charge.Start();

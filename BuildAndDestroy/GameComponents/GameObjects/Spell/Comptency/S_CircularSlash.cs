@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency
 {
+    /// <summary>
+    /// Permet de d'envoyer un coup circulaire
+    /// </summary>
     public class S_CircularSlash : Skill
     {
         public S_CircularSlash( E_Player owner) : base("Circular Slash", owner, new Knowledges(2,0,0), null)

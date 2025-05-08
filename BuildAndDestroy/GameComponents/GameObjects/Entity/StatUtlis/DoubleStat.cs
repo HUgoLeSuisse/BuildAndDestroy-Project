@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis
 {
     /// <summary>
-    /// Cette classe permet de géré une statistique qui à une valeur maximal et une valeur acctuel
+    /// Cette classe permet de géré une statistique qui à une valeur maximal et une valeur acctuel (ex : point de vie)
     /// </summary>
     public class DoubleStat : Stat
     {
@@ -33,6 +33,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis
             }
 
         }
+        /// <summary>
+        /// ratio entre la valeur acctuelle et la valeur maximale 
+        /// </summary>
         public float Percent
         {
             get
@@ -40,7 +43,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis
                 return CurrentAmount / Total;
             }
         }
-
+        /// <summary>
+        /// est ce que la valeur acctuelle est en dessous de zero
+        /// </summary>
         public bool IsZero
         {
             get

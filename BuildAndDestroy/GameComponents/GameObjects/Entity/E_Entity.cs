@@ -190,6 +190,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// </summary>
         private bool CanAttack { get { return attackCooldown == null; } }
 
+        /// <summary>
+        /// calcule la réduction de dégat en fonction de l'armure
+        /// </summary>
         private float DamageReduction
         {
             get

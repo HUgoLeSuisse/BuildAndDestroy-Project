@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
 {
+    /// <summary>
+    /// Pour lancer une boule de feu qui applique une réduction d'armure de l'enemie
+    /// </summary>
     public class Fireball : Active
     {
         const float BASE_DAMAGE = 3;
@@ -23,7 +26,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
         /// Lance la boule de feu
         /// </summary>
         /// <param name="skillData"></param>
-        private void Launch(SkillData skillData)
+        private void Launch()
         {
             // envoyer un projectile
             Bullet fireBall = new Bullet(gm,skill.Owner,
@@ -37,7 +40,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
             //quand le projectile touche
             fireBall.onTouch += (hitted) =>
             {
-                OnTouch(skillData, hitted);
+                OnTouch( hitted);
             };
         }
 
@@ -46,7 +49,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
         /// </summary>
         /// <param name="skillData"></param>
         /// <param name="hitted"></param>
-        private void OnTouch(SkillData skillData, E_Entity hitted)
+        private void OnTouch( E_Entity hitted)
         {
             if (hitted != null)
             {

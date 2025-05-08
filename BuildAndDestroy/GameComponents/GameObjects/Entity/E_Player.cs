@@ -31,13 +31,18 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 skills[0].Use();
             };
+            // Asigne le coup circulaire sur le deuxième sort (test a supprimer par la suite)
             skills[1] = new S_CircularSlash(this);
             inputManager.PutInput("SecondSpell", Keys.W);
             inputManager.GetInputs()["SecondSpell"].onKeyUp += () =>
             {
                 skills[1].Use();
             };
-            Weapon = new W_MagicStaff(this);
+
+            // Asigne une arme par defaut (test a supprimer par la suite)
+            Weapon = new W_Sword(this); // attaque au corp à corp
+
+            //Weapon = new W_MagicStaff(this); // attaque à distance
 
         }
         #region Display

@@ -28,7 +28,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
             this.gm = gm;
             this.skill = skill;
             this.baseTimer = baseTimer;
-            onUse += (skillData) =>
+            onUse += () =>
             {
                 isAvailable = false;
                 cooldown = new Cooldown(Timer);
@@ -44,7 +44,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
 
         }
 
-        public delegate void OnUse(SkillData skillData);
+        public delegate void OnUse();
         public OnUse onUse;
 
         public virtual void Destroy()

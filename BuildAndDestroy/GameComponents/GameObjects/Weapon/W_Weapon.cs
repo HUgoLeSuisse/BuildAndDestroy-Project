@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
 {
+    /// <summary>
+    /// Classe de base pour une arme
+    /// </summary>
     public abstract class W_Weapon
     {
         private E_Player owner;
@@ -20,6 +23,10 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
             this.owner = owner;
         }
 
+        /// <summary>
+        /// Permet d'attaquer avec l'arme
+        /// </summary>
+        /// <param name="target">cible à attaquer</param>
         public abstract void Attack(E_Entity target);
 
     }

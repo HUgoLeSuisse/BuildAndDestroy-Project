@@ -35,10 +35,12 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell
             }
         }
 
+        /// <summary>
+        /// s'acticve quand la condition est active
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected virtual void OnConditionValide(GameTime gameTime)
-        {
-
-        }
+        {        }
 
         public virtual void Destroy()
         {
