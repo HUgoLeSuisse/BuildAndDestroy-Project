@@ -54,7 +54,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Activ
             if (hitted != null)
             {
                 hitted.TakeDamage(BASE_DAMAGE + MAGIC_RATIO * skill.Owner.Knowledges.Magic, skill.Owner);
-                hitted.Effects.Add(new F_ArmorMods(hitted, skill.Owner,4));
+                hitted.Effects.Add(new F_ArmorMods(hitted, skill.Owner,-4));
             }
         }
     }

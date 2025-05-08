@@ -52,7 +52,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 distance: Stats[RANGE].Total);
             b.onTouch += (entity) =>
             {
-                Hit(entity);
+                Hit(entity, Stats[DAMAGE].Total);
             };
         }
     }

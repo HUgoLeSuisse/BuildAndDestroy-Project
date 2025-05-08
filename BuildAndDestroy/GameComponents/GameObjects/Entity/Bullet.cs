@@ -42,7 +42,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             this.shooter = shooter;
             this.origine = position == null ? shooter.Position : position.Value;
             this.direction = direction == null ? new Vector2( 0, 0 ) : direction.Value;
-            this.direction.Normalize();
 
             this.rect = new Rectangle(
                 position == null ? shooter.Position- (size.Value.ToVector2()/2).ToPoint() : position.Value,

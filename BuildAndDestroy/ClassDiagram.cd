@@ -17,9 +17,10 @@
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Weapon.W_Weapon" Collapsed="true">
     <Position X="14.75" Y="13.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAACAAQAAgAAAAAAAAAAAAICAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Weapon\W_Weapon.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis.DoubleStat" Collapsed="true">
     <Position X="18.5" Y="14.75" Width="1.5" />
@@ -96,7 +97,7 @@
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Effect.F_Effect" Collapsed="true">
     <Position X="9.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAABEAAAgBAAAIAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABEAAAgBAAAIAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Effect\F_Effect.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

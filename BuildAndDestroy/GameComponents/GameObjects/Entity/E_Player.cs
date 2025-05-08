@@ -15,7 +15,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
     public class E_Player : E_Entity
     {
 
-        public E_Player(GameManager gameMananger) : base(gameMananger, rect: new Rectangle(300, 500, 50, 50), range: 50, speed: 10)
+        public E_Player(GameManager gameMananger) : base(gameMananger, rect: new Rectangle(300, 500, 50, 50), range: 50, speed: 10, armor:3)
         {
             inputManager = new InputManager();
             mouseInput = MouseInput.Instance;
@@ -122,7 +122,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         }
 
-
         /// <summary>
         /// Niveau du personnage
         /// </summary>
@@ -206,7 +205,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <returns></returns>
         public Vector2 GetMouseDirection()
         {
-            return mouseInput.GetMousePosition().ToVector2() - Rect.Center.ToVector2();
+            Vector2 dir = mouseInput.GetMousePosition().ToVector2() - Rect.Center.ToVector2();
+            dir.Normalize();
+            return dir;
         }
 
 

@@ -40,9 +40,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects
                 );
             var m3 = new E_Monster(
                 this,
-                maxHealth: 200,
+                maxHealth: 20,
                 damage: 6,
-                position: new Point(24000, 500),
+                position: new Point(2400, 500),
                 size: new Point(200, 200),
                 lootBox: new LootBox(300)
                 );

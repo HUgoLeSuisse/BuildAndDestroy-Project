@@ -1,6 +1,7 @@
 ﻿using BuildAndDestroy.GameComponents;
 using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis;
+using BuildAndDestroy.GameComponents.GameObjects.Weapon;
 using BuildAndDestroy.GameComponents.UI;
 using BuildAndDestroy.GameComponents.UI.Element;
 using BuildAndDestroy.GameComponents.Utils;
@@ -227,11 +228,29 @@ namespace BuildAndDestroy
         }
         public void Visit(E_Player v)
         {
-            Rectangle r = v.GetAbsoluteRectangle();
             Visit((E_Entity)v);
 
 
             _sb.DrawString(d.defaultFont, v.Level.ToString() + " : " + v.Xp + "/" + v.NextLevel, new Vector2(50, 50), Color.White);
+            v.Weapon?.Accept(this);
+
+        }
+
+        public void Visit(W_Weapon v)
+        {
+            Rectangle r = v.GetAbsoluteRectangle();
+            _sb.Draw(
+                v.GetAcctualTexture(),
+                v.GetAbsoluteRectangle(),
+                null,
+                v.GetAcctualColor(),
+                v.Direction,
+                new Vector2(187.5f,500),
+                SpriteEffects.None,
+                1f
+                );
+
+
 
         }
 

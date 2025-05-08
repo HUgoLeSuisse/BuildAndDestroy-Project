@@ -205,7 +205,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <summary>
         /// le temp à attendre entre chaque attaque
         /// </summary>
-        private float AttackTime { get { return 1 / Stats[ATTACK_SPEED].Total; } }
+        public float AttackTime { get { return 1 / Stats[ATTACK_SPEED].Total; } }
 
 
         #endregion
@@ -284,18 +284,18 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <param name="target">La cible a attaquer</param>
         protected void MeleeAttack(E_Entity target)
         {
-            Hit(target);
+            Hit(target, Stats[DAMAGE].Total);
 
         }
         /// <summary>
         /// Quand on tape
         /// </summary>
         /// <param name="hited"></param>
-        public virtual void Hit(E_Entity hit)
+        public virtual void Hit(E_Entity hit, float damage)
         {
             if (hit is not null)
             {
-                if (hit.TakeDamage(Stats[DAMAGE].Total, this))
+                if (hit.TakeDamage(damage, this))
                 {
                     target = null;
                 }
@@ -377,9 +377,15 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         public Vector2 GetDirectionWith(E_Entity entity)
         {
-            return (entity.Position - Position).ToVector2();
+            Vector2 direction = (entity.Position - Position).ToVector2();
+            direction.Normalize();
+            return direction;
         }
 
+        public Vector2 GetDirection()
+        {
+            return path?.GetDirection() ?? new Vector2();
+        }
         #endregion
 
         #endregion
