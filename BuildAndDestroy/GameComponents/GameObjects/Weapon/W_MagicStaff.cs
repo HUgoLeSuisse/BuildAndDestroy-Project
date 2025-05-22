@@ -59,7 +59,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
             };
         }
 
-        public override Texture2D GetAcctualTexture()
+        public override Texture2D GetCurrentTexture()
         {
             return DisplayUtils.GetInstance().GetByPath<Texture2D>("magic_staff");
         }

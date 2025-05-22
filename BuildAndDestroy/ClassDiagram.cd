@@ -1,50 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Weapon.W_MagicStaff" Collapsed="true">
-    <Position X="13.5" Y="14.75" Width="1.5" />
+    <Position X="12.5" Y="13.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAAAAACAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Weapon\W_MagicStaff.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Weapon.W_Sword" Collapsed="true">
-    <Position X="15.75" Y="14.75" Width="1.5" />
+    <Position X="14.75" Y="13.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Weapon\W_Sword.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Weapon.W_Weapon" Collapsed="true">
-    <Position X="14.75" Y="13.5" Width="1.5" />
+    <Position X="13.75" Y="12.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAACAAQAAgAAAAAAAAAAAAICAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AIAAAACAAQACgAAIACAAAAAAAIDAAAAAAAAAACIAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Weapon\W_Weapon.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis.DoubleStat" Collapsed="true">
-    <Position X="18.5" Y="14.75" Width="1.5" />
+    <Position X="17.5" Y="13.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAgAAAAAAAAAAACAAAACA=</HashCode>
       <FileName>GameComponents\GameObjects\Entity\StatUtlis\DoubleStat.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis.Stat" Collapsed="true">
-    <Position X="18.5" Y="13.5" Width="1.5" />
+    <Position X="17.5" Y="12.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAABACAAAAAAAAAACAAAAAAAAAAQAAAAAAAAAAAAAQ=</HashCode>
       <FileName>GameComponents\GameObjects\Entity\StatUtlis\Stat.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis.StatModifier" Collapsed="true">
-    <Position X="25" Y="6.5" Width="1.5" />
+    <Position X="24" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAIAACACAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Entity\StatUtlis\StatModifier.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.Bullet" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="23.25" Y="3.5" Width="1.5" />
+    <Position X="22.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIQAgAAAAQAAIUAAAAAAIAgAAEDAAQAAAAAAAAIAAEA=</HashCode>
       <FileName>GameComponents\GameObjects\Entity\Bullet.cs</FileName>
@@ -52,50 +52,50 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.E_Entity" Collapsed="true">
-    <Position X="19.75" Y="6.5" Width="1.5" />
+    <Position X="18.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ENQAACASAYgAAAAgII4CIAEEAKHQIgCEMAAAgApAAgA=</HashCode>
+      <HashCode>ENQAACASAYgIAAAgII4CIAEEAKHQIgCEMAAAgApAAgA=</HashCode>
       <FileName>GameComponents\GameObjects\Entity\E_Entity.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.E_Monster" Collapsed="true">
-    <Position X="18.5" Y="7.75" Width="1.5" />
+    <Position X="17.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAI=</HashCode>
       <FileName>GameComponents\GameObjects\Entity\E_Monster.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.E_Player" Collapsed="true">
-    <Position X="20.75" Y="7.75" Width="1.5" />
+    <Position X="19.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>UIAAABAEARAAAAAAEAAAAABACAHAQQgpAAAAAEAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Entity\E_Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Entity.E_RangeMonster" Collapsed="true">
-    <Position X="18.5" Y="9.25" Width="1.5" />
+    <Position X="17.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Entity\E_RangeMonster.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Effect.F_ArmorMods" Collapsed="true">
-    <Position X="8.5" Y="10.25" Width="1.5" />
+    <Position X="7.5" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Effect\F_ArmorMods.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Effect.F_Bleeding" Collapsed="true">
-    <Position X="10.75" Y="10.25" Width="1.5" />
+    <Position X="9.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAgAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Effect\F_Bleeding.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Effect.F_Effect" Collapsed="true">
-    <Position X="9.75" Y="7.5" Width="1.5" />
+    <Position X="8.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABEAAAgBAAAIAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Effect\F_Effect.cs</FileName>
@@ -103,63 +103,63 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Effect.F_Temporary" Collapsed="true">
-    <Position X="9.75" Y="8.75" Width="1.5" />
+    <Position X="8.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAACAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Effect\F_Temporary.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Utils.Knowledges" Collapsed="true">
-    <Position X="23.25" Y="5.5" Width="1.5" />
+    <Position X="22.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAEAAAAABAAAAAAAAAAAAAAAAAAABAAAAAQAAIABA=</HashCode>
       <FileName>GameComponents\GameObjects\Utils\Knowledges.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Utils.LootBox" Collapsed="true">
-    <Position X="25" Y="5.5" Width="1.5" />
+    <Position X="24" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Utils\LootBox.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Spell.Activ.CircularSlash" Collapsed="true">
-    <Position X="8.5" Y="12.75" Width="1.5" />
+    <Position X="7.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQABAAIAAQAAEgAAAgAAAAAAABAAAAAAQAAAIgAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Spell\Activ\CircularSlash.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Spell.Activ.Fireball" Collapsed="true">
-    <Position X="10.75" Y="12.75" Width="1.5" />
+    <Position X="9.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQAAAAABAAAAAAgAAAAEIAAAAAAAAAAgAAgA=</HashCode>
       <FileName>GameComponents\GameObjects\Spell\Activ\Fireball.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency.S_CircularSlash" Collapsed="true">
-    <Position X="13.5" Y="11.75" Width="1.5" />
+    <Position X="12.5" Y="10.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Spell\Comptency\S_CircularSlash.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency.S_Fireball" Collapsed="true">
-    <Position X="15.75" Y="11.75" Width="1.5" />
+    <Position X="14.75" Y="10.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Spell\Comptency\S_Fireball.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Spell.Passiv.DamageZone" Collapsed="true">
-    <Position X="18.5" Y="11.75" Width="1.5" />
+    <Position X="17.5" Y="10.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAgAAAAAAAAAAQAABAAACAAAAAAIAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Spell\Passiv\DamageZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Spell.Active" Collapsed="true">
-    <Position X="9.75" Y="11.5" Width="1.5" />
+    <Position X="8.75" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAIAAAEAAAAAAAAAAACFAAAAggAAAAIAEAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Spell\Active.cs</FileName>
@@ -167,7 +167,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Spell.Passive" Collapsed="true">
-    <Position X="18.5" Y="10.5" Width="1.5" />
+    <Position X="17.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAABAAAACAAEAAAAAAAAAQAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Spell\Passive.cs</FileName>
@@ -175,7 +175,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Spell.Skill" Collapsed="true">
-    <Position X="14.75" Y="10.5" Width="1.5" />
+    <Position X="13.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAEACAgAAAgAAAAAAAAABEAAAgAQAAoAEAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Spell\Skill.cs</FileName>
@@ -183,14 +183,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.Pathfinding.Path" Collapsed="true">
-    <Position X="28.5" Y="5.5" Width="1.5" />
+    <Position X="27.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAIABAAABAAAAAAAAAAAAAEAAAACAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Pathfinding\Path.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.GameObjects.GameManager" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="25" Y="4.5" Width="1.5" />
+    <Position X="24" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQABAAAQAAAAAgAAAEEAAAAAABAAAADAAAAAAAEAAA=</HashCode>
       <FileName>GameComponents\GameObjects\GameManager.cs</FileName>
@@ -198,14 +198,14 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_Button" Collapsed="true">
-    <Position X="17.75" Y="4.75" Width="1.5" />
+    <Position X="16.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIYAAAAAAAAAARAAAAkAAAAAAADgAgIAAFRACIAAAAA=</HashCode>
       <FileName>GameComponents\UI\Element\UI_Button.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_Element" Collapsed="true">
-    <Position X="13.25" Y="3.5" Width="1.5" />
+    <Position X="12.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIgAAAAAAQAAAABQAAAAYAAgABDAAgCkAAAAAAIAAAQ=</HashCode>
       <FileName>GameComponents\UI\Element\UI_Element.cs</FileName>
@@ -213,49 +213,49 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_GamePannel" Collapsed="true">
-    <Position X="11" Y="6.25" Width="1.5" />
+    <Position X="10" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAQAAAAAAAAAEAEAAAAAAABAAAAIAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\UI\Element\UI_GamePannel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_Label" Collapsed="true">
-    <Position X="8.75" Y="4.75" Width="1.5" />
+    <Position X="7.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIIAAAAAAACAAAACgAAAAAAAAABAAAAIAAAAAAIAAAA=</HashCode>
       <FileName>GameComponents\UI\Element\UI_Label.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_Pannel" Collapsed="true">
-    <Position X="12.25" Y="4.75" Width="1.5" />
+    <Position X="11.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIIAAAAAAAAAAAQAAAIABAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\UI\Element\UI_Pannel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_Skill" Collapsed="true">
-    <Position X="15.5" Y="4.75" Width="1.5" />
+    <Position X="14.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EIQAABAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAACAAA=</HashCode>
       <FileName>GameComponents\UI\Element\UI_Skill.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.Element.UI_StatPannel" Collapsed="true">
-    <Position X="13.25" Y="6.25" Width="1.5" />
+    <Position X="12.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIwAAAAAAAAAAAAAAAAAAgAAAANBAAABAAAAAAAAABg=</HashCode>
       <FileName>GameComponents\UI\Element\UI_StatPannel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.UI_Game" Collapsed="true">
-    <Position X="15.75" Y="8.75" Width="1.5" />
+    <Position X="14.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABACAAAAAAAAA=</HashCode>
       <FileName>GameComponents\UI\UI_Game.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.UI_Manager" Collapsed="true">
-    <Position X="14.75" Y="7.5" Width="1.5" />
+    <Position X="13.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACBAAAAAAAAAAAAAAAAAAAAABAAAAEACAAAAAAAAA=</HashCode>
       <FileName>GameComponents\UI\UI_Manager.cs</FileName>
@@ -263,14 +263,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.UI.UI_Menu" Collapsed="true">
-    <Position X="13.5" Y="8.75" Width="1.5" />
+    <Position X="12.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAACA=</HashCode>
       <FileName>GameComponents\UI\UI_Menu.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.Utils.Cooldown" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="26.75" Y="3.5" Width="1.5" />
+    <Position X="25.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQQAAAAAACAAAQAAAAEAAAAAAABEAACAYAAAgEAAAAA=</HashCode>
       <FileName>GameComponents\Utils\Cooldown.cs</FileName>
@@ -278,14 +278,14 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.Utils.DisplayUtils" Collapsed="true">
-    <Position X="28.5" Y="3.5" Width="1.5" />
+    <Position X="27.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAgAAAIEAAQAQAAAAAAABABAAAgAAAAAAAAgAAA=</HashCode>
       <FileName>GameComponents\Utils\DisplayUtils.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.Utils.DrawableCircle" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="23.25" Y="4.5" Width="1.5" />
+    <Position X="22.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAQAAAAAAAAAACAAAAACAAACAAAAAAAIAAAA=</HashCode>
       <FileName>GameComponents\Utils\DrawableCircle.cs</FileName>
@@ -293,7 +293,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.Utils.Timer" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="26.75" Y="6.5" Width="1.5" />
+    <Position X="25.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQQBAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\Utils\Timer.cs</FileName>
@@ -301,14 +301,14 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.Utils.UpdateEvents" Collapsed="true">
-    <Position X="28.5" Y="6.5" Width="1.5" />
+    <Position X="27.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>GameComponents\Utils\UpdateEvents.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.Input.InputAction" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="26.75" Y="4.5" Width="1.5" />
+    <Position X="25.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAQAAAAAAAAAAgAAEAgAAAABAAAAAAAAAAAEBAAA=</HashCode>
       <FileName>GameComponents\Input\InputAction.cs</FileName>
@@ -316,7 +316,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.Input.InputManager" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="28.5" Y="4.5" Width="1.5" />
+    <Position X="27.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAACAAAAAAAAAAAAAAAAAAAAABAABAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\Input\InputManager.cs</FileName>
@@ -324,63 +324,71 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.Input.MouseInput" Collapsed="true">
-    <Position X="26.75" Y="5.5" Width="1.5" />
+    <Position X="25.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAACgAAgAAAhAAAQAAAAABAAAAAQAAAAAEAIAA=</HashCode>
       <FileName>GameComponents\Input\MouseInput.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuildAndDestroy.GameComponents.Camera" Collapsed="true">
-    <Position X="25" Y="3.5" Width="1.5" />
+    <Position X="24" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAUAAAAAAgAAAAAAAAAABAAAAEQAAAAAAAEAA=</HashCode>
       <FileName>GameComponents\Camera.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="BuildAndDestroy.Display" Collapsed="true">
+    <Position X="19.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAAAwQAAAAAAAAIAAEAAAIGAAAAAAAAAQA=</HashCode>
+      <FileName>Display.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Struct Name="Circle" Collapsed="true">
-    <Position X="23.25" Y="7.75" Width="1.5" />
+    <Position X="22.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAYAIA=</HashCode>
       <FileName>GameComponents\Utils\Circle.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Interface Name="BuildAndDestroy.GameComponents.GameObjects.Entity.I_Moveable" Collapsed="true">
-    <Position X="23.25" Y="9" Width="1.5" />
+    <Position X="22.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\GameObjects\Entity\I_Moveable.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BuildAndDestroy.GameComponents.Utils.I_SmartObject" Collapsed="true">
-    <Position X="25" Y="9" Width="1.5" />
+    <Position X="24" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\Utils\I_SmartObject.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BuildAndDestroy.GameComponents.I_Visible" Collapsed="true">
-    <Position X="26.75" Y="9" Width="1.5" />
+    <Position X="25.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAQAAAAAAAAAAAAAAAACAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>GameComponents\I_Visible.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BuildAndDestroy.GameComponents.I_VisibleVisitor" Collapsed="true">
-    <Position X="28.5" Y="9" Width="1.5" />
+    <Position X="27.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameComponents\I_VisibleVisitor.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="BuildAndDestroy.GameComponents.UI.Element.Horizontal" Collapsed="true">
-    <Position X="23.25" Y="10" Width="1.5" />
+    <Position X="22.25" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAQA=</HashCode>
       <FileName>GameComponents\UI\Element\UI_Element.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="BuildAndDestroy.GameComponents.UI.Element.Vertical" Collapsed="true">
-    <Position X="25" Y="10" Width="1.5" />
+    <Position X="24" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMEAAA=</HashCode>
       <FileName>GameComponents\UI\Element\UI_Element.cs</FileName>

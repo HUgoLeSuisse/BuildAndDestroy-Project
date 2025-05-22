@@ -25,7 +25,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 new Rectangle
                 (position == null ? new Point(0,0): position.Value,
                     size == null ? new Point(0, 0) : size.Value),
-                texture,
                 maxHealth: maxHealth,
                 speed: speed,
                 attackSpeed: attackSpeed,

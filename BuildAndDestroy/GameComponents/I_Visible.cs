@@ -10,7 +10,7 @@ namespace BuildAndDestroy.GameComponents
         /// </summary>
         /// <param name="v"></param>
         public void Accept(I_VisibleVisitor v);
-        public Texture2D GetAcctualTexture();
+        public Texture2D GetCurrentTexture();
         public Rectangle GetAbsoluteRectangle();
         public Color GetAcctualColor();
     }

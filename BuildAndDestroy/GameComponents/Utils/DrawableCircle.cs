@@ -39,7 +39,7 @@ namespace BuildAndDestroy.GameComponents.Utils
             return Color.White;
         }
 
-        public Texture2D GetAcctualTexture()
+        public Texture2D GetCurrentTexture()
         {
             return Display.CreateCircleTexture(DisplayUtils.GetInstance().graphics, (int)(circle.Radius * 2), color);
         }

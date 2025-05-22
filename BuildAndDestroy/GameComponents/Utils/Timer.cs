@@ -14,6 +14,7 @@ namespace BuildAndDestroy.GameComponents.Utils
     public class Timer : I_SmartObject
     {
         private float time;
+        public float Time { get { return time; } set { time = value; } }
         public Timer()
         {
             UpdateEvents.GetInstance().Update += Update;
@@ -22,11 +23,6 @@ namespace BuildAndDestroy.GameComponents.Utils
         {
             time += (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
-        public float GetTime()
-        {
-            return time;
-        }
-
         public void Destroy()
         {
             UpdateEvents.GetInstance().Update -= Update;

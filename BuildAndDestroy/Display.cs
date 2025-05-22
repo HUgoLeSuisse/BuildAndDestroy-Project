@@ -93,7 +93,7 @@ namespace BuildAndDestroy
         public void Visit(I_Visible v)
         {
             _sb.Draw(
-                v.GetAcctualTexture(),
+                v.GetCurrentTexture(),
                 v.GetAbsoluteRectangle(),
                 v.GetAcctualColor());
         }
@@ -101,7 +101,7 @@ namespace BuildAndDestroy
 
         public void Visit(UI_Label v)
         {
-            _sb.Draw(v.GetAcctualTexture(),
+            _sb.Draw(v.GetCurrentTexture(),
                 new Rectangle(
                     v.GetAbsoluteRectangle().X - v.GetAbsoluteRectangle().Width / 10,
                     v.GetAbsoluteRectangle().Y - v.GetAbsoluteRectangle().Height / 10,
@@ -126,7 +126,7 @@ namespace BuildAndDestroy
         public void Visit(UI_Skill v)
         {
             _sb.Draw(
-                v.GetAcctualTexture(),
+                v.GetCurrentTexture(),
                 v.GetAbsoluteRectangle(),
                 v.GetAcctualColor());
 
@@ -155,7 +155,7 @@ namespace BuildAndDestroy
             {
                 int rx = 0;
             }
-            _sb.Draw(v.GetAcctualTexture(),
+            _sb.Draw(v.GetCurrentTexture(),
                     v.GetAbsoluteRectangle(),
                     v.GetAcctualColor());
 
@@ -217,9 +217,14 @@ namespace BuildAndDestroy
         public void Visit(E_Entity v)
         {
             _sb.Draw(
-                v.GetAcctualTexture(),
+                v.GetCurrentTexture(),
                 v.GetAbsoluteRectangle(),
-                v.GetAcctualColor());
+                null,
+                v.GetAcctualColor(),
+                0,
+                Vector2.Zero,
+                v.IsFilped ? SpriteEffects.FlipHorizontally:SpriteEffects.None,
+                0);
 
 
             DrawEntityHealthBar(v, Color.Red);
@@ -240,7 +245,7 @@ namespace BuildAndDestroy
         {
             Rectangle r = v.GetAbsoluteRectangle();
             _sb.Draw(
-                v.GetAcctualTexture(),
+                v.GetCurrentTexture(),
                 v.GetAbsoluteRectangle(),
                 null,
                 v.GetAcctualColor(),

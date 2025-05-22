@@ -72,7 +72,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
             v.Visit(this);
         }
 
-        public abstract Texture2D GetAcctualTexture();
+        public abstract Texture2D GetCurrentTexture();
 
         public Rectangle GetAbsoluteRectangle()
         {

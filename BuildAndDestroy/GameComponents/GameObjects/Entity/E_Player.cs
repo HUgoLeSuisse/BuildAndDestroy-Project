@@ -9,6 +9,8 @@ using BuildAndDestroy.GameComponents.GameObjects.Spell;
 using System;
 using BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency;
 using BuildAndDestroy.GameComponents.GameObjects.Weapon;
+using BuildAndDestroy.GameComponents.Texture;
+using System.Security.Principal;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
@@ -41,9 +43,13 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
             // Asigne une arme par defaut (test a supprimer par la suite)
             Weapon = new W_Sword(this); // attaque au corp à corp
+            
+            Weapon = new W_MagicStaff(this); // attaque à distance
 
-            //Weapon = new W_MagicStaff(this); // attaque à distance
-
+            AnimManager.Add(new SimpleAnim("character_1/idle", 8), "idle");
+            AnimManager.Add(new SimpleAnim("character_1/front",8),"front");
+            AnimManager.Add(new SimpleAnim("character_1/side", 8), "side");
+            AnimManager.Add(new SimpleAnim("character_1/back", 8), "back");
         }
         #region Display
 
@@ -56,15 +62,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             v.Visit(this);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>La texture acctuel</returns>
-        public override Texture2D GetAcctualTexture()
-        {
-            return texture;
-        }
-
 
         /// <summary>
         /// 
@@ -72,11 +69,12 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// <returns>La couleur acctuel</returns>
         public override Color GetAcctualColor()
         {
-            return Color.Green;
+            return Color.White;
         }
 
 
         #endregion
+
 
         private InputManager inputManager;
         private MouseInput mouseInput;
@@ -200,7 +198,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         }
 
         /// <summary>
-        /// Obtien la direction entre l'entité et la souris
+        /// Obtient la direction entre l'entité et la souris
         /// </summary>
         /// <returns></returns>
         public Vector2 GetMouseDirection()

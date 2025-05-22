@@ -118,7 +118,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
                         if (isPressed)
                         {
                             onMouseUp?.Invoke();
-                            onClick?.Invoke(timePressed.GetTime());
+                            onClick?.Invoke(timePressed.Time);
                             timePressed = null;
                             isPressed = false;
                         }

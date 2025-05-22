@@ -122,7 +122,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             return Color.Cyan;
         }
 
-        public Texture2D GetAcctualTexture()
+        public Texture2D GetCurrentTexture()
         {
             return DisplayUtils.GetInstance().blank;
         }

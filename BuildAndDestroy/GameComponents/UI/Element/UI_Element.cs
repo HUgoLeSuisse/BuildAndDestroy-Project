@@ -206,7 +206,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// 
         /// </summary>
         /// <returns>TextureBG acctuelle</returns>
-        public virtual Texture2D GetAcctualTexture()
+        public virtual Texture2D GetCurrentTexture()
         {
             return texture;
         }

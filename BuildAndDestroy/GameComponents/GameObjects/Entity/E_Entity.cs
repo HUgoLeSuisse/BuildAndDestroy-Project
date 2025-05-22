@@ -11,13 +11,14 @@ using BuildAndDestroy.GameComponents.GameObjects.Effect;
 using BuildAndDestroy.GameComponents.GameObjects.Weapon;
 using BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis;
 using System.Buffers;
+using BuildAndDestroy.GameComponents.Texture;
 
 namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 {
     /// <summary>
     /// Gére une entité
     /// </summary>
-    public class E_Entity : I_Visible, I_Moveable, I_SmartObject
+    public class E_Entity : I_Visible, I_Moveable, I_SmartObject, AnimatedObject
     {
 
         private GameManager gameManager;
@@ -29,7 +30,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         public E_Entity(
             GameManager gameMananger,
             Rectangle? rect = null,
-            Texture2D texture = null,
             float maxHealth = 10,
             float speed = 5,
             float damage = 3,
@@ -40,9 +40,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             d = DisplayUtils.GetInstance();
             this.rect = rect == null ? new Rectangle(0, 0, 50, 50) : rect.Value;
-            this.texture = texture == null ? d.blank : texture;
             this.gameManager = gameMananger;
 
+            animManager = new AnimManager(this);
 
             stats.Add(SPEED, new Stat(speed));
             stats.Add(DAMAGE, new Stat(damage));
@@ -80,8 +80,41 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
 
         #region Display
         protected Rectangle rect;
-        protected Texture2D texture;
         DisplayUtils d;
+
+        private AnimManager animManager;
+        public AnimManager AnimManager
+        {
+            get
+            {
+                return animManager;
+            }
+        }
+        public bool IsFilped
+        {
+            get 
+            {
+                return GetDirection().X <= -0.5;
+            }
+        }
+
+        public string GetState()
+        {
+            Vector2 dir = GetDirection();
+            if (dir.Y > 0.5f)
+            {
+                return "front";
+            }
+            if (dir.Y < -0.5f)
+            {
+                return "back";
+            }
+            if (dir.X + dir.Y == 0)
+            {
+                return "idle";
+            }
+            return "side";
+        }
 
         /// <summary>
         /// Pour le visiteur
@@ -96,9 +129,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// 
         /// </summary>
         /// <returns>La texture acctuel</returns>
-        public virtual Texture2D GetAcctualTexture()
+        public virtual Texture2D GetCurrentTexture()
         {
-            return texture;
+            return animManager.GetCurrentTexture();
         }
 
         /// <summary>
@@ -386,6 +419,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         {
             return path?.GetDirection() ?? new Vector2();
         }
+
         #endregion
 
         #endregion

@@ -34,7 +34,7 @@ namespace BuildAndDestroy.GameComponents.Input
             {
                 isDown = false;
                 onKeyUp?.Invoke();
-                onKeyPressed?.Invoke(timer.GetTime());
+                onKeyPressed?.Invoke(timer.Time);
                 timer = null;
             }
         }

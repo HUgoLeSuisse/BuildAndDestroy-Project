@@ -29,7 +29,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
             Owner.Hit(target, Owner.Stats[E_Entity.DAMAGE].Total * (Owner.Knowledges.Force + 1));
         }
 
-        public override Texture2D GetAcctualTexture()
+        public override Texture2D GetCurrentTexture()
         {
             return DisplayUtils.GetInstance().GetByPath<Texture2D>("sword");
         }
