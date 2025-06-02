@@ -26,11 +26,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects
             e.Update += Update;
 
             player = new E_Player(this);
-            var m1 = new E_Monster(
+            var m1 = new Rat(
                 this,
-                position: new Point(800, 500),
-                size: new Point(150, 150),
-                lootBox: new LootBox(100)
+                position: new Point(800, 500)
                 );
             var m2 = new E_RangeMonster(
                 this,

@@ -62,6 +62,23 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             v.Visit(this);
         }
 
+        public override string GetState()
+        {
+            Vector2 dir = GetDirection();
+            if (dir.Y > 0.5f)
+            {
+                return "front";
+            }
+            if (dir.Y < -0.5f)
+            {
+                return "back";
+            }
+            if (dir.X + dir.Y == 0)
+            {
+                return "idle";
+            }
+            return "side";
+        }
 
         /// <summary>
         /// 

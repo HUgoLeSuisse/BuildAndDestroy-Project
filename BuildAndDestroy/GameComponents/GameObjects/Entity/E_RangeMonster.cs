@@ -28,7 +28,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 gameMananger,
                 position:position,
                 size:size,
-                texture: texture,
                 maxHealth: maxHealth,
                 speed: speed,
                 damage: damage,

@@ -12,7 +12,6 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             GameManager gameMananger,
             Point? position = null,
             Point? size = null,
-            Texture2D texture = null,
             float maxHealth = 10,
             float speed = 5,
             float damage = 4,
