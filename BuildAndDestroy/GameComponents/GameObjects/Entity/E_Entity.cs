@@ -141,7 +141,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// 
         /// </summary>
         /// <returns>La couleur acctuel</returns>
-        public virtual Color GetAcctualColor()
+        public virtual Color GetCurrentColor()
         {
             return Color.White;
         }

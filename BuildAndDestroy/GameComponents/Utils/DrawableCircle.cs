@@ -34,7 +34,7 @@ namespace BuildAndDestroy.GameComponents.Utils
                 );
         }
 
-        public Color GetAcctualColor()
+        public Color GetCurrentColor()
         {
             return Color.White;
         }

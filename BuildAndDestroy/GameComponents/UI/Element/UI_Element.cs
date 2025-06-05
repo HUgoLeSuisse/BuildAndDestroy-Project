@@ -224,7 +224,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// 
         /// </summary>
         /// <returns>Couleur acctuellle</returns>
-        public virtual Color GetAcctualColor()
+        public virtual Color GetCurrentColor()
         {
             return color;
         }

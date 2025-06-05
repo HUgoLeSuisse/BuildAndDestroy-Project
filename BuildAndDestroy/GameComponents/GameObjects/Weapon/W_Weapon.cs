@@ -80,7 +80,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
             return new Rectangle(Owner.GetAbsoluteRectangle().Center.X, Owner.GetAbsoluteRectangle().Center.Y, 50, 50);
         }
 
-        public Color GetAcctualColor()
+        public Color GetCurrentColor()
         {
             return Color.White;
         }

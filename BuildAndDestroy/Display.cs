@@ -1,6 +1,7 @@
 ﻿using BuildAndDestroy.GameComponents;
 using BuildAndDestroy.GameComponents.GameObjects.Entity;
 using BuildAndDestroy.GameComponents.GameObjects.Entity.StatUtlis;
+using BuildAndDestroy.GameComponents.GameObjects.Environement;
 using BuildAndDestroy.GameComponents.GameObjects.Weapon;
 using BuildAndDestroy.GameComponents.UI;
 using BuildAndDestroy.GameComponents.UI.Element;
@@ -95,7 +96,7 @@ namespace BuildAndDestroy
             _sb.Draw(
                 v.GetCurrentTexture(),
                 v.GetAbsoluteRectangle(),
-                v.GetAcctualColor());
+                v.GetCurrentColor());
         }
 
 
@@ -107,7 +108,7 @@ namespace BuildAndDestroy
                     v.GetAbsoluteRectangle().Y - v.GetAbsoluteRectangle().Height / 10,
                     (int)(v.GetAbsoluteRectangle().Width * 1.2f),
                     (int)(v.GetAbsoluteRectangle().Height * 1.2f)
-                   ), v.GetAcctualColor());
+                   ), v.GetCurrentColor());
 
             Vector2 pos = v.GetAbsoluteRectangle().Location.ToVector2();
             _sb.DrawString(
@@ -128,7 +129,7 @@ namespace BuildAndDestroy
             _sb.Draw(
                 v.GetCurrentTexture(),
                 v.GetAbsoluteRectangle(),
-                v.GetAcctualColor());
+                v.GetCurrentColor());
 
             Vector2 pos = v.GetAbsoluteRectangle().Center.ToVector2();
             if (v.Skill != null && v.Skill.Active != null && v.Skill.Active.Cooldown != null && !v.Skill.Active.IsAvailable)
@@ -157,7 +158,7 @@ namespace BuildAndDestroy
             }
             _sb.Draw(v.GetCurrentTexture(),
                     v.GetAbsoluteRectangle(),
-                    v.GetAcctualColor());
+                    v.GetCurrentColor());
 
             UI_Label label = v.label;
 
@@ -220,7 +221,7 @@ namespace BuildAndDestroy
                 v.GetCurrentTexture(),
                 v.GetAbsoluteRectangle(),
                 null,
-                v.GetAcctualColor(),
+                v.GetCurrentColor(),
                 0,
                 Vector2.Zero,
                 v.IsFilped ? SpriteEffects.FlipHorizontally:SpriteEffects.None,
@@ -248,7 +249,7 @@ namespace BuildAndDestroy
                 v.GetCurrentTexture(),
                 v.GetAbsoluteRectangle(),
                 null,
-                v.GetAcctualColor(),
+                v.GetCurrentColor(),
                 v.Direction,
                 new Vector2(187.5f,500),
                 SpriteEffects.None,
@@ -290,6 +291,29 @@ namespace BuildAndDestroy
         public void Visit(DrawableCircle v)
         {
             Visit((I_Visible) v);
+        }
+
+        public void Visit(Map v)
+        {
+            const int TILE_SIZE = 64;
+            int x = _cam.Position.X;
+            int y = _cam.Position.Y;
+
+            int w = d.width;
+            int h = d.height;
+
+            Texture2D grass = v.GetCurrentTexture();
+            
+
+            for (int i = -1; i < w/ TILE_SIZE +1; i++)
+            {
+                for (int ii = -1; ii < h / TILE_SIZE +2; ii++)
+                {
+                    _sb.Draw(grass,
+                        new Rectangle(i* TILE_SIZE - x% TILE_SIZE, ii* TILE_SIZE - y % TILE_SIZE, TILE_SIZE, TILE_SIZE),
+                        v.GetCurrentColor());
+                }
+            }
         }
 
         #endregion

@@ -117,7 +117,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             return r;
         }
 
-        public Color GetAcctualColor()
+        public Color GetCurrentColor()
         {
             return Color.Cyan;
         }

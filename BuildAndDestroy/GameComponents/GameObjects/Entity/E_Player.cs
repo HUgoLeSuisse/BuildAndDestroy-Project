@@ -84,7 +84,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// 
         /// </summary>
         /// <returns>La couleur acctuel</returns>
-        public override Color GetAcctualColor()
+        public override Color GetCurrentColor()
         {
             return Color.White;
         }

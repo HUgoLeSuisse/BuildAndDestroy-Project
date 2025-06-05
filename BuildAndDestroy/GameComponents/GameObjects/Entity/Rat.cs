@@ -26,7 +26,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             AnimManager.Add(new SimpleAnim("monster/Rat", 8), "default");
         }
 
-        public override Color GetAcctualColor()
+        public override Color GetCurrentColor()
         {
             return Color.White;
         }

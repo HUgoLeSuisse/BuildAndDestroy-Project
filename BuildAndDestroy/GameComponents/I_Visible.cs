@@ -12,6 +12,6 @@ namespace BuildAndDestroy.GameComponents
         public void Accept(I_VisibleVisitor v);
         public Texture2D GetCurrentTexture();
         public Rectangle GetAbsoluteRectangle();
-        public Color GetAcctualColor();
+        public Color GetCurrentColor();
     }
 }

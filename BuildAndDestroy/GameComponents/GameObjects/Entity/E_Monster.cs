@@ -42,7 +42,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// retourne la couleur acctuelle de l'enemie
         /// </summary>
         /// <returns></returns>
-        public override Color GetAcctualColor()
+        public override Color GetCurrentColor()
         {
             return Color.Red;
         }

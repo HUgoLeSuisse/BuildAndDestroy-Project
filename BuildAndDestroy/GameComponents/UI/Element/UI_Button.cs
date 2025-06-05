@@ -148,7 +148,7 @@ namespace BuildAndDestroy.GameComponents.UI.Element
         /// La couleur change en fonction de si le buton est appuyer, survoler ou rien du tout
         /// </summary>
         /// <returns>La couleur acctuelle</returns>
-        public override Color GetAcctualColor()
+        public override Color GetCurrentColor()
         {
             if (isPressed)
             {

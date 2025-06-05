@@ -1,4 +1,5 @@
 ﻿using BuildAndDestroy.GameComponents.GameObjects.Entity;
+using BuildAndDestroy.GameComponents.GameObjects.Environement;
 using BuildAndDestroy.GameComponents.GameObjects.Utils;
 using BuildAndDestroy.GameComponents.UI;
 using BuildAndDestroy.GameComponents.Utils;
@@ -15,7 +16,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         public static List<DrawableCircle> drawableCircles = new List<DrawableCircle>();
 
         UpdateEvents e = UpdateEvents.GetInstance();
-
+        Map map;
         E_Player player;
         List<E_Monster> monsters = new List<E_Monster>();
 
@@ -23,6 +24,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects
 
 
         public GameManager() {
+            map = new Map();
             e.Update += Update;
 
             player = new E_Player(this);
@@ -95,6 +97,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         public bool IsSomeThingHere(Rectangle rect, out List<E_Entity> who)
         {
             who = new List<E_Entity>();
+
             if (player.Rect.Intersects(rect))
             {
                 who.Add(player);
@@ -145,17 +148,18 @@ namespace BuildAndDestroy.GameComponents.GameObjects
         /// <returns></returns>
         public I_Visible[] GetVisibleElement(Rectangle rect)
         {
-            List<I_Visible> visibles = drawableCircles.Cast<I_Visible>().ToList();
+            List<I_Visible> visibles = new List<I_Visible>();
+            visibles.Add(map);
+
+            visibles = visibles.Concat(drawableCircles.Cast<I_Visible>()).ToList();
+                
             List<E_Entity> entities;
             IsSomeThingHere(rect, out entities);
-            foreach (var entity in entities)
-            {
-                visibles.Add(entity);
-            }
-            foreach (var bullet in Bullet.Bullets)
-            {
-                visibles.Add(bullet);
-            }
+
+            visibles = visibles.Concat(entities.Cast<I_Visible>()).ToList();
+
+            visibles = visibles.Concat(Bullet.Bullets.Cast<I_Visible>()).ToList();
+
             return visibles.ToArray();
         }
 
