@@ -44,7 +44,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             // Asigne une arme par defaut (test a supprimer par la suite)
             Weapon = new W_Sword(this); // attaque au corp à corp
             
-            Weapon = new W_MagicStaff(this); // attaque à distance
+            //Weapon = new W_MagicStaff(this); // attaque à distance
 
             AnimManager.Add(new SimpleAnim("character_1/idle", 8), "idle");
             AnimManager.Add(new SimpleAnim("character_1/front",8),"front");

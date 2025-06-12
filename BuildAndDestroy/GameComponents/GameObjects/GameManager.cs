@@ -36,13 +36,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects
                 this,
                 position: new Point(1600, 500)
                 );
-            var m3 = new E_Monster(
+            var m3 = new Slim(
                 this,
-                maxHealth: 20,
-                damage: 6,
-                position: new Point(2400, 500),
-                size: new Point(200, 200),
-                lootBox: new LootBox(300)
+                position: new Point(2400, 500)
                 );
 
             var m4 = new Bat(

@@ -314,6 +314,11 @@ namespace BuildAndDestroy
                         v.GetCurrentColor());
                 }
             }
+
+            foreach (var item in v.Props)
+            {
+                item.Accept(this);
+            }
         }
         public void Visit(AnimBullet v)
         {

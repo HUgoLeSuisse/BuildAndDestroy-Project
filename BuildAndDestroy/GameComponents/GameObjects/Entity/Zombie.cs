@@ -14,12 +14,22 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
     {
         public Zombie(GameManager gameMananger, Point? position = null) : base(gameMananger, position, new Point(60, 60), null, 15, 4, 5, 1, 2, 300, new LootBox(350))
         {
-            AnimManager.Add(new SimpleAnim("zombie", 8), "default");
+            AnimManager.Add(new SimpleAnim("zombie", 0), "default");
+            AnimManager.Add(new SimpleAnim("zombie", 4), "walk");
         }
 
         public override Color GetCurrentColor()
         {
             return Color.White;
+        }
+
+        public override string GetState()
+        {
+            if (isMoving)
+            {
+                return "walk";
+            }
+            return base.GetState();
         }
 
         /// <summary>

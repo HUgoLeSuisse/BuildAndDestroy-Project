@@ -159,6 +159,8 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         public const string ATTACK_SPEED = "attackSpeed";
         public const string RANGE = "range";
 
+        public bool isMoving = false;
+
         private Dictionary<string, Stat> stats = new Dictionary<string, Stat> ();
 
         public Dictionary<string, Stat> Stats { get { return stats; } }
@@ -348,11 +350,13 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
                 path = new Path(rect.Center, target.rect.Center);
                 if (!AttackArea.Intersects(target.rect))
                 {
+                    isMoving = true;
                     I_Moveable moveable = this;
                     moveable.Move(gameTime, ref rect, path.GetDirection(), Stats[SPEED].Total);
                 }
                 else
                 {
+                    isMoving = false;
                     Attack(target);
                 }
             }
@@ -360,8 +364,14 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             {
                 if (!rect.Contains(path.Destination))
                 {
+                    isMoving = true;
                     I_Moveable moveable = this;
                     moveable.Move(gameTime, ref rect, path.GetDirection(), Stats[SPEED].Total);
+                }
+                else
+                {
+
+                    isMoving = false;
                 }
             }
         }
