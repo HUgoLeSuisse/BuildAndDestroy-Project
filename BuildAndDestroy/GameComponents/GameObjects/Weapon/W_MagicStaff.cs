@@ -45,11 +45,11 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Weapon
         {
             base.Attack(target);
             Vector2 dir = Owner.GetDirectionWith(target);
-            Bullet b = new Bullet(
+            Bullet b = new AnimBullet(
                 Owner.GameManager,
                 Owner,
                 position: Owner.Position + (dir*50).ToPoint(),
-                size: new Point(16, 16),
+                size: new Point(32, 32),
 
                 direction: dir,
                 distance: Owner.Stats[E_Entity.RANGE].Total);

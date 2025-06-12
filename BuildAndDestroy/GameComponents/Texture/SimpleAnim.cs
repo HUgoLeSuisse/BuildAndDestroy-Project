@@ -30,6 +30,9 @@ namespace BuildAndDestroy.GameComponents.Texture
         public SimpleAnim(Texture2D texture, float frequency) : base(texture)
         {
             this.Frequency = frequency;
+
+            maxFrame = base.Texture.Width / base.Texture.Height;
+            UpdateEvents.GetInstance().Update += Update;
         }
 
         public SimpleAnim(string textureName, float frequency) : base(textureName)

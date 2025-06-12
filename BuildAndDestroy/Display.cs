@@ -315,6 +315,20 @@ namespace BuildAndDestroy
                 }
             }
         }
+        public void Visit(AnimBullet v)
+        {
+            Rectangle r = v.GetAbsoluteRectangle();
+            _sb.Draw(
+                v.GetCurrentTexture(),
+                v.GetAbsoluteRectangle(),
+                null,
+                v.GetCurrentColor(),
+                v.Rotation,
+                Vector2.Zero,
+                SpriteEffects.None,
+                1f
+                );
+        }
 
         #endregion
 

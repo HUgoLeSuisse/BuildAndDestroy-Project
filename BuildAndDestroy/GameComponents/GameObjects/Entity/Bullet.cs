@@ -66,7 +66,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             onTouch = null;
         }
 
-        private void Update(GameTime gameTime)
+        protected virtual void Update(GameTime gameTime)
         {
             float X = rect.Center.X - origine.X;
             float Y = rect.Center.Y - origine.Y;
@@ -96,7 +96,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         }
 
         #region Display
-        public void Accept(I_VisibleVisitor v)
+        public virtual void Accept(I_VisibleVisitor v)
         {
             v.Visit(this);
         }
@@ -105,7 +105,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// 
         /// </summary>
         /// <returns>Le rectangle absolu</returns>
-        public Rectangle GetAbsoluteRectangle()
+        public virtual Rectangle GetAbsoluteRectangle()
         {
             Rectangle r = new Rectangle(
                 rect.X - Camera.Instance.Position.X,
@@ -117,12 +117,12 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
             return r;
         }
 
-        public Color GetCurrentColor()
+        public virtual Color GetCurrentColor()
         {
             return Color.Cyan;
         }
 
-        public Texture2D GetCurrentTexture()
+        public virtual Texture2D GetCurrentTexture()
         {
             return DisplayUtils.GetInstance().blank;
         }

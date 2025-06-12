@@ -23,6 +23,7 @@ namespace BuildAndDestroy.GameComponents
         public void Visit(W_Weapon v);
         public void Visit(DrawableCircle v);
         public void Visit(Map v);
+        public void Visit(AnimBullet v);
 
     }
 

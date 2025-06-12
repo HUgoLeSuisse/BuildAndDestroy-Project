@@ -16,7 +16,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Spell.Comptency
         {
             active = new Fireball(owner.GameManager,this);
             
-            passives.Add(new DamageZone(owner.GameManager, this, color: new Color(120, 170, 190, 127)));
+            //passives.Add(new DamageZone(owner.GameManager, this, color: new Color(120, 170, 190, 127)));
         }
     }
 }
