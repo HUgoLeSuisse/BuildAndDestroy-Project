@@ -43,7 +43,7 @@ namespace BuildAndDestroy.GameComponents.GameObjects.Entity
         /// Attaque à distance
         /// </summary>
         /// <param name="target"></param>
-        private void RangeAttack(E_Entity target)
+        protected virtual void RangeAttack(E_Entity target)
         {
             Bullet b = new Bullet(GameManager, this,
                 size: new Point(20, 20),

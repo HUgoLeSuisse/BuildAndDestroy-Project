@@ -32,11 +32,9 @@ namespace BuildAndDestroy.GameComponents.GameObjects
                 this,
                 position: new Point(800, 500)
                 );
-            var m2 = new E_RangeMonster(
+            var m2 = new Zombie(
                 this,
-                position: new Point(1600, 500),
-                size: new Point(75, 75),
-                lootBox: new LootBox(100)
+                position: new Point(1600, 500)
                 );
             var m3 = new E_Monster(
                 this,
@@ -46,9 +44,21 @@ namespace BuildAndDestroy.GameComponents.GameObjects
                 size: new Point(200, 200),
                 lootBox: new LootBox(300)
                 );
+
+            var m4 = new Bat(
+                this,
+                position: new Point(-400, 350)
+                );
+
+            var m5 = new Bat(
+                this,
+                position: new Point(-400, 650)
+                );
             monsters.Add(m1 );
             monsters.Add(m2);
             monsters.Add(m3);
+            monsters.Add(m4);
+            monsters.Add(m5);
         }
 
         /// <summary>

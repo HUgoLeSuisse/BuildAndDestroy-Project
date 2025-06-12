@@ -134,7 +134,7 @@ namespace BuildAndDestroy
             Vector2 pos = v.GetAbsoluteRectangle().Center.ToVector2();
             if (v.Skill != null && v.Skill.Active != null && v.Skill.Active.Cooldown != null && !v.Skill.Active.IsAvailable)
             {
-                Vector2 size = d.defaultFont.MeasureString(Convert.ToInt32(v.Skill.Active.Cooldown.GetTime()).ToString()) * 0.7f /2;
+                Vector2 size = d.defaultFont.MeasureString(Convert.ToInt32(v.Skill.Active.Cooldown.GetTime()).ToString()) * 0.7f / 2;
                 pos -= size;
                 _sb.DrawString(
                     d.defaultFont,
@@ -224,7 +224,7 @@ namespace BuildAndDestroy
                 v.GetCurrentColor(),
                 0,
                 Vector2.Zero,
-                v.IsFilped ? SpriteEffects.FlipHorizontally:SpriteEffects.None,
+                v.IsFilped ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
                 0);
 
 
@@ -251,7 +251,7 @@ namespace BuildAndDestroy
                 null,
                 v.GetCurrentColor(),
                 v.Direction,
-                new Vector2(187.5f,500),
+                new Vector2(187.5f, 500),
                 SpriteEffects.None,
                 1f
                 );
@@ -280,8 +280,8 @@ namespace BuildAndDestroy
             _sb.Draw(
                 d.blank,
                 new Rectangle(
-                v.GetAbsoluteRectangle().Center.X - 50 ,
-                v.GetAbsoluteRectangle().Top - 15 ,
+                v.GetAbsoluteRectangle().Center.X - 50,
+                v.GetAbsoluteRectangle().Top - 15,
                 (int)(((DoubleStat)v.Stats[E_Entity.HEALTH]).Percent * 100),
                 10),
                 color
@@ -290,7 +290,7 @@ namespace BuildAndDestroy
         }
         public void Visit(DrawableCircle v)
         {
-            Visit((I_Visible) v);
+            Visit((I_Visible)v);
         }
 
         public void Visit(Map v)
@@ -303,14 +303,14 @@ namespace BuildAndDestroy
             int h = d.height;
 
             Texture2D grass = v.GetCurrentTexture();
-            
 
-            for (int i = -1; i < w/ TILE_SIZE +1; i++)
+
+            for (int i = -1; i < w / TILE_SIZE + 1; i++)
             {
-                for (int ii = -1; ii < h / TILE_SIZE +2; ii++)
+                for (int ii = -1; ii < h / TILE_SIZE + 2; ii++)
                 {
                     _sb.Draw(grass,
-                        new Rectangle(i* TILE_SIZE - x% TILE_SIZE, ii* TILE_SIZE - y % TILE_SIZE, TILE_SIZE, TILE_SIZE),
+                        new Rectangle(i * TILE_SIZE - x % TILE_SIZE, ii * TILE_SIZE - y % TILE_SIZE, TILE_SIZE, TILE_SIZE),
                         v.GetCurrentColor());
                 }
             }
@@ -324,7 +324,7 @@ namespace BuildAndDestroy
                 null,
                 v.GetCurrentColor(),
                 v.Rotation,
-                Vector2.Zero,
+                new Vector2(100,100),
                 SpriteEffects.None,
                 1f
                 );
